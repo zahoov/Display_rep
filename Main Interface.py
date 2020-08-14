@@ -900,7 +900,7 @@ class FuelGaugeApp(App):
 
 
         fin = open(display_code_dir + "arbitration_file.txt", "wt")
-        fin.write(self.arb_id)
+        fin.write(str(self.arb_id))
         fin.close()
 
 
