@@ -771,6 +771,7 @@ class FuelGaugeApp(App):
         if fin.read() == '':
             arb_id = '0xCFF41F2'
             fin.write('0xCFF41F2')
+            fin.close()
         else:
             arb_id = str(fin.read())
             fin.close()

@@ -2,7 +2,7 @@ import can
 
 
 def main():
-    arb_id = '0xCFF41F2'
+    arb_id = ''
 
     source_id = int(arb_id[7:9], 16)
 
