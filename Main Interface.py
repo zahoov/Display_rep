@@ -773,7 +773,7 @@ class FuelGaugeApp(App):
             fin.write('0xCFF41F2')
             fin.close()
         else:
-            arb_id = str(fin.read())
+            arb_id = fin.read()
             fin.close()
     else:
         fin = open(display_code_dir + "arbitration_file.txt", "w")
