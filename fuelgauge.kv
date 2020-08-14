@@ -582,7 +582,7 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp1
+                    text: app.temp1 + '*C'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                 Label:
                     canvas.before:
@@ -591,7 +591,7 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp2
+                    text: app.temp2 + '*C'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                 Label:
                     canvas.before:
@@ -600,7 +600,7 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp3
+                    text: app.temp3 + '*C'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                 Label:
                     canvas.before:
@@ -609,7 +609,7 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp4
+                    text: app.temp4 + '*C'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                 Label:
                     canvas.before:
@@ -618,7 +618,7 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp5
+                    text: app.temp5 + '*C'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
             GridLayout:
                 cols: 1
@@ -629,7 +629,7 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.press1
+                    text: app.press1 + 'Bar'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
                 Label:
                     canvas.before:
@@ -638,7 +638,7 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.press2
+                    text: app.press2 + 'Bar'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
         BoxLayout:
             orientation: 'horizontal'
