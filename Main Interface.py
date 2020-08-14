@@ -901,6 +901,11 @@ class FuelGaugeApp(App):
 
     def source_changer(self, new_id):
 
+        temp_storage_help = self.arb_id[7:9]
+
+        print(type(temp_storage_help))
+        print(temp_storage_help)
+
         source_id = int(self.arb_id[7:9], 16)
         print('source id is right below')
         print(source_id)
