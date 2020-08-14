@@ -765,9 +765,9 @@ class FuelGaugeApp(App):
         fin.close()
 
     if mode_num == '2':
-        msg_data = [1]
-    else:
         msg_data = [0]
+    else:
+        msg_data = [1]
 
     # These are all of the data values received and decoded by Calvin's code
     temp0 = StringProperty()
@@ -803,7 +803,6 @@ class FuelGaugeApp(App):
     conversion_factor = cf
 
     toggle_msg = can.Message()
-    msg_data = []
 
     # This calls errorMsg every 2 seconds to constantly change the error notification text from "FAULT" to the error code, or if there is no error it sets the text to blank
     Clock.schedule_interval(errorMsg, 2)
@@ -816,11 +815,9 @@ class FuelGaugeApp(App):
 
     if (mode_num == '0') or (mode_num == '1'):
         engine_mode = 'H2\nMODE'
-        msg_data = [1]
         mode_color = [0, 1, 0, 1]
     else:
         engine_mode = 'DIESEL\nMODE'
-        msg_data = [0]
         mode_color = [0.431, 0.431, 0.431, 1]
 
     try:
@@ -851,7 +848,6 @@ class FuelGaugeApp(App):
                 self.msg_data = [1]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
                 self.mode_num = '0'
-
                 print(self.mode_num)
 
             else:
