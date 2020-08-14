@@ -772,14 +772,20 @@ class FuelGaugeApp(App):
             arb_id = '0xCFF41F2'
             fin.write('0xCFF41F2')
             fin.close()
+            print('check 1: nothing in file')
+            print(arb_id)
         else:
             arb_id = fin.read()
             fin.close()
+            print('check 2: something in file')
+            print(arb_id)
     else:
         fin = open(display_code_dir + "arbitration_file.txt", "w")
         fin.write('0xCFF41F2')
         arb_id = '0xCFF41F2'
         fin.close()
+        print("check 3: file doesn't exist yet")
+        print(arb_id)
 
     if mode_num == '2':
         msg_data = [0]
