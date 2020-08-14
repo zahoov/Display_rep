@@ -766,6 +766,16 @@ class FuelGaugeApp(App):
         mode_num = '2'
         fin.close()
 
+    if os.path.isfile(display_code_dir + "arbitration_file.txt"):
+        fin = open(display_code_dir + "arbitration_file.txt", "rt")
+        arb_id = fin.read()
+        fin.close()
+    else:
+        fin = open(display_code_dir + "arbitration_file.txt", "w")
+        fin.write('0xCFF41F2')
+        arb_id = '0xCFF41F2'
+        fin.close()
+
     if mode_num == '2':
         msg_data = [0]
     else:
@@ -826,10 +836,6 @@ class FuelGaugeApp(App):
         print('Cannot find PiCAN board.')
         pass
 
-    arb_id = 0xCFF41F2
-
-    print(type(arb_id))
-
 
     toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
 
@@ -878,6 +884,17 @@ class FuelGaugeApp(App):
                 fin.close()
 
         Clock.schedule_once(truckEngineMode)
+
+    def source_changer(self, new_id):
+
+        source_id = int(self.arb_id[7:9], 16)
+
+        temp_id = int(self.arb_id, 16)
+
+        wo_source = temp_id - source_id
+
+        self.arb_id = wo_source + new_id
+
 
 
 # Makes everything start

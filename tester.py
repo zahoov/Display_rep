@@ -2,53 +2,21 @@ import can
 
 
 def main():
+    arb_id = '0xCFF41F2'
 
+    source_id = int(arb_id[7:9], 16)
 
-    # Creates the CAN message --> arbitration_id = destination address
-    #toggle_msg = can.Message()
-    bus = can.interface.Bus()
+    arb_id = int(arb_id, 16)
 
-    print(type(bus))
-    #print(bus)
+    wo_source = arb_id - source_id
 
+    try:
+        source_id = int(input('Input the new source address:\n'), 16)
+    except ValueError:
+        print("You dingus you didn't input anything")
 
-    pass
-
-
-
+    arb_id = wo_source + source_id
 
 
 if __name__ == '__main__':
     main()
-
-
-
-    def message_setup(self, dt):
-
-        # Creates the CAN message --> arbitration_id = destination address
-        try:
-            self.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=self.msg_data)
-        except AttributeError:
-            bus_status = 0
-        else:
-            print('success')
-            bus_status = 1
-
-        while bus_status == 0:
-            try:
-                self.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=self.msg_data)
-            except AttributeError:
-                bus_status = 0
-            else:
-                bus_status = 1
-            print(bus_status)
-
-        # Sends the CAN message to whatever 'bus' was set to every period in seconds (0.25 = 250ms)
-        try:
-            if not isinstance(self.task, can.ModifiableCyclicTaskABC):
-                print("This interface doesn't seem to support modification")
-                self.task.stop()
-                return
-        except AttributeError:
-            print('aw shit here we go again')
-            pass

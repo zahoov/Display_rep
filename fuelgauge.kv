@@ -133,6 +133,67 @@
 	    Rectangle:
 	        size: self.width, self.height
 
+	    BoxLayout:
+        orientation: 'vertical'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                size: root.width, root.height * 0.2
+
+                Label:
+                    text: app.error_base
+                    background_color: 0, 0, 0, 0
+                    #size: self.texture_size
+                    size_hint_x: 0.25
+                    color: 1, 0, 0, 1
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                    #on_press: app.root.current = 'fourth'
+
+                Label:
+                    text: 'Message Settings'
+
+                    size_hint_x: 0.5
+                    color: 1, 1, 1, 1
+                    font_size: ((root.width + root.height) / 2) * 0.1
+                    size: self.texture_size
+                    bold: True
+
+                Label:
+                    id: hMode
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 1
+                        Line:
+                            width: 5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: app.engine_mode
+                    size_hint_x: 0.25
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                    color: app.mode_color
+
+            GridLayout:
+                cols: 2
+                padding: 10, 10, 10, 10
+                spacing: 10, 10
+                size_hint_y: 0.75
+
+                TextInput:
+                    id: source_id
+                    hint_text: 'Enter the new SourceID'
+                    multiline : False
+                    font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
+
+                Button:
+                    background_normal: ''
+                    background_color: 0, 0, 0.8, 1
+                    text: 'Submit new ID'
+                    on_press: root.source_changer(source_id.text)
+                    on_touch_up: source_id.text = ''
+                    font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
+
+
+
 
 <ModeLocking>:
     name: 'passlock'
@@ -151,14 +212,14 @@
             size_hint_y: None
             size: root.width, root.height * 0.2
 
-            Button:
+            Label:
                 text: app.error_base
                 background_color: 0, 0, 0, 0
                 #size: self.texture_size
                 size_hint_x: 0.25
                 color: 1, 0, 0, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                on_press: app.root.current = 'fourth'
+                #on_press: app.root.current = 'fourth'
 
             Label:
         	    id: gauge_title
@@ -265,14 +326,14 @@
             size_hint_y: None
             size: root.width, root.height * 0.2
 
-            Button:
+            Label:
                 text: app.error_base
                 background_color: 0, 0, 0, 0
                 #size: self.texture_size
                 size_hint_x: 0.25
                 color: 1, 0, 0, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                on_press: app.root.current = 'fourth'
+                #on_press: app.root.current = 'fourth'
 
             Label:
         	    id: gauge_title
@@ -373,13 +434,13 @@
             size_hint_y: None
             size: root.width, root.height * 0.2
 
-            Button:
+            Label:
                 text: app.error_base
                 background_color: 0, 0, 0, 0
                 size_hint_x: 0.25
                 color: 1, 0, 0, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                on_press: app.root.current = 'fourth'
+                #on_press: app.root.current = 'fourth'
 
             Label:
         	    id: gauge_title
@@ -521,14 +582,14 @@
             size_hint_y: None
             size: root.width, root.height * 0.2
 
-            Button:
+            Label:
                 text: app.error_base
                 background_color: 0, 0, 0, 0
                 #size: self.texture_size
                 size_hint_x: 0.25
                 color: 1, 0, 0, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                on_press: app.root.current = 'fourth'
+                #on_press: app.root.current = 'fourth'
 
             Label:
         	    id: gauge_title
@@ -687,14 +748,14 @@
             orientation: 'horizontal'
             size_hint_y: None
             size: root.width, root.height * 0.2
-            Button:
+            Label:
                 text: app.error_base
                 background_color: 0, 0, 0, 0
                 #size: self.texture_size
                 size_hint_x: 0.25
                 color: 1, 0, 0, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                on_press: app.root.current = 'fourth'
+                #on_press: app.root.current = 'fourth'
             Label:
                 text: 'Fault Info:'
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
@@ -814,14 +875,14 @@
             size_hint_y: None
             size: root.width, root.height * 0.2
 
-            Button:
+            Label:
                 text: app.error_base
                 background_color: 0, 0, 0, 0
                 #size: self.texture_size
                 size_hint_x: 0.25
                 color: 1, 0, 0, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                on_press: app.root.current = 'fourth'
+                #on_press: app.root.current = 'fourth'
 
             Label:
         	    id: gauge_title
