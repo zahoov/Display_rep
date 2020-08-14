@@ -445,36 +445,6 @@ def callback(dt):
     app.root.current = 'third'
 
 
-def message_setup(dt):
-    app = App.get_running_app()
-
-    # Creates the CAN message --> arbitration_id = destination address
-    try:
-        app.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=app.msg_data)
-    except AttributeError:
-        bus_status = 0
-    else:
-        bus_status = 1
-
-    while bus_status == 0:
-        try:
-            app.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=app.msg_data)
-        except AttributeError:
-            bus_status = 0
-        else:
-            bus_status = 1
-        print(bus_status)
-
-
-    # Sends the CAN message to whatever 'bus' was set to every period in seconds (0.25 = 250ms)
-    try:
-        app.task = app.bus.send_periodic(app.toggle_msg, 0.25)
-        if not isinstance(app.task, can.ModifiableCyclicTaskABC):
-            print("This interface doesn't seem to support modification")
-            app.task.stop()
-            return
-    except AttributeError:
-        pass
 
 
 
@@ -847,7 +817,7 @@ class FuelGaugeApp(App):
     # This calls errorMsg every 2 seconds to constantly change the error notification text from "FAULT" to the error code, or if there is no error it sets the text to blank
     Clock.schedule_interval(errorMsg, 2)
 
-    Clock.schedule_once(message_setup)
+
 
     # This checks the value of the engine mode number every 2 seconds and changes the notification text if needed
     Clock.schedule_interval(truckEngineMode, 2)
@@ -865,6 +835,39 @@ class FuelGaugeApp(App):
     # Runs the screen manager that sets everything in motion
     def build(self):
         return MyScreenManager()
+
+    def message_setup(dt):
+        app = App.get_running_app()
+
+        # Creates the CAN message --> arbitration_id = destination address
+        try:
+            app.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=app.msg_data)
+        except AttributeError:
+            bus_status = 0
+        else:
+            print('success')
+            bus_status = 1
+
+        while bus_status == 0:
+            try:
+                app.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=app.msg_data)
+            except AttributeError:
+                bus_status = 0
+            else:
+                bus_status = 1
+            print(bus_status)
+
+        # Sends the CAN message to whatever 'bus' was set to every period in seconds (0.25 = 250ms)
+        try:
+            app.task = app.bus.send_periodic(app.toggle_msg, 0.25)
+            if not isinstance(app.task, can.ModifiableCyclicTaskABC):
+                print("This interface doesn't seem to support modification")
+                app.task.stop()
+                return
+        except AttributeError:
+            pass
+
+    Clock.schedule_once(message_setup)
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
