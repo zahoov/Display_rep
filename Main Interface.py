@@ -893,7 +893,11 @@ class FuelGaugeApp(App):
 
         wo_source = temp_id - source_id
 
-        self.arb_id = wo_source + int(new_id, 16)
+        try:
+            self.arb_id = wo_source + int(new_id, 16)
+        except ValueError:
+            print("You didn't input a new source ID")
+
 
         fin = open(display_code_dir + "arbitration_file.txt", "wt")
         fin.write(self.arb_id)
