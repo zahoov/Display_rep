@@ -768,14 +768,14 @@ class FuelGaugeApp(App):
 
     if os.path.isfile(display_code_dir + "arbitration_file.txt"):
         fin = open(display_code_dir + "arbitration_file.txt", "r+")
-        if fin.read() == '':
+        if fin.readline() == '':
             arb_id = '0xCFF41F2'
-            fin.write('0xCFF41F2')
+            fin.write("0xCFF41F2")
             fin.close()
             print('check 1: nothing in file')
             print(arb_id)
         else:
-            arb_id = fin.read()
+            arb_id = fin.readline()
             fin.close()
             print('check 2: something in file')
             print(arb_id)
