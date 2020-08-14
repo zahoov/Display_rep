@@ -773,12 +773,14 @@ class FuelGaugeApp(App):
 
         if stored_id == '':
             arb_id = '0xCFF41F2'
+            arb_address = StringProperty(arb_id)
             fin.write('0xCFF41F2')
             fin.close()
             print('check 1: nothing in file')
             print(arb_id)
         else:
             arb_id = stored_id
+            arb_address = StringProperty(arb_id)
             fin.close()
             print('check 2: something in file')
             print(arb_id)
@@ -786,6 +788,7 @@ class FuelGaugeApp(App):
         fin = open(display_code_dir + "arbitration_file.txt", "w")
         fin.write('0xCFF41F2')
         arb_id = '0xCFF41F2'
+        arb_address = StringProperty(arb_id)
         fin.close()
         print("check 3: file doesn't exist yet")
         print(arb_id)
@@ -916,13 +919,16 @@ class FuelGaugeApp(App):
         print(wo_source)
 
         #try:
-        self.arb_id = wo_source + int(new_id, 16)
+        self.arb_id = hex(wo_source + int(new_id, 16))
+
+        self.arb_address = self.arb_id
+
         print('arb id below')
         print(self.arb_id)
         #except ValueError:
         #    print("You didn't input a new source ID")
 
-        print('arb id int 16 below')
+        print('arb id in hex')
         print(hex(self.arb_id))
 
         #fin = open(display_code_dir + "arbitration_file.txt", "w")
