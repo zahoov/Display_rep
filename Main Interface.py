@@ -895,6 +895,9 @@ class FuelGaugeApp(App):
 
         self.arb_id = wo_source + new_id
 
+        fin = open(display_code_dir + "arbitration_file.txt", "wt")
+        fin.write(self.arb_id)
+        fin.close()
 
 
 # Makes everything start
