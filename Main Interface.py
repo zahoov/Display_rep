@@ -859,9 +859,7 @@ class FuelGaugeApp(App):
             self.toggle_msg.dlc = 1
 
             try:
-                print(self.task)
                 self.task.modify_data(self.toggle_msg)
-                print(self.task)
             except AttributeError:
                 print("its throwing an error when it tries to modify the data")
                 return
