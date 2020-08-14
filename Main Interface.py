@@ -813,12 +813,12 @@ class FuelGaugeApp(App):
     a = Thread(target=msg_receiving)
     a.start()
 
-    '''if (mode_num == '0') or (mode_num == '1'):
+    if (mode_num == '0') or (mode_num == '1'):
         engine_mode = 'H2\nMODE'
         mode_color = [0, 1, 0, 1]
     else:
         engine_mode = 'DIESEL\nMODE'
-        mode_color = [0.431, 0.431, 0.431, 1]'''
+        mode_color = [0.431, 0.431, 0.431, 1]
 
     try:
         bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
