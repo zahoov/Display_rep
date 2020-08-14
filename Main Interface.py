@@ -643,7 +643,7 @@ class TankTempPress(Screen):
 
     def on_touch_up(self, touch):
         Clock.unschedule(callback)
-        Clock.schedule(callback, delay)
+        Clock.schedule_once(callback, delay)
 
     def on_leave(self):
         Clock.unschedule(callback)
