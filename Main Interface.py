@@ -846,17 +846,25 @@ class FuelGaugeApp(App):
 
         # If the display is unlocked (lock_status == '0') it checks to see what the current engine mode is
         if self.lock_status == '0':
+            print('we have made it past the lock')
 
             # Depending on the current mode the CAN msg data is set to either 1 or 0 (for H2 mode and Diesel mode respectively)
             if self.mode_num == '2':
+                print('we have made it inside the changer for current mode hydrogen')
+
 
                 self.msg_data = [1]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
                 self.mode_num = '0'
 
+                print(self.mode_num)
+
             else:
+                print('we made it inside the changer for diesel mode')
                 self.msg_data = [0]
                 self.mode_num = '2'
+
+                print(self.mode_num)
 
             self.toggle_msg.data = self.msg_data
             self.toggle_msg.dlc = 1
@@ -867,6 +875,7 @@ class FuelGaugeApp(App):
                 print("its throwing an error when it tries to modify the data")
                 return
             else:
+                print('success this is where we want to get to')
                 # Writing the current engine mode to a text file so that it is saved when the display is shut off
                 fin = open("fuel_file.txt", "wt")
                 fin.write(self.mode_num)
