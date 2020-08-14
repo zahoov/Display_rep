@@ -60,6 +60,8 @@ cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 1000
 
+display_code_dir = 'Display_rep/'
+
 _canIdTank123 = "cff3d17"
 _canIdTank456 = "cff4017"
 _canIdNira3 = "cff3e17"
@@ -445,10 +447,6 @@ def callback(dt):
     app.root.current = 'third'
 
 
-
-
-
-
 # This is the menu screen that the app defaults to and provides buttons to access all of the information screens
 class MainMenu(Screen):
 
@@ -708,7 +706,7 @@ class ModeLocking(Screen):
                 self.status = 'Locked'
 
             # Writes the current lock status to lock_file.txt to save it across sessions
-            fin = open("lock_file.txt", "wt")
+            fin = open(display_code_dir + "lock_file.txt", "wt")
             fin.write(app.lock_status)
             fin.close()
 
@@ -727,7 +725,7 @@ class FuelGaugeApp(App):
     mode_num = str
 
     # Opens the NIRA error code file and saves th error codes to error_code_list
-    with open('Display_rep/faultmessages.txt',
+    with open(display_code_dir + 'faultmessages.txt',
               'r') as f:
         lines = f.readlines()
         # Goes line by line and adds the error codes to the 'error_code_list' list
@@ -736,7 +734,7 @@ class FuelGaugeApp(App):
         f.close()
 
     # Opens the NIRA error code file and saves the fault code descriptions to error_list
-    with open('Display_rep/faultmessages.txt',
+    with open(display_code_dir + 'faultmessages.txt',
               'r') as f:
         lines = f.readlines()
         # Goes line by line and adds the error messages to the 'error_list' list
@@ -746,22 +744,22 @@ class FuelGaugeApp(App):
 
     # lock_file.txt and fuel_file.txt contains and holds the lock and engine mode statuses so they are saved after the screen is turned off
     # Tries to open the file -- if it isn't there it creates it with a default value
-    if os.path.isfile("Display_rep/lock_file.txt"):
-        fin = open("Display_rep/lock_file.txt", "rt")
+    if os.path.isfile(display_code_dir + "lock_file.txt"):
+        fin = open(display_code_dir + "lock_file.txt", "rt")
         lock_status = fin.read()
         fin.close()
     else:
-        fin = open("Display_rep/lock_file.txt", "w")
+        fin = open(display_code_dir + "lock_file.txt", "w")
         fin.write('0')
         lock_status = '0'
         fin.close()
 
-    if os.path.isfile("Display_rep/fuel_file.txt"):
-        fin = open("Display_rep/fuel_file.txt", "rt")
+    if os.path.isfile(display_code_dir + "fuel_file.txt"):
+        fin = open(display_code_dir + "fuel_file.txt", "rt")
         mode_num = fin.read()
         fin.close()
     else:
-        fin = open("Display_rep/fuel_file.txt", "w")
+        fin = open(display_code_dir + "fuel_file.txt", "w")
         fin.write('2')
         mode_num = '2'
         fin.close()
@@ -810,8 +808,6 @@ class FuelGaugeApp(App):
     # This calls errorMsg every 2 seconds to constantly change the error notification text from "FAULT" to the error code, or if there is no error it sets the text to blank
     Clock.schedule_interval(errorMsg, 2)
 
-
-
     # This checks the value of the engine mode number every 2 seconds and changes the notification text if needed
     Clock.schedule_interval(truckEngineMode, 2)
     # Starts Calvin's CAN message reading code in another thread so that it is constantly reading while the display is active
@@ -852,7 +848,6 @@ class FuelGaugeApp(App):
             if self.mode_num == '2':
                 print('we have made it inside the changer for current mode hydrogen')
 
-
                 self.msg_data = [1]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
                 self.mode_num = '0'
@@ -877,11 +872,9 @@ class FuelGaugeApp(App):
             else:
                 print('success this is where we want to get to')
                 # Writing the current engine mode to a text file so that it is saved when the display is shut off
-                fin = open("fuel_file.txt", "wt")
+                fin = open(display_code_dir + "fuel_file.txt", "wt")
                 fin.write(self.mode_num)
                 fin.close()
-
-
 
     # This is for uploading the truck live feed to a wordpress site -- leaving here just in case its needed again
     '''def content_former(self, data):
