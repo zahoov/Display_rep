@@ -791,12 +791,17 @@ class FuelGaugeApp(App):
     # It is a StringProperty() which is a Kivy variable type the essentially tells the Kivy back end code to keep checking what its value is/if it changes
     error_base = StringProperty()
 
+    if (mode_num == '0') or (mode_num == '1'):
+        engine_mode = StringProperty('H2\nMODE')
+        mode_color = ListProperty([0, 1, 0, 1])
+    else:
+        engine_mode = StringProperty('DIESEL\nMODE')
+        mode_color = ListProperty([0.431, 0.431, 0.431, 1])
+
     # Similar to error_base this is a string property and will contain the text to be displayed in the top right of most screens. This text tells the user if the truck is in H2 mode or Diesel mode
-    engine_mode = StringProperty()
 
     # In kivy colors are lists (rgba) and to send a color from the python code to the Kivy back end it must be a list property so that Kivy understands what it is receiving. This is needed since when the truck
     # is in H2 mode the text saying this is Green, whereas if the truck is in Diesel mode the text saying that is in Grey
-    mode_color = ListProperty()
 
     # Grabs the global variable and stores it as a local one that the Kivy back end can read
     # The conversion factor is for changing the discrete data values into a specific angle of rotation for the gauges
@@ -812,13 +817,6 @@ class FuelGaugeApp(App):
     # Starts Calvin's CAN message reading code in another thread so that it is constantly reading while the display is active
     a = Thread(target=msg_receiving)
     a.start()
-
-    if (mode_num == '0') or (mode_num == '1'):
-        engine_mode = 'H2\nMODE'
-        mode_color = [0, 1, 0, 1]
-    else:
-        engine_mode = 'DIESEL\nMODE'
-        mode_color = [0.431, 0.431, 0.431, 1]
 
     try:
         bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
