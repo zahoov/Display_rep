@@ -757,7 +757,7 @@ class FuelGaugeApp(App):
     mode_num = str
 
     # Opens the NIRA error code file and saves th error codes to error_code_list
-    with open('Display/2018.08.13 - NIRA J1979 Fault Messages.txt',
+    with open('Display/faultmessages.txt',
               'r') as f:
         lines = f.readlines()
         # Goes line by line and adds the error codes to the 'error_code_list' list
@@ -766,7 +766,7 @@ class FuelGaugeApp(App):
         f.close()
 
     # Opens the NIRA error code file and saves the fault code descriptions to error_list
-    with open('Display/2018.08.13 - NIRA J1979 Fault Messages.txt',
+    with open('Display/faultmessages.txt',
               'r') as f:
         lines = f.readlines()
         # Goes line by line and adds the error messages to the 'error_list' list
