@@ -905,7 +905,7 @@ class FuelGaugeApp(App):
     def source_changer(self, new_id):
 
         if new_id == '':
-            new_id = '0xCFF41F2'
+            new_id = 'F2'
 
         string_insurance = str(self.arb_id)
 
