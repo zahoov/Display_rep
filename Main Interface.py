@@ -867,7 +867,7 @@ class FuelGaugeApp(App):
             print('aw shit here we go again')
             pass
 
-    Clock.schedule_once(message_setup)
+    Clock.schedule_once(message_setup, 0)
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
