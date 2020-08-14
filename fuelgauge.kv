@@ -21,6 +21,7 @@
     # Page 5 -- 'temp&press'
     DynamicLeak:
     ModeLocking:
+    Message_settings:
 
 # Graphical code for the main screen where all of the buttons are
 <MainMenu>:
@@ -122,8 +123,15 @@
                 background_normal: ''
 			    background_color: 0, 0, 0.8, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
-                on_press: app.ModeSender()
+                on_press: app.root.current = 'can_settings'
 
+<Message_settings>:
+    name: 'can_settings'
+    canvas:
+	    Color:
+	        rgba: 0.027, 0.043, 0.372, 1
+	    Rectangle:
+	        size: self.width, self.height
 
 
 <ModeLocking>:

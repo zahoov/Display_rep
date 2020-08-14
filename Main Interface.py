@@ -714,6 +714,8 @@ class ModeLocking(Screen):
             # Changes the color of the submit button to Red in order to show an incorrect password was entered
             self.wrong_password_ind = [1, 0, 0, 1]
 
+class Message_settings(Screen):
+    pass
 
 # The main app class that everything runs off of
 class FuelGaugeApp(App):
@@ -876,23 +878,6 @@ class FuelGaugeApp(App):
                 fin.close()
 
         Clock.schedule_once(truckEngineMode)
-
-    # This is for uploading the truck live feed to a wordpress site -- leaving here just in case its needed again
-    '''def content_former(self, data):
-        i = 0
-        vals = []
-        formed_content = ''
-        data_titles = ['Date: ', 'H2 Mass: ', 'RPM: ', 'H2 Rail Pressure:', 'Tank Pressure:', 'Tank 1 Temp: ',
-                       'Tank 2 Temp: ', 'Tank 3 Temp: ', 'Tank 4 Temp: ', 'Tank 5 Temp: ']
-
-        while i < 10:
-            vals.append(str(data_titles[i]) + ' ' + str(data[i]) + '\n')
-            formed_content = formed_content + str(vals[i])
-            i = i + 1
-
-        print(formed_content)
-
-        return formed_content'''
 
 
 # Makes everything start
