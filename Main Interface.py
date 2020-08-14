@@ -771,13 +771,6 @@ class FuelGaugeApp(App):
     else:
         msg_data = [0]
 
-    try:
-        bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
-    except OSError:
-        print('Cannot find PiCAN board.')
-        pass
-
-
     # These are all of the data values received and decoded by Calvin's code
     temp0 = StringProperty()
     temp1 = StringProperty()
@@ -827,47 +820,26 @@ class FuelGaugeApp(App):
 
     if (mode_num == '0') or (mode_num == '1'):
         engine_mode = 'H2\nMODE'
+        msg_data = [1]
         mode_color = [0, 1, 0, 1]
     else:
         engine_mode = 'DIESEL\nMODE'
+        msg_data = [0]
         mode_color = [0.431, 0.431, 0.431, 1]
+
+    try:
+        bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
+    except OSError:
+        print('Cannot find PiCAN board.')
+        pass
+
+    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
+
+    task = bus.send_periodic(toggle_msg, 0.2)
 
     # Runs the screen manager that sets everything in motion
     def build(self):
         return MyScreenManager()
-
-    def message_setup(self, dt):
-
-        # Creates the CAN message --> arbitration_id = destination address
-        try:
-            self.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=self.msg_data)
-        except AttributeError:
-            bus_status = 0
-        else:
-            print('success')
-            bus_status = 1
-
-        while bus_status == 0:
-            try:
-                self.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=self.msg_data)
-            except AttributeError:
-                bus_status = 0
-            else:
-                bus_status = 1
-            print(bus_status)
-
-        # Sends the CAN message to whatever 'bus' was set to every period in seconds (0.25 = 250ms)
-        try:
-            self.task = self.bus.send_periodic(self.toggle_msg, 0.25)
-            if not isinstance(self.task, can.ModifiableCyclicTaskABC):
-                print("This interface doesn't seem to support modification")
-                self.task.stop()
-                return
-        except AttributeError:
-            print('aw shit here we go again')
-            pass
-
-    Clock.schedule_once(message_setup, 0)
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
@@ -886,16 +858,20 @@ class FuelGaugeApp(App):
                 self.msg_data = [0]
                 self.mode_num = '2'
 
+            self.toggle_msg.data = self.msg_data
+            self.toggle_msg.dlc = 1
+
             try:
                 self.task.modify_data(self.toggle_msg)
             except AttributeError:
+                print("its throwing an error when it tries to modify the data")
                 return
             else:
                 # Writing the current engine mode to a text file so that it is saved when the display is shut off
                 fin = open("fuel_file.txt", "wt")
                 fin.write(self.mode_num)
                 fin.close()
-                self.toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=self.msg_data)
+
 
 
     # This is for uploading the truck live feed to a wordpress site -- leaving here just in case its needed again
