@@ -913,12 +913,12 @@ class FuelGaugeApp(App):
         print('wo_source is below')
         print(wo_source)
 
-        try:
-            self.arb_id = wo_source + int(new_id, 16)
-            print('arb id below')
-            print(self.arb_id)
-        except ValueError:
-            print("You didn't input a new source ID")
+        #try:
+        self.arb_id = wo_source + int(new_id, 16)
+        print('arb id below')
+        print(self.arb_id)
+        #except ValueError:
+        #    print("You didn't input a new source ID")
 
         print('arb id int 16 below')
         print(int(self.arb_id, 16))
