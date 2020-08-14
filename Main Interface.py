@@ -921,7 +921,7 @@ class FuelGaugeApp(App):
         #try:
         self.arb_id = hex(wo_source + int(new_id, 16))
 
-        self.arb_address = self.arb_id
+        self.arb_address = self.arb_id.upper()
 
         print('arb id below')
         print(self.arb_id)
