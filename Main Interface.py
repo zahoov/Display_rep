@@ -869,7 +869,7 @@ class FuelGaugeApp(App):
                 fin = open(display_code_dir + "fuel_file.txt", "wt")
                 fin.write(self.mode_num)
                 fin.close()
-
+        print(self.task)
         Clock.schedule_once(truckEngineMode)
 
     # This is for uploading the truck live feed to a wordpress site -- leaving here just in case its needed again
