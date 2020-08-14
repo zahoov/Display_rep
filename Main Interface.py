@@ -902,19 +902,30 @@ class FuelGaugeApp(App):
     def source_changer(self, new_id):
 
         source_id = int(self.arb_id[7:9], 16)
+        print('source id is right below')
+        print(source_id)
 
         temp_id = int(self.arb_id, 16)
+        print('temp id is right below')
+        print(temp_id)
 
         wo_source = temp_id - source_id
+        print('wo_source is below')
+        print(wo_source)
 
         try:
             self.arb_id = wo_source + int(new_id, 16)
+            print('arb id below')
+            print(self.arb_id)
         except ValueError:
             print("You didn't input a new source ID")
 
-        fin = open(display_code_dir + "arbitration_file.txt", "w")
-        fin.write(str(int(self.arb_id, 16)))
-        fin.close()
+        print('arb id int 16 below')
+        print(int(self.arb_id, 16))
+
+        #fin = open(display_code_dir + "arbitration_file.txt", "w")
+        #fin.write(str(int(self.arb_id, 16)))
+        #fin.close()
 
 
 # Makes everything start
