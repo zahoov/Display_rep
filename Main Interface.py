@@ -921,7 +921,7 @@ class FuelGaugeApp(App):
         #    print("You didn't input a new source ID")
 
         print('arb id int 16 below')
-        print(int(self.arb_id, 16))
+        print(hex(self.arb_id))
 
         #fin = open(display_code_dir + "arbitration_file.txt", "w")
         #fin.write(str(int(self.arb_id, 16)))
