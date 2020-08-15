@@ -972,7 +972,8 @@ class FuelGaugeApp(App):
             fin.write(str(new_id))
             fin.close()
 
-            self.old_id = new_id
+
+            self.old_id = hex(new_id)
 
 
 
