@@ -766,6 +766,16 @@ class FuelGaugeApp(App):
         mode_num = '2'
         fin.close()
 
+    if os.path.isfile(display_code_dir + "old_source.txt"):
+        fin = open(display_code_dir + "old_source.txt", "rt")
+        old_id = fin.read()
+        fin.close()
+    else:
+        fin = open(display_code_dir + "old_source.txt", "w")
+        fin.write('F2')
+        old_id = 'F2'
+        fin.close()
+
     if os.path.isfile(display_code_dir + "arbitration_file.txt"):
         fin = open(display_code_dir + "arbitration_file.txt", "r+")
 
@@ -905,38 +915,53 @@ class FuelGaugeApp(App):
     def source_changer(self, new_id):
 
         if new_id == '':
-            new_id = 'F2'
+            return
 
-        string_insurance = str(self.arb_id)
+        try:
+            int(new_id)
+        except ValueError:
+            print('This is a hex value')
+            hex_check = True
+        else:
+            print('This is an integer value')
+            hex_check = False
 
-        source_id = int(string_insurance[7:9], 16)
-        print('source id is right below')
-        print(source_id)
+        if hex_check:
 
-        temp_id = int(string_insurance, 16)
-        print('temp id is right below')
-        print(temp_id)
+            string_insurance = str(self.arb_id)
 
-        wo_source = temp_id - source_id
-        print('wo_source is below')
-        print(wo_source)
+            source_id = int(self.old_id, 16)
 
-        #try:
-        self.arb_id = hex(wo_source + int(new_id, 16))
+            temp_id = int(string_insurance, 16)
 
-        self.arb_address = self.arb_id.upper()
+            wo_source = temp_id - source_id
 
-        print('arb id below')
-        print(self.arb_id)
-        #except ValueError:
-        #    print("You didn't input a new source ID")
+            self.arb_id = hex(wo_source + int(new_id, 16))
 
-        print('arb id in hex')
-        print(self.arb_id)
+            self.arb_address = self.arb_id.upper()
 
-        #fin = open(display_code_dir + "arbitration_file.txt", "w")
-        #fin.write(str(int(self.arb_id, 16)))
-        #fin.close()
+            fin = open(display_code_dir + "arbitration_file.txt", "wt")
+            fin.write(self.arb_address)
+            fin.close()
+
+        elif not hex_check:
+
+            string_insurance = str(self.arb_id)
+
+            source_id = int(self.old_id, 16)
+
+            temp_id = int(string_insurance, 16)
+
+            wo_source = temp_id - source_id
+
+            self.arb_id = hex(wo_source + new_id)
+
+            self.arb_address = self.arb_id.upper()
+
+            fin = open(display_code_dir + "arbitration_file.txt", "wt")
+            fin.write(self.arb_address)
+            fin.close()
+
 
 
 # Makes everything start
