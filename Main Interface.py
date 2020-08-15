@@ -960,7 +960,7 @@ class FuelGaugeApp(App):
 
             wo_source = temp_id - source_id
 
-            self.arb_id = hex(wo_source + new_id)
+            self.arb_id = hex(wo_source + int(new_id))
 
             self.arb_address = self.arb_id.upper()
 
