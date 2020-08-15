@@ -927,7 +927,7 @@ class FuelGaugeApp(App):
             hex_check = False
 
         if hex_check:
-
+            print('hexcheck true')
             string_insurance = str(self.arb_id)
 
             source_id = int(self.old_id, 16)
@@ -944,8 +944,14 @@ class FuelGaugeApp(App):
             fin.write(self.arb_address)
             fin.close()
 
-        elif not hex_check:
+            fin = open(display_code_dir + "old_source.txt")
+            fin.write(new_id)
+            fin.close()
 
+            self.old_id = new_id
+
+        elif not hex_check:
+            print('hexcheck false')
             string_insurance = str(self.arb_id)
 
             source_id = int(self.old_id, 16)
@@ -961,6 +967,12 @@ class FuelGaugeApp(App):
             fin = open(display_code_dir + "arbitration_file.txt", "wt")
             fin.write(self.arb_address)
             fin.close()
+
+            fin = open(display_code_dir + "old_source.txt")
+            fin.write(new_id)
+            fin.close()
+
+            self.old_id = new_id
 
 
 
