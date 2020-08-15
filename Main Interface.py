@@ -945,7 +945,7 @@ class FuelGaugeApp(App):
             fin.close()
 
             fin = open(display_code_dir + "old_source.txt")
-            fin.write(new_id)
+            fin.write(str(new_id))
             fin.close()
 
             self.old_id = new_id
@@ -969,7 +969,7 @@ class FuelGaugeApp(App):
             fin.close()
 
             fin = open(display_code_dir + "old_source.txt")
-            fin.write(new_id)
+            fin.write(str(new_id))
             fin.close()
 
             self.old_id = new_id
