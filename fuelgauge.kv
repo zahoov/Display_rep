@@ -181,6 +181,7 @@
             TextInput:
                 id: source_id
                 hint_text: 'Enter the new SourceID'
+                on_text_validate: app.source_changer(source_id.text)
                 multiline : False
                 font_size: ((self.parent.width + self.parent.height) / 3) * 0.075
 
