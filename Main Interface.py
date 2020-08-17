@@ -774,25 +774,26 @@ class FuelGaugeApp(App):
         stored_id = fin.read()
 
         if stored_id == '':
-            arb_address = StringProperty('0xCFF41F2')
-            fin.write('0xCFF41F2')
+            arb_id = '0xCFF41F2'
+            arb_address = StringProperty(arb_id)
+            fin.write(arb_id)
             fin.close()
             print('check 1: nothing in file')
             print(arb_address)
         else:
+            arb_id = '0xCFF41F2'
             arb_address = StringProperty(stored_id)
             fin.close()
             print('check 2: something in file')
-            print(arb_address)
     else:
         fin = open(display_code_dir + "arbitration_file.txt", "w")
-        fin.write('0xCFF41F2')
-        arb_address = StringProperty('0xCFF41F2')
+        arb_id = '0xCFF41F2'
+        fin.write(arb_id)
+        arb_address = StringProperty(arb_id)
         fin.close()
         print("check 3: file doesn't exist yet")
 
-    temp = arb_address[7:9]
-    source_id = StringProperty(temp)
+    source_id = arb_id[7:9]
 
     if mode_num == '2':
         msg_data = [0]
@@ -914,7 +915,7 @@ class FuelGaugeApp(App):
         else:
             print('Input accepted')
 
-            wo_source = str(self.arb_address)[0:7]
+            wo_source = str(self.arb_id)[0:7]
 
             if new_id > 255:
                 print('Inputted value is too high, 255 is the max input')
@@ -923,12 +924,14 @@ class FuelGaugeApp(App):
 
                 new_id = str(hex(int(new_id)))[2:]
 
-                self.arb_address = (wo_source + new_id)
+                self.arb_id = (wo_source + new_id)
                 self.source_id = new_id
 
                 fin = open(display_code_dir + "arbitration_file.txt", "wt")
-                fin.write(self.arb_address)
+                fin.write(self.arb_id)
                 fin.close()
+
+                self.arb_address = self.arb_id
 
     def destination_changer(self, new_id):
 
