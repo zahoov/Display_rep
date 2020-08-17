@@ -772,8 +772,8 @@ class FuelGaugeApp(App):
         fin.close()
     else:
         fin = open(display_code_dir + "old_source.txt", "w")
-        fin.write('F2')
-        old_id = 'F2'
+        fin.write('242')
+        old_id = '242'
         fin.close()
 
     if os.path.isfile(display_code_dir + "arbitration_file.txt"):
@@ -782,9 +782,9 @@ class FuelGaugeApp(App):
         stored_id = fin.read()
 
         if stored_id == '':
-            arb_id = '0xCFF41F2'
+            arb_id = '218055154'
             arb_address = StringProperty(arb_id)
-            fin.write('0xCFF41F2')
+            fin.write('218055154')
             fin.close()
             print('check 1: nothing in file')
             print(arb_id)
@@ -796,8 +796,8 @@ class FuelGaugeApp(App):
             print(arb_id)
     else:
         fin = open(display_code_dir + "arbitration_file.txt", "w")
-        fin.write('0xCFF41F2')
-        arb_id = '0xCFF41F2'
+        fin.write('218055154')
+        arb_id = '218055154'
         arb_address = StringProperty(arb_id)
         fin.close()
         print("check 3: file doesn't exist yet")
@@ -920,25 +920,18 @@ class FuelGaugeApp(App):
         try:
             int(new_id)
         except ValueError:
-            print('This is a hex value')
-            hex_check = True
+            print('This is not an integer value')
         else:
-            print('This is an integer value')
-            hex_check = False
+            print('Input accepted')
+            string_insurance = int(self.arb_id)
 
-        if hex_check:
-            print('hexcheck true')
-            string_insurance = str(self.arb_id)
+            source_id = int(self.old_id)
 
-            source_id = int(self.old_id, 16)
+            wo_source = string_insurance - source_id
 
-            temp_id = int(string_insurance, 16)
+            self.arb_id = (wo_source + int(new_id))
 
-            wo_source = temp_id - source_id
-
-            self.arb_id = hex(wo_source + int(new_id, 16))
-
-            self.arb_address = self.arb_id.upper()
+            self.arb_address = self.arb_id
 
             fin = open(display_code_dir + "arbitration_file.txt", "wt")
             fin.write(self.arb_address)
@@ -948,32 +941,7 @@ class FuelGaugeApp(App):
             fin.write(str(new_id))
             fin.close()
 
-            self.old_id = new_id
-
-        elif not hex_check:
-            print('hexcheck false')
-            string_insurance = str(self.arb_id)
-
-            source_id = int(self.old_id, 16)
-
-            temp_id = int(string_insurance, 16)
-
-            wo_source = temp_id - source_id
-
-            self.arb_id = hex(wo_source + int(new_id))
-
-            self.arb_address = self.arb_id.upper()
-
-            fin = open(display_code_dir + "arbitration_file.txt", "wt")
-            fin.write(self.arb_address)
-            fin.close()
-
-            fin = open(display_code_dir + "old_source.txt", "wt")
-            fin.write(str(new_id))
-            fin.close()
-
-            self.old_id = hex(int(new_id))
-
+            self.old_id = int(new_id)
 
 
 # Makes everything start
