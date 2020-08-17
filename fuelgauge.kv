@@ -207,8 +207,8 @@
 
 
             BoxLayout:
-		    id: reference
-			orientation: 'horizontal'
+                id: reference
+                orientation: 'horizontal'
 
                 size_hint_max_y: root.height * (2.5 / 12)
 
@@ -221,11 +221,11 @@
                     size: self.texture_size
 
                 Button:
-                background_normal: ''
-                background_color: 0, 0, 0.8, 1
-                text: 'Toggle Engine Mode'
-                font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
-                on_press: app.ModeSender
+                    background_normal: ''
+                    background_color: 0, 0, 0.8, 1
+                    text: 'Toggle Engine Mode'
+                    font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
+                    on_press: app.ModeSender
 
                 Label:
                     text: app.arb_address
