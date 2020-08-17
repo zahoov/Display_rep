@@ -963,14 +963,15 @@ class FuelGaugeApp(App):
                 return
             else:
                 wo_source = int(new_id) * (10 ** (9 - input_length))
-                print('wo_source as int' + wo_source)
+                print(wo_source)
 
 
                 wo_source = hex(wo_source)
-                print('wo_source as hex' + wo_source)
+                print(wo_source)
 
 
                 self.arb_id = (wo_source + self.source_id)
+                print(self.arb_id)
 
                 self.arb_address = self.arb_id
 
