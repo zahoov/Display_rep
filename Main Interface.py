@@ -954,15 +954,15 @@ class FuelGaugeApp(App):
 
             source_id = int(self.old_id)
 
-            check = source_id
-            source_length = 0
+            check = new_id
+            input_length = 0
 
             while check > 1:
                 check = check / 10
-                source_length = source_length + 1
-                print(source_length)
+                input_length = input_length + 1
+                print(input_length)
 
-            wo_source = int(new_id) * (10 ** source_length)
+            wo_source = int(new_id) * (10 ** (9 - input_length))
 
             self.arb_id = (wo_source + source_id)
 
