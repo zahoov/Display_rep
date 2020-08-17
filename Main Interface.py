@@ -963,11 +963,11 @@ class FuelGaugeApp(App):
                 print('That was too large a number. The max input is: ' + str(cap - 255))
                 return
             else:
-                wo_source = int(new_id) * (10 ** (9 - input_length))
+                wo_source = str(hex(int(new_id) * (10 ** (9 - input_length))))[0:7]
                 print(wo_source)
 
                 no_caps = wo_source[0:2]
-                wo_source = str(hex(wo_source))[2:7]
+                wo_source = wo_source[2:7]
 
                 print(wo_source)
 
