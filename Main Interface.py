@@ -714,8 +714,10 @@ class ModeLocking(Screen):
             # Changes the color of the submit button to Red in order to show an incorrect password was entered
             self.wrong_password_ind = [1, 0, 0, 1]
 
+
 class Message_settings(Screen):
     pass
+
 
 # The main app class that everything runs off of
 class FuelGaugeApp(App):
@@ -863,7 +865,6 @@ class FuelGaugeApp(App):
         print('Cannot find PiCAN board.')
         pass
 
-
     toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
 
     task = bus.send_periodic(toggle_msg, 0.2)
@@ -945,6 +946,8 @@ class FuelGaugeApp(App):
 
     def destination_changer(self, new_id):
 
+        max = 2 ** 29
+
         try:
             int(new_id)
         except ValueError:
@@ -962,16 +965,22 @@ class FuelGaugeApp(App):
                 input_length = input_length + 1
                 print(input_length)
 
-            wo_source = int(new_id) * (10 ** (9 - input_length))
+            if input_length > 9:
+                print('That was too large a number. The max input is: ' + str(max - 255))
+                return
+            elif check > (max - 255):
+                print('That was too large a number. The max input is: ' + str(max - 255))
+                return
+            else:
+                wo_source = int(new_id) * (10 ** (9 - input_length))
 
-            self.arb_id = (wo_source + source_id)
+                self.arb_id = (wo_source + source_id)
 
-            self.arb_address = str(self.arb_id)
+                self.arb_address = str(self.arb_id)
 
-            fin = open(display_code_dir + "arbitration_file.txt", "wt")
-            fin.write(self.arb_address)
-            fin.close()
-
+                fin = open(display_code_dir + "arbitration_file.txt", "wt")
+                fin.write(self.arb_address)
+                fin.close()
 
 
 # Makes everything start
