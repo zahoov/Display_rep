@@ -954,7 +954,7 @@ class FuelGaugeApp(App):
 
             source_id = int(self.old_id)
 
-            check = new_id
+            check = int(new_id)
             input_length = 0
 
             while check > 1:
