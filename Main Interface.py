@@ -960,6 +960,7 @@ class FuelGaugeApp(App):
             while check > 1:
                 check = check / 10
                 source_length = source_length + 1
+                print(source_length)
 
             wo_source = int(new_id) * source_length
 
