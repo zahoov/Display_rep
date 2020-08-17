@@ -220,16 +220,16 @@
                 on_release: app.root.current = 'menu'
                 size: self.texture_size
 
+            Label:
+                text: app.arb_address
+                font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
+
             Button:
                 background_normal: ''
                 background_color: 0, 0, 0.8, 1
                 text: 'Toggle Engine Mode'
                 font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
                 on_press: app.ModeSender
-
-            Label:
-                text: app.arb_address
-                font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
 
 
 
