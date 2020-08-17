@@ -931,7 +931,7 @@ class FuelGaugeApp(App):
 
             self.arb_id = (wo_source + int(new_id))
 
-            self.arb_address = self.arb_id
+            self.arb_address = str(self.arb_id)
 
             fin = open(display_code_dir + "arbitration_file.txt", "wt")
             fin.write(self.arb_address)
