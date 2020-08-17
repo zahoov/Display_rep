@@ -951,6 +951,8 @@ class FuelGaugeApp(App):
                 check = check / 10
                 input_length = input_length + 1
 
+            print(input_length)
+
             if input_length > 9:
                 print('That was too large a number. The max input is: ' + str(cap - 255))
                 return
