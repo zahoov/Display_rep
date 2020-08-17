@@ -943,6 +943,35 @@ class FuelGaugeApp(App):
 
             self.old_id = int(new_id)
 
+    def destination_changer(self, new_id):
+
+        try:
+            int(new_id)
+        except ValueError:
+            print('This is not an integer value')
+        else:
+            print('Input accepted')
+
+            source_id = int(self.old_id)
+
+            check = source_id
+            source_length = 0
+
+            while check > 1:
+                check = check / 10
+                source_length = source_length + 1
+
+            wo_source = int(new_id) * source_length
+
+            self.arb_id = (wo_source + source_id)
+
+            self.arb_address = str(self.arb_id)
+
+            fin = open(display_code_dir + "arbitration_file.txt", "wt")
+            fin.write(self.arb_address)
+            fin.close()
+
+
 
 # Makes everything start
 if __name__ == '__main__':
