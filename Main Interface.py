@@ -935,6 +935,8 @@ class FuelGaugeApp(App):
 
     def destination_changer(self, new_id):
 
+        cap = 2 ** 29
+
         try:
             int(new_id)
         except ValueError:
@@ -948,23 +950,24 @@ class FuelGaugeApp(App):
             while check > 1:
                 check = check / 10
                 input_length = input_length + 1
-                print(input_length)
 
             if input_length > 9:
-                print('That was too large a number. The max input is: ' + str(max - 255))
+                print('That was too large a number. The max input is: ' + str(cap - 255))
                 return
-            elif check > (max - 255):
-                print('That was too large a number. The max input is: ' + str(max - 255))
+            elif check > (cap - 255):
+                print('That was too large a number. The max input is: ' + str(cap - 255))
                 return
             else:
                 wo_source = int(new_id) * (10 ** (9 - input_length))
 
-                self.arb_address = (wo_source + self.source_id)
+                wo_source = hex(wo_source)
 
-                self.arb_address = str(self.arb_address)
+                self.arb_id = (wo_source + self.source_id)
+
+                self.arb_address = self.arb_id
 
                 fin = open(display_code_dir + "arbitration_file.txt", "wt")
-                fin.write(self.arb_address)
+                fin.write(self.arb_id)
                 fin.close()
 
 
