@@ -924,7 +924,7 @@ class FuelGaugeApp(App):
 
                 new_id = str(hex(int(new_id)))[2:]
 
-                self.arb_id = (wo_source + new_id)
+                self.arb_id = (wo_source + new_id.upper())
                 self.source_id = new_id
 
                 fin = open(display_code_dir + "arbitration_file.txt", "wt")
