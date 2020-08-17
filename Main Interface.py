@@ -915,7 +915,8 @@ class FuelGaugeApp(App):
         else:
             print('Input accepted')
 
-            wo_source = str(self.arb_id)[0:7]
+            no_caps = str(self.arb_id)[0:2]
+            wo_source = str(self.arb_id)[2:7]
             print('next is wo_source')
             print(wo_source)
 
@@ -926,7 +927,7 @@ class FuelGaugeApp(App):
 
                 new_id = str(hex(int(new_id)))[2:]
 
-                self.arb_id = (wo_source + new_id.upper())
+                self.arb_id = (no_caps + wo_source.upper() + new_id.upper())
                 self.source_id = new_id
 
                 fin = open(display_code_dir + "arbitration_file.txt", "wt")
@@ -965,12 +966,12 @@ class FuelGaugeApp(App):
                 wo_source = int(new_id) * (10 ** (9 - input_length))
                 print(wo_source)
 
+                no_caps = wo_source[0:2]
+                wo_source = str(hex(wo_source))[2:7]
 
-                wo_source = str(hex(wo_source))[0:7]
                 print(wo_source)
 
-
-                self.arb_id = (wo_source + self.source_id)
+                self.arb_id = (no_caps + wo_source.upper() + self.source_id.upper())
                 print(self.arb_id)
 
                 self.arb_address = self.arb_id
