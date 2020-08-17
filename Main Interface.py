@@ -781,8 +781,8 @@ class FuelGaugeApp(App):
             print('check 1: nothing in file')
             print(arb_address)
         else:
-            arb_id = '0xCFF41F2'
-            arb_address = StringProperty(stored_id)
+            arb_id = stored_id
+            arb_address = StringProperty(arb_id)
             fin.close()
             print('check 2: something in file')
     else:
@@ -963,8 +963,12 @@ class FuelGaugeApp(App):
                 return
             else:
                 wo_source = int(new_id) * (10 ** (9 - input_length))
+                print('wo_source as int' + wo_source)
+
 
                 wo_source = hex(wo_source)
+                print('wo_source as hex' + wo_source)
+
 
                 self.arb_id = (wo_source + self.source_id)
 

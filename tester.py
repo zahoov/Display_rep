@@ -6,7 +6,7 @@ def main():
 
     #print('That was too large a number. The max input is: ' + str(max - 255))
     arb_id = '0xCFF4124'
-
+    print(max)
     token = input('Enter:\n')
 
     print(hex(int(token)))
