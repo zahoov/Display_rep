@@ -917,7 +917,7 @@ class FuelGaugeApp(App):
 
             wo_source = str(self.arb_id)[0:7]
 
-            if new_id > 255:
+            if int(new_id) > 255:
                 print('Inputted value is too high, 255 is the max input')
                 return
             else:
