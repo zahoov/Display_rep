@@ -4,18 +4,26 @@ import can
 def main():
     max = 2 ** 29
 
-    print('That was too large a number. The max input is: ' + str(max - 255))
+    #print('That was too large a number. The max input is: ' + str(max - 255))
+    arb_id = '0xCFF4124'
+
+    token = input('Enter:\n')
+
+    print(hex(int(token)))
 
 
-'''
-    arb_id = '0xCFF41F2'
 
-    test1 = int(arb_id, 16)
 
-    test2 = str(test1)
+    source_id = str(arb_id)[0:7]
 
-    print(test1)
-    print(test2)'''
+
+    print(source_id)
+
+    arb_id = source_id + str(hex(int(token)))[2:]
+
+    print(arb_id)
+
+
 
 if __name__ == '__main__':
     main()
