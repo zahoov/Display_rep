@@ -966,7 +966,7 @@ class FuelGaugeApp(App):
                 print(wo_source)
 
 
-                wo_source = hex(wo_source)
+                wo_source = str(hex(wo_source))[0:7]
                 print(wo_source)
 
 
