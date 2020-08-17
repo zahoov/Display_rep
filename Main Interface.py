@@ -962,7 +962,7 @@ class FuelGaugeApp(App):
                 source_length = source_length + 1
                 print(source_length)
 
-            wo_source = int(new_id) * source_length
+            wo_source = int(new_id) * (10 ** source_length)
 
             self.arb_id = (wo_source + source_id)
 
