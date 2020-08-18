@@ -446,19 +446,17 @@ def callback(dt):
     # app.root.current just calls the the Kivy ScreenManger class that handles all of the screens and changes it to the screen defined as 'third'
     app.root.current = 'third'
 
-def lock_changer(status):
-
-    app = App.get_running_app()
-
-    if status == '0':
-        app.root.current = 'can_settings'
-    else:
-        return
-
-
-
 # This is the menu screen that the app defaults to and provides buttons to access all of the information screens
 class MainMenu(Screen):
+
+    def lock_changer(self, status):
+
+        app = App.get_running_app()
+
+        if status == '0':
+            app.root.current = 'can_settings'
+        else:
+            return
 
     # When the user enters the page a transition to the screen-saver is scheduled for delay seconds from now
     def on_enter(self):
@@ -881,11 +879,11 @@ class FuelGaugeApp(App):
 
         # If the display is unlocked (lock_status == '0') it checks to see what the current engine mode is
         if self.lock_status == '0':
-            print('we have made it past the lock')
+            print('working so far')
 
             # Depending on the current mode the CAN msg data is set to either 1 or 0 (for H2 mode and Diesel mode respectively)
             if self.mode_num == '2':
-                print('we have made it inside the changer for current mode hydrogen')
+                print('working more')
 
                 self.msg_data = [1]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
@@ -893,7 +891,7 @@ class FuelGaugeApp(App):
                 print(self.mode_num)
 
             else:
-                print('we made it inside the changer for diesel mode')
+                print('also working more')
                 self.msg_data = [0]
                 self.mode_num = '2'
 
@@ -905,7 +903,7 @@ class FuelGaugeApp(App):
             try:
                 self.task.modify_data(self.toggle_msg)
             except AttributeError:
-                print("its throwing an error when it tries to modify the data")
+                print("please don't trigger this error")
                 return
             else:
                 print('success this is where we want to get to')
