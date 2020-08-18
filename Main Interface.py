@@ -866,6 +866,8 @@ class FuelGaugeApp(App):
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
 
+        print(self.lock_status)
+
         # If the display is unlocked (lock_status == '0') it checks to see what the current engine mode is
         if self.lock_status == '0':
             print('we have made it past the lock')
