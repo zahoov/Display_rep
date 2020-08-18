@@ -185,13 +185,6 @@
                 multiline : False
                 font_size: ((self.parent.width + self.parent.height) / 3) * 0.075
 
-            Button:
-                background_normal: ''
-                background_color: 0, 0, 0.8, 1
-                text: 'Submit new ID'
-                on_press: app.source_changer(source_id.text)
-                #on_touch_up: source_id.text = ''
-                font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
 
             TextInput:
                 id: destination_id
@@ -199,6 +192,15 @@
                 multiline: False
                 on_text_validate: app.destination_changer(destination_id.text)
                 font_size: ((self.parent.width + self.parent.height) / 3) * 0.075
+
+
+            Button:
+                background_normal: ''
+                background_color: 0, 0, 0.8, 1
+                text: 'Submit new ID'
+                on_press: app.source_changer(source_id.text)
+                #on_touch_up: source_id.text = ''
+                font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
 
             Button:
                 background_normal: ''
