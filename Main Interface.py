@@ -446,6 +446,16 @@ def callback(dt):
     # app.root.current just calls the the Kivy ScreenManger class that handles all of the screens and changes it to the screen defined as 'third'
     app.root.current = 'third'
 
+def lock_changer(status):
+
+    app = App.get_running_app()
+
+    if status == '0':
+        app.root.current = 'can_settings'
+    else:
+        return
+
+
 
 # This is the menu screen that the app defaults to and provides buttons to access all of the information screens
 class MainMenu(Screen):
