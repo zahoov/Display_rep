@@ -197,6 +197,7 @@
                 id: destination_id
                 hint_text: 'Enter the new DestID'
                 multiline: False
+                on_text_validate: app.destination_changer(destination_id.text)
                 font_size: ((self.parent.width + self.parent.height) / 3) * 0.075
 
             Button:
@@ -229,7 +230,7 @@
                 background_normal: ''
                 background_color: 0, 0, 0.8, 1
                 text: 'Toggle Engine Mode'
-                font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
+                font_size: ((self.parent.width + self.parent.height) / 3) * 0.09
                 on_press: app.ModeSender
 
 
