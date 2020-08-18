@@ -865,6 +865,7 @@ class FuelGaugeApp(App):
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
+        print('inside mode sender')
 
         print(self.lock_status)
 
