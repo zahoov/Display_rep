@@ -793,7 +793,7 @@ class FuelGaugeApp(App):
         fin.close()
         print("check 3: file doesn't exist yet")
 
-    source_id = arb_id[7:9]
+    source_id = StringProperty(arb_id[7:9])
 
     if mode_num == '2':
         msg_data = [0]
