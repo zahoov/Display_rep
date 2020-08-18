@@ -1000,7 +1000,7 @@ class FuelGaugeApp(App):
                 self.task.stop()
                 self.toggle_msg = can.Message(arbitration_id=int(self.arb_id, 16), data=self.msg_data)
                 self.task = self.bus.send_periodic(self.toggle_msg, 0.2)
-                print('This is the new msg --> ' + self.toggle_msg)
+                print('This is the new msg --> ' + str(self.toggle_msg))
 
 
 # Makes everything start
