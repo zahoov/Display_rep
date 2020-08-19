@@ -867,6 +867,8 @@ class FuelGaugeApp(App):
 
     task = bus.send_periodic(toggle_msg, 0.2)
 
+
+
     # Runs the screen manager that sets everything in motion
     def build(self):
         return MyScreenManager()
@@ -965,30 +967,17 @@ class FuelGaugeApp(App):
             print('Input accepted')
 
             check = int(new_id)
-            input_length = 0
 
-            while check > 1:
-                check = check / 10
-                input_length = input_length + 1
-
-            print(input_length)
-
-            if input_length > 9:
-                print('That was too large a number. The max input is: ' + str(cap - 255))
-                return
-            elif check > (cap - 255):
+            if check > (cap - 255):
                 print('That was too large a number. The max input is: ' + str(cap - 255))
                 return
             else:
-                wo_source = str(hex(int(new_id) * (10 ** (9 - input_length))))[0:7]
-                print(wo_source)
+                front_mid = self.arb_id[2:5]
+                rear = self.arb_id[7:9]
+                no_caps = self.arb_id[0:2]
+                new_id = (str(hex(check)))[2:]
 
-                no_caps = wo_source[0:2]
-                wo_source = wo_source[2:7]
-
-                print(wo_source)
-
-                self.arb_id = (no_caps + wo_source.upper() + self.source_id.upper())
+                self.arb_id = (no_caps + front_mid.upper() + new_id.upper() + rear.upper())
                 print(self.arb_id)
 
                 self.arb_address = self.arb_id
