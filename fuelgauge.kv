@@ -178,12 +178,7 @@
             spacing: 10, 10
             size_hint_y: 0.75
 
-            TextInput:
-                id: source_id
-                hint_text: 'Enter the new SourceID'
-                on_text_validate: app.source_changer(source_id.text)
-                multiline : False
-                font_size: ((self.parent.width + self.parent.height) / 3) * 0.075
+
 
 
             TextInput:
@@ -193,13 +188,21 @@
                 on_text_validate: app.destination_changer(destination_id.text)
                 font_size: ((self.parent.width + self.parent.height) / 3) * 0.075
 
-            Label:
-                text: app.source_id
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+            TextInput:
+                id: source_id
+                hint_text: 'Enter the new SourceID'
+                on_text_validate: app.source_changer(source_id.text)
+                multiline : False
+                font_size: ((self.parent.width + self.parent.height) / 3) * 0.075
 
 
             Label:
                 text: app.arb_address
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+
+
+            Label:
+                text: app.source_id
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
 
 
