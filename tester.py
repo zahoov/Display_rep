@@ -1,28 +1,17 @@
-import can
-
 
 def main():
-    max = 2 ** 29
 
-    #print('That was too large a number. The max input is: ' + str(max - 255))
-    arb_id = '0xCFF4124'
-    print(max)
-    token = input('Enter:\n')
+    arb_id = '0xCFF41F2'
+    check = input('Enter the new destination ID:\n')
 
-    print(hex(int(token)))
+    front_mid = arb_id[2:5]
+    rear = arb_id[7:9]
+    no_caps = arb_id[0:2]
+    new_id = (str(hex(int(check))))[2:]
 
+    completed = no_caps + front_mid.upper() + new_id.upper() + rear.upper()
 
-
-
-    source_id = str(arb_id)[0:7]
-
-
-    print(source_id)
-
-    arb_id = source_id + str(hex(int(token)))[2:]
-
-    print(arb_id)
-
+    print(completed)
 
 
 if __name__ == '__main__':
