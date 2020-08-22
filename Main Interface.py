@@ -975,7 +975,7 @@ class FuelGaugeApp(App):
                 return
             else:
 
-                self.dest_id = str(hex(int(new_id)))
+                self.dest_id = str(hex(int(new_id)))[2:]
 
                 front_mid = self.arb_id[2:5]
                 rear = self.arb_id[7:9]
