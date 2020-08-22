@@ -821,6 +821,8 @@ class FuelGaugeApp(App):
     press2 = StringProperty()
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
+
+    dest_id = StringProperty()
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
     hMass = NumericProperty(0)
 
@@ -974,6 +976,9 @@ class FuelGaugeApp(App):
                 print('That was too large a number. The max input is: ' + str(cap - 255))
                 return
             else:
+
+                self.dest_id = str(hex(int(new_id)))
+
                 front_mid = self.arb_id[2:5]
                 rear = self.arb_id[7:9]
                 no_caps = self.arb_id[0:2]
