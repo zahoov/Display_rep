@@ -464,6 +464,8 @@ class MainMenu(Screen):
 
     # Listens for the touch up on the screen
     def on_touch_up(self, touch):
+        app = App.get_running_app()
+        app.root.current = 'third'
         # Clock.unschedule(FUNCTION) just cancels whatever scheduling was put onto the designated function. It is used here as the screen saver delay tool. When the user touches the screen the function that changes
         # the screen to the screen saver will be unscheduled and then rescheduled by the Clock call below this, this basically just resets the delay timer on the screen saver
         Clock.unschedule(callback)
