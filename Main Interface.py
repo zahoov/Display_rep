@@ -271,9 +271,9 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
                 app.press1 = str(presT1) + ' bar'
 
-                app.temp0 = str(tempL[0]) + '˚C'
-                app.temp1 = str(tempL[1]) + '˚C'
-                app.temp2 = str(tempL[2]) + '˚C'
+                app.temp0 = str("%.2f" % tempL[0]) + '˚C'
+                app.temp1 = str("%.2f" % tempL[1]) + '˚C'
+                app.temp2 = str("%.2f" % tempL[2]) + '˚C'
 
             #######################################################################################
             # Temperature and Pressure T4-T6
@@ -282,9 +282,9 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 tempL[4] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempL[5] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                app.temp3 = str(tempL[3]) + '˚C'
-                app.temp4 = str(tempL[4]) + '˚C'
-                app.temp5 = str(tempL[5]) + '˚C'
+                app.temp3 = str("%.2f" % tempL[3]) + '˚C'
+                app.temp4 = str("%.2f" % tempL[4]) + '˚C'
+                app.temp5 = str("%.2f" % tempL[5]) + '˚C'
 
 
 
