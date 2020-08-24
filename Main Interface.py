@@ -58,7 +58,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 # cf = conversion_factor
 cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
-delay = 1000
+delay = 20
 
 display_code_dir = 'Display_rep/'
 
@@ -392,8 +392,6 @@ def hydrogenMassEq2(pressureV, tempV, volumeV):
 
     app.hMass = HmassTotalKg
 
-    print(HmassTotalKg)
-
     return HmassTotalKg
 
 
@@ -596,7 +594,6 @@ class ErrorPage(Screen):
             self.error_expl = 'ERROR: Code outside of range'
         else:
             self.error_expl = app.error_list[e_c]
-        print(e_c)
 
     # Same as in the other class
     def on_enter(self):
@@ -786,20 +783,16 @@ class FuelGaugeApp(App):
             arb_address = StringProperty(arb_id)
             fin.write(arb_id)
             fin.close()
-            print('check 1: nothing in file')
-            print(arb_address)
         else:
             arb_id = stored_id
             arb_address = StringProperty(arb_id)
             fin.close()
-            print('check 2: something in file')
     else:
         fin = open(display_code_dir + "arbitration_file.txt", "w")
         arb_id = '0xCFF41F2'
         fin.write(arb_id)
         arb_address = StringProperty(arb_id)
         fin.close()
-        print("check 3: file doesn't exist yet")
 
     source_id = StringProperty(arb_id[7:9])
 
@@ -877,29 +870,20 @@ class FuelGaugeApp(App):
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
-        print('inside mode sender')
-
-        print(self.lock_status)
 
         # If the display is unlocked (lock_status == '0') it checks to see what the current engine mode is
         if self.lock_status == '0':
-            print('working so far')
 
             # Depending on the current mode the CAN msg data is set to either 1 or 0 (for H2 mode and Diesel mode respectively)
             if self.mode_num == '2':
-                print('working more')
 
                 self.msg_data = [1]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
                 self.mode_num = '0'
-                print(self.mode_num)
 
             else:
-                print('also working more')
                 self.msg_data = [0]
                 self.mode_num = '2'
-
-                print(self.mode_num)
 
             self.toggle_msg.data = self.msg_data
             self.toggle_msg.dlc = 1
@@ -907,10 +891,8 @@ class FuelGaugeApp(App):
             try:
                 self.task.modify_data(self.toggle_msg)
             except AttributeError:
-                print("please don't trigger this error")
                 return
             else:
-                print('success this is where we want to get to')
                 # Writing the current engine mode to a text file so that it is saved when the display is shut off
                 fin = open(display_code_dir + "fuel_file.txt", "wt")
                 fin.write(self.mode_num)
@@ -928,12 +910,9 @@ class FuelGaugeApp(App):
         except ValueError:
             print('This is not an integer value')
         else:
-            print('Input accepted')
 
             no_caps = str(self.arb_id)[0:2]
             wo_source = str(self.arb_id)[2:7]
-            print('next is wo_source')
-            print(wo_source)
 
             if int(new_id) > 255:
                 print('Inputted value is too high, 255 is the max input')
@@ -983,8 +962,6 @@ class FuelGaugeApp(App):
                 new_id = (str(hex(check)))[2:]
 
                 self.arb_id = (no_caps + front_mid.upper() + new_id.upper() + rear.upper())
-                print(self.arb_id)
-
                 self.arb_address = self.arb_id
 
                 fin = open(display_code_dir + "arbitration_file.txt", "wt")
@@ -994,8 +971,6 @@ class FuelGaugeApp(App):
                 self.task.stop()
                 self.toggle_msg = can.Message(arbitration_id=int(self.arb_id, 16), data=self.msg_data)
                 self.task = self.bus.send_periodic(self.toggle_msg, 0.2)
-                print('This is the new msg --> ' + str(self.toggle_msg))
-
 
 # Makes everything start
 if __name__ == '__main__':
