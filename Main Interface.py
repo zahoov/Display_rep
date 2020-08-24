@@ -583,9 +583,7 @@ class ErrorPage(Screen):
         # fault codes, if it is 255 it sets the message to 'Everything is running as expected' and if the code is greater than 233 it sets it as 'ERROR: Code outside of range'
         try:
             e_c = int(app.error_code)
-
         except ValueError:
-            print('No NIRA error codes recieved yet')
             return ()
 
         if e_c == 255:
