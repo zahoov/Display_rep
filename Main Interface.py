@@ -269,7 +269,7 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 tempL[1] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempL[2] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                app.press1 = str(presT1) + ' bar'
+                app.press1 = str("%.2f" % presT1) + ' bar'
 
                 app.temp0 = str("%.2f" % tempL[0]) + '˚C'
                 app.temp1 = str("%.2f" % tempL[1]) + '˚C'
