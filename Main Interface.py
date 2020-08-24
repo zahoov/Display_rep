@@ -80,7 +80,7 @@ def msg_receiving():
 
     outDir = "Display_rep/out/hydraFL"  # "/home/pi/rough/logger-rbp-python-out/lomack150_"
     numCAN = 1  # 2
-    bRate = 500000  # 250000 or 500000
+    bRate = 250000  # 250000 or 500000
     CANtype = "RBP15"  # OCAN or ACAN
     numTank = 5
     volumeStr = "202,202,202,202,148"
@@ -820,7 +820,7 @@ class FuelGaugeApp(App):
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
 
-    dest_id = StringProperty()
+    dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
     hMass = NumericProperty(0)
 
