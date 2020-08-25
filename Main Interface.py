@@ -833,11 +833,11 @@ class FuelGaugeApp(App):
 
     # error_code is a string variable that is used to temporarily store the current error code taken from the text document it is stored in. It is a string because after coming from the .txt the data is a string and
     # must be converted into a float or int to be used as a number
-    error_code = StringProperty()
+    error_code = StringProperty('wow')
 
     # error_base is the text that is displayed in the top left hand of most screens -- if there is a fault this variable becomes "FAULT" and then the error code and flips between them
     # It is a StringProperty() which is a Kivy variable type the essentially tells the Kivy back end code to keep checking what its value is/if it changes
-    error_base = StringProperty()
+    error_base = StringProperty('error base')
 
     if (mode_num == '0') or (mode_num == '1'):
         engine_mode = StringProperty('H2\nMODE')
