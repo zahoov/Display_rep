@@ -13,6 +13,10 @@ def main():
 
     print(completed)
 
+    coolant_temp = (enforceMaxV(((int(msg[0:2], 16))), 250) * 1.0) - 40.0  # Unit = °C
+
 
 if __name__ == '__main__':
     main()
+
+

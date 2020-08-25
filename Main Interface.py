@@ -311,6 +311,21 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
             elif ((idV == "cff3e28") or (idV == "cff3efa")):
                 app.Hleakage = (enforceMaxV(((int(hexV[2:4], 16))), 250) * 0.4)
 
+
+            elif (idV == "INSERT THE CAN ID FOR ENGINE COOLANT TEMPERATURE HERE"):
+                app.coolant_temp = (enforceMaxV(((int(hexV[0:2], 16))), 250) * 1.0) - 40.0  # Unit = °C
+
+
+            elif (idV == "INSERT THE CAN ID FOR THE MILL LIGHT HERE"):
+                app.mill_light = 'placeholder'
+
+
+            elif (idV == "INSERT THE CAN ID FOR THE DPF STATUS HERE"):
+                app.dpf_status = 'placeholder'
+
+
+
+
             #######################################################################################
             # curHr = int(dateV.split(":")[1])
             # if ((curHr in [0, 15, 30, 45]) and (curHr != lastQuarterHour)):
@@ -389,8 +404,6 @@ def hydrogenMassEq2(pressureV, tempV, volumeV):
     HmassTotal = (component1 + component2) * volumeV
     HmassTotalKg = HmassTotal / 1000.0
 
-
-
     return HmassTotalKg
 
 
@@ -442,6 +455,7 @@ def callback(dt):
     app = App.get_running_app()
     # app.root.current just calls the the Kivy ScreenManger class that handles all of the screens and changes it to the screen defined as 'third'
     app.root.current = 'third'
+
 
 # This is the menu screen that the app defaults to and provides buttons to access all of the information screens
 class MainMenu(Screen):
@@ -809,6 +823,9 @@ class FuelGaugeApp(App):
     press2 = StringProperty()
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
+    mill_light = StringProperty()
+    coolant_temp = StringProperty()
+    dpf_status = StringProperty()
 
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
@@ -858,8 +875,6 @@ class FuelGaugeApp(App):
     toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
 
     task = bus.send_periodic(toggle_msg, 0.2)
-
-
 
     # Runs the screen manager that sets everything in motion
     def build(self):
@@ -931,8 +946,6 @@ class FuelGaugeApp(App):
                 self.toggle_msg = can.Message(arbitration_id=int(self.arb_id, 16), data=self.msg_data)
                 self.task = self.bus.send_periodic(self.toggle_msg, 0.2)
 
-
-
     def destination_changer(self, new_id):
 
         cap = 2 ** 29
@@ -968,6 +981,7 @@ class FuelGaugeApp(App):
                 self.task.stop()
                 self.toggle_msg = can.Message(arbitration_id=int(self.arb_id, 16), data=self.msg_data)
                 self.task = self.bus.send_periodic(self.toggle_msg, 0.2)
+
 
 # Makes everything start
 if __name__ == '__main__':

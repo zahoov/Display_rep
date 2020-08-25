@@ -806,7 +806,6 @@
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
                 size: self.texture_size
                 size_hint_x: 0.5
-                font_size: ((root.width + root.height) / 2) * 0.1
                 size: self.texture_size
                 bold: True
             Label:
@@ -821,13 +820,11 @@
 			    size_hint_x: 0.25
 			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
 			    color: app.mode_color
-	    Label:
-	        size_hint_y: 0.1
-        BoxLayout:
-            pos: root.x, root.height * (2.75 / 12)
-            orientation: 'vertical'
+
+        GridLayout:
+            cols: 2
             BoxLayout:
-                orientation: 'horizontal'
+                orientation: 'vertical'
 
                 Label:
                     canvas.before:
@@ -841,21 +838,7 @@
                     bold: True
                     size: self.texture_size
                     padding_x: 50
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0, 0, 0, 1
-                        Line:
-                            width: 5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: 'MESSAGE:'
-                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                    bold: True
-                    size: self.texture_size
-                    padding_x: 50
-            BoxLayout:
 
-                orientation: 'horizontal'
                 Label:
                     canvas.before:
                         Color:
@@ -868,6 +851,24 @@
                     size: self.texture_size
                     valign: 'middle'
                     halign: 'center'
+                    padding_x: 50
+
+
+
+            BoxLayout:
+
+                orientation: 'vertical'
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 1
+                        Line:
+                            width: 5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: 'MESSAGE:'
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                    bold: True
+                    size: self.texture_size
                     padding_x: 50
 
                 Label:
