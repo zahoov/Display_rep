@@ -327,6 +327,7 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                         HtotalMassL.append(currHtotalMassT)
 
                     HtotalMass = round(sum(HtotalMassL), 1)
+                    app.hMass = HtotalMass
 
                     'Insert code here'
 
@@ -375,8 +376,6 @@ def hydrogenMassEq2(pressureV, tempV, volumeV):
     Value returns in unit kilo grams
     """
 
-    app = App.get_running_app()
-
     var1 = 0.000000001348034
     var2 = 0.000000267013
     var3 = 0.00004247859
@@ -390,7 +389,7 @@ def hydrogenMassEq2(pressureV, tempV, volumeV):
     HmassTotal = (component1 + component2) * volumeV
     HmassTotalKg = HmassTotal / 1000.0
 
-    app.hMass = HmassTotalKg
+
 
     return HmassTotalKg
 
