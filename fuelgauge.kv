@@ -823,66 +823,145 @@
 
         GridLayout:
             cols: 2
-            BoxLayout:
-                orientation: 'vertical'
 
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0, 0, 0, 1
-                        Line:
-                            width: 5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: 'CODE:'
-                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                    bold: True
-                    size: self.texture_size
-                    padding_x: 50
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: 'Code:'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                bold: True
+                size: self.texture_size
+                padding_x: 50
 
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0, 0, 0, 1
-                        Line:
-                            width: 5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: app.error_code
-                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-                    size: self.texture_size
-                    valign: 'middle'
-                    halign: 'center'
-                    padding_x: 50
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: app.error_code
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+                size: self.texture_size
+                valign: 'middle'
+                halign: 'center'
+                padding_x: 50
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: 'Message:'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                bold: True
+                size: self.texture_size
+                padding_x: 50
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: root.error_expl
+                text_size: self.size
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.08
+                valign: 'middle'
+                padding_x: 50
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: 'MILL Light'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                bold: True
+                size: self.texture_size
+                padding_x: 50
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: app.mill_light
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                bold: True
+                size: self.texture_size
+                padding_x: 50
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: 'DPF Status'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                bold: True
+                size: self.texture_size
+                padding_x: 50
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: app.dpf_status
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                bold: True
+                size: self.texture_size
+                padding_x: 50
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: 'Coolant Temp'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                bold: True
+                size: self.texture_size
+                padding_x: 50
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                text: app.coolant_temp
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                bold: True
+                size: self.texture_size
+                padding_x: 50
 
 
 
-            BoxLayout:
 
-                orientation: 'vertical'
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0, 0, 0, 1
-                        Line:
-                            width: 5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: 'MESSAGE:'
-                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                    bold: True
-                    size: self.texture_size
-                    padding_x: 50
 
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0, 0, 0, 1
-                        Line:
-                            width: 5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: root.error_expl
-                    text_size: self.size
-                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.08
-                    valign: 'middle'
-                    padding_x: 50
+
+
+
         BoxLayout:
             orientation: 'horizontal'
             size_hint_max_y: root.height * (2.5 / 12)
