@@ -360,8 +360,6 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                     HtotalMass = round(sum(HtotalMassL), 1)
                     app.hMass = HtotalMass
 
-                    'Insert code here'
-
                 tempL = []
                 for i in range(maxNumTanks): tempL.append(None)
                 presT1 = None
