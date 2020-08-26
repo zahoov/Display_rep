@@ -313,7 +313,7 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
 
             elif (idV == "18feee00"):
-                app.coolant_temp = (enforceMaxV(((int(hexV[0:2], 16))), 250) * 1.0) - 40.0  # Unit = °C
+                app.coolant_temp = str((enforceMaxV(((int(hexV[0:2], 16))), 250) * 1.0) - 40.0)  # Unit = °C
 
 
             elif (idV == "18feca00"):
