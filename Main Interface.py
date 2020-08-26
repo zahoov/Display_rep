@@ -312,16 +312,24 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 app.Hleakage = (enforceMaxV(((int(hexV[2:4], 16))), 250) * 0.4)
 
 
-            elif (idV == "INSERT THE CAN ID FOR ENGINE COOLANT TEMPERATURE HERE"):
+            elif (idV == "18feee00"):
                 app.coolant_temp = (enforceMaxV(((int(hexV[0:2], 16))), 250) * 1.0) - 40.0  # Unit = °C
 
 
-            elif (idV == "INSERT THE CAN ID FOR THE MILL LIGHT HERE"):
-                app.mill_light = 'placeholder'
+            elif (idV == "18feca00"):
+                DM1 = (enforceMaxV((((int(hexV[0:2], 16) & 0b11000000) >> 6)), 3) * 1.0)  # Unit = bit
+
+                if DM1 == 1:
+                    app.mil_light = 'On'
+                else:
+                    app.mil_light = 'Off'
+
+            elif (idV == "18fd700"):
+
+                app.dpf_status = (enforceMaxV((((int(hexV[2:4], 16) & 0b00001100) >> 2)), 3) * 1.0)  # Unit = bit
 
 
-            elif (idV == "INSERT THE CAN ID FOR THE DPF STATUS HERE"):
-                app.dpf_status = 'placeholder'
+
 
 
 
@@ -823,7 +831,7 @@ class FuelGaugeApp(App):
     press2 = StringProperty()
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
-    mill_light = StringProperty()
+    mil_light = StringProperty()
     coolant_temp = StringProperty()
     dpf_status = StringProperty()
 
