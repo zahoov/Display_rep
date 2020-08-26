@@ -324,7 +324,7 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 else:
                     app.mil_light = 'Lamp On'
 
-            elif (idV == "18fd700"):
+            elif (idV == "18fd7C00"):
 
                 dpf = (enforceMaxV((((int(hexV[2:4], 16) & 0b00001100) >> 2)), 3) * 1.0)  # Unit = bit
 
