@@ -319,15 +319,23 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
             elif (idV == "18feca00"):
                 DM1 = (enforceMaxV((((int(hexV[0:2], 16) & 0b11000000) >> 6)), 3) * 1.0)  # Unit = bit
 
-                if DM1 == 1:
-                    app.mil_light = 'On'
+                if DM1 == 0:
+                    app.mil_light = 'Lamp Off'
                 else:
-                    app.mil_light = 'Off'
+                    app.mil_light = 'Lamp On'
 
             elif (idV == "18fd700"):
 
-                app.dpf_status = (enforceMaxV((((int(hexV[2:4], 16) & 0b00001100) >> 2)), 3) * 1.0)  # Unit = bit
+                dpf = (enforceMaxV((((int(hexV[2:4], 16) & 0b00001100) >> 2)), 3) * 1.0)  # Unit = bit
 
+                if dpf == 0:
+                    app.dpf_status = 'Not Active'
+                elif dpf == 1:
+                    app.dpf_status = 'Active'
+                elif dpf == 2:
+                    app.dpf_status = 'Regen Needed'
+                else:
+                    app.dpf_status = 'Not Available'
 
 
 
