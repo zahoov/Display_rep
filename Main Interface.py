@@ -326,8 +326,6 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
             elif (idV == "18fd7c00"):
 
-                print('recieving DPF msg')
-
                 dpf = (enforceMaxV((((int(hexV[2:4], 16) & 0b00001100) >> 2)), 3) * 1.0)  # Unit = bit
 
                 if dpf == 0:
