@@ -511,29 +511,19 @@
 			    color: app.mode_color
 
 
-		FloatLayout:
+		GridLayout:
+		    cols: 2
 
-			Image:
-				id: gauge_dash
-				source: 'cadran.png'
-				size: root.width * .6, root.height * .4
-				size_hint_max: 500, 250
-				pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		    Label:
+		        text: 'Injection Rate:'
+		    Label:
+		        text: root.hInjection
+		    Label:
+		        text: 'H2 Leakage:'
+		    Label:
+		        text: root.leak_display
 
-            Image:
-                id: needle_dash
-                canvas.before:
-                    PushMatrix
-                    Rotate:
-                        angle: 90 - (app.HinjectionV / 1285.1) * (app.conversion_factor * 100)
-                        origin: root.width * 0.5, (root.height - gauge_dash.height) / 2
-                canvas.after:
-                    PopMatrix
 
-                id: needle_dash
-                source: 'needle.png'
-                size_hint_max: 50, 275
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
 		BoxLayout:
 		    id: reference
