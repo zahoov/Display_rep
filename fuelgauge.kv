@@ -403,56 +403,29 @@
 			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
 			    color: app.mode_color
 
-	    BoxLayout:
-	        orientation: 'horizontal'
+        FloatLayout:
 
-            FloatLayout:
+            Image:
+                id: gauge_dash
+                source: 'cadran.png'
+                size: root.width * .6, root.height * .4
+                size_hint_max: 500, 250
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
-                Image:
-                    id: gauge_dash
-                    source: 'cadran.png'
-                    size: root.width * .6, root.height * .4
-                    size_hint_max: 500, 250
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            Image:
+                id: needle_dash
+                canvas.before:
+                    PushMatrix
+                    Rotate:
+                        angle: 90 - (root.dash_val * app.conversion_factor)
+                        origin: root.width * 0.25, (root.height - gauge_dash.height) / 2
+                canvas.after:
+                    PopMatrix
 
-                Image:
-                    id: needle_dash
-                    canvas.before:
-                        PushMatrix
-                        Rotate:
-                            angle: 90 - (root.dash_val * app.conversion_factor)
-                            origin: root.width * 0.25, (root.height - gauge_dash.height) / 1.5
-                    canvas.after:
-                        PopMatrix
-
-                    id: needle_dash
-                    source: 'needle.png'
-                    size_hint_max: 25, 137.5
-                    pos_hint: {'center_x': 0.535, 'center_y': 0.4}
-
-            FloatLayout:
-
-                Image:
-                    id: gauge_dash
-                    source: 'cadran.png'
-                    size: root.width * .6, root.height * .4
-                    size_hint_max: 500, 250
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-                Image:
-                    id: needle_dash
-                    canvas.before:
-                        PushMatrix
-                        Rotate:
-                            angle: 90 - (root.dash_val * app.conversion_factor)
-                            origin: root.width * 0.75, (root.height - gauge_dash.height) / 1.5
-                    canvas.after:
-                        PopMatrix
-
-                    id: needle_dash
-                    source: 'needle.png'
-                    size_hint_max: 25, 137.5
-                    pos_hint: {'center_x': 0.535, 'center_y': 0.4}
+                id: needle_dash
+                source: 'needle.png'
+                size_hint_max: 50, 275
+                pos_hint: {'center_x': 0.535, 'center_y': 0.4}
 
 		BoxLayout:
 		    id: reference
