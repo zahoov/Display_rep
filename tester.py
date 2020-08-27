@@ -55,3 +55,12 @@ BoxLayout:
 			    size_hint_x: 0.25
 			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
 			    color: app.mode_color
+
+
+
+
+cff3c28
+cff3cfa
+
+
+( enforceMaxV(( ((int(msg[0:2], 16) & 0b00001100) >> 2)), 3)  * 1.0)

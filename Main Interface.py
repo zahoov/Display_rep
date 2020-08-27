@@ -338,6 +338,22 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                     app.dpf_status = 'Not Available'
 
 
+            elif (idV == 'cff3c28') or (idV == 'cff3cfa'):
+
+                current_mode = ( enforceMaxV(( ((int(hexV[0:2], 16) & 0b00001100) >> 2)), 3)  * 1.0)
+
+                if (current_mode == 0) or (current_mode == 1):
+                    app.current_mode = 'Hydrogen'
+
+                else:
+                    app.current_mode = 'Diesel'
+
+
+                pass
+
+
+
+
 
 
 
@@ -823,6 +839,7 @@ class FuelGaugeApp(App):
     mil_light = StringProperty()
     coolant_temp = StringProperty()
     dpf_status = StringProperty()
+    current_mode = StringProperty()
 
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
