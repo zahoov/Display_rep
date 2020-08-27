@@ -565,6 +565,8 @@ class FuelGaugeLayout(Screen):
 class FuelInjectionLayout(Screen):
     # This variable is what is used to display injection reading at the bottom of the page, is a string property to allow the Kivy back end to read it even when it changes
     hInjection = StringProperty()
+    leak_display = StringProperty()
+
 
     # Same as in the other classes, calls functions as the user enters the page. Upon_entering has the same function as upon_entering_mass and just calls the functions after a 0.5s
     # delay to avoid any issues
@@ -588,10 +590,13 @@ class FuelInjectionLayout(Screen):
 
         self.hInjection = '%.2f' % app.HinjectionV
 
+        leakAmt = app.Hleakage
+        self.leak_display = '%.2f' % app.Hleakage
+
     # Same as in the other classes
     def on_leave(self):
         Clock.unschedule(callback)
-
+        Clock.unschedule(self.injection_reader)
 
 # This is the page that displays the Fault code and its corresponding message
 class ErrorPage(Screen):
@@ -656,29 +661,7 @@ class MyScreenManager(ScreenManager):
 
 # Screen that shows the leakage rate
 class DynamicLeak(Screen):
-    # The numerical value for calculating the needle rotation
-    leakAmt = NumericProperty()
-    # The value that displays at the bottom of the screen
-    leak_display = StringProperty()
-
-    def on_enter(self):
-        Clock.schedule_once(self.leakReader, 0)
-        Clock.schedule_interval(callback, delay)
-        Clock.schedule_interval(self.leakReader, 0.2)
-
-    def on_touch_up(self, touch):
-        Clock.unschedule(callback)
-        Clock.schedule_once(callback, delay)
-
-    def leakReader(self, dt):
-        app = App.get_running_app()
-
-        self.leakAmt = app.Hleakage
-        self.leak_display = '%.2f' % app.Hleakage
-
-    def on_leave(self):
-        Clock.unschedule(self.leakReader)
-        Clock.unschedule(callback)
+    pass
 
 
 # This is the lock screen where technicians can lock or unlock the engine mode toggle button -- accessed by hitting the engine mode descriptor
