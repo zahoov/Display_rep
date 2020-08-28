@@ -1,0 +1,4 @@
+xmkmf
+make
+make install
+make install.man
