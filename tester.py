@@ -1,66 +1,84 @@
+import os
+import can
+from threading import Thread
+
+display_code_dir = 'ENTER WHERE ITS SAVING TO'
+
 
 def main():
 
-    arb_id = '0xCFF41F2'
-    check = input('Enter the new destination ID:\n')
+    bRate = 9600
 
-    front_mid = arb_id[2:5]
-    rear = arb_id[7:9]
-    no_caps = arb_id[0:2]
-    new_id = (str(hex(int(check))))[2:]
+    os.system("sudo /sbin/ip link set can0 down")
 
-    completed = no_caps + front_mid.upper() + new_id.upper() + rear.upper()
+    # Make CAN interface to 250 or 500kbps
+    setCANbaudRate(bRate)
 
-    print(completed)
+    # Connect to Bus
+    bus0 = connectToLogger('can0')
 
-    coolant_temp = (enforceMaxV(((int(msg[0:2], 16))), 250) * 1.0) - 40.0  # Unit = °C
+    # Continually recieved messages
+    readwriteMessageThread(bus0)
+
+    # Continually write readMessages
+    try:
+        while True:
+            pass
+
+    except KeyboardInterrupt:
+        # Catch keyboard interrupt
+        os.system("sudo /sbin/ip link set can0 down")
+
+
+def setCANbaudRate(bRate):
+    """
+    Make CAN interface to 250 or 500 kbps
+    """
+    os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(bRate))
+
+
+def connectToLogger(canV):
+    """
+    Connect to Bus
+    """
+
+    try:
+        bus = can.interface.Bus(channel=canV, bustype='socketcan_native')
+    except OSError:
+        print('Cannot find PiCAN board.')
+        exit()
+    return bus
+
+
+def readwriteMessageThread(bus):
+    """
+    In seperate thread continually recieve messages from CAN logger
+    """
+    # Start receive thread
+    t = Thread(target=can_rx_task, args=bus)
+    t.start()
+
+
+def createLogLine(message):
+    """
+    Format the CAN message
+    """
+
+    if os.path.isfile(display_code_dir + "J1587_log.txt"):
+        fin = open(display_code_dir + "J1587_log.txt", "r+")
+        fin.write(message)
+        fin.close()
+
+    else:
+        fin = open(display_code_dir + "arbitration_file.txt", "w")
+        fin.write(message)
+        fin.close()
+
+
+def can_rx_task(bus):
+    while True:
+        createLogLine(bus.recv())
 
 
 if __name__ == '__main__':
     main()
-
-
-BoxLayout:
-            orientation: 'horizontal'
-            size_hint_y: None
-            size: root.width, root.height * 0.2
-
-            Label:
-                text: app.error_base
-                background_color: 0, 0, 0, 0
-                size_hint_x: 0.25
-                color: 1, 0, 0, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                #on_press: app.root.current = 'fourth'
-
-            Label:
-        	    id: gauge_title
-        	    size_hint_x: 0.5
-			    text: 'H2 Injection'
-			    text_size: self.size
-			    color: 1, 1, 1, 1
-			    font_size: ((root.width + root.height) / 2) * 0.1
-                size: self.texture_size
-                bold: True
-
-			Label:
-			    id: hMode
-			    canvas.before:
-                    Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-			    text: app.engine_mode
-			    size_hint_x: 0.25
-			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-			    color: app.mode_color
-
-
-
-
-cff3c28
-cff3cfa
-
-
-( enforceMaxV(( ((int(msg[0:2], 16) & 0b00001100) >> 2)), 3)  * 1.0)
