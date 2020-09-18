@@ -2,12 +2,12 @@ import os
 import can
 from threading import Thread
 
-display_code_dir = 'ENTER WHERE ITS SAVING TO'
+display_code_dir = 'Display_rep/'
 
 
 def main():
 
-    bRate = 9600
+    bRate = 9603
 
     os.system("sudo /sbin/ip link set can0 down")
 
