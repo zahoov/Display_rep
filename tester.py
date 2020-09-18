@@ -68,11 +68,13 @@ def createLogLine(message):
         fin = open(display_code_dir + "J1587_log.txt", "r+")
         fin.write(message)
         fin.close()
+        print(message)
 
     else:
         fin = open(display_code_dir + "J1587_log.txt", "w")
         fin.write(message)
         fin.close()
+        print(message)
 
 
 def can_rx_task(bus):
