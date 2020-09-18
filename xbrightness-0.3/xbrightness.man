@@ -1,0 +1,90 @@
+.\" Copyright 2003 Asher Blum <asher@wildspark.com>
+.\" 
+.\" All Rights Reserved.
+.\" 
+.\" The above copyright notice and this permission notice shall be included
+.\" in all copies or substantial portions of the Software.
+.\" 
+.\" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+.\" OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+.\" MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+.\" IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR
+.\" OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+.\" ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+.\" OTHER DEALINGS IN THE SOFTWARE.
+.\" 
+.\"
+.TH xbrightness 1 Version 0.3
+.SH NAME
+xbrightness - Adjust a monitor's brightness for XFree86
+.SH SYNOPSIS
+.B "xbrightness"
+BRIGHTNESS
+[ GAMMA ]
+.SH DESCRIPTION
+.PP
+.B xbrightness
+sets the overall brightness of a monitor via the XFree86 X server video
+mode extension (XFree86-VidModeExtension).
+.PP
+It uses the new
+.B XF86VidModeSetGammaRamp
+function, which provides a more flexible control than the old
+.B XF86VidModeSetGamma.
+The latter function cannot change the endpoints of the gamma curve,
+only the middle, so full brightness remains full brightness no matter
+how you set the gamma.
+
+.SH ARGUMENTS
+.PP
+.TP 8
+.B BRIGHTNESS
+A number from 0 to 65535, where 0 means complete darkness, and 65535
+means normal functioning - full brightness.
+.PP
+.TP 8
+.B GAMMA
+A float number from 0.0 to 10.0, which gives the exponent used for
+building the gamma ramp. The default is 1.0 (linear).
+
+.SH ENVIRONMENT
+.PP
+.TP 8
+.B DISPLAY
+To get default host and display number.
+.SH BUGS
+.PP
+.TP 8
+Does not have
+.B display
+or
+.B screen
+arguments - set these via
+.B DISPLAY
+environment variable if necessary.
+.PP
+.TP 8
+Does not query brightness, only sets it.
+.PP
+.TP 8
+Does not play well with xgamma - xbrightness will erase xgamma's
+settings and vice versa.
+.PP
+.SH SEE ALSO
+xgamma(1)
+.SH AUTHORS
+.PP
+Asher Blum <asher@wildspark.com>
+
+Jean-Daniel Pauget <jdp@disjunkt.com>
+.SH HISTORY
+Written in January 2003 to use the recently added
+.B XF86VidModeSetGammaRamp
+function as an overall brightness control.
+
+Additions in September 2005 in order to get some revival from a
+shifted LCD screen.
+.SH LINKS
+http://wildspark.com/xbrightness/
+
+http://disjunkt.com/xbrightness/

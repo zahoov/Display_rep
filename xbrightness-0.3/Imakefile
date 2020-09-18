@@ -1,0 +1,7 @@
+        DEPLIBS = $(DEPXXF86VMLIB) XawClientDepLibs
+  SYS_LIBRARIES = MathLibrary
+LOCAL_LIBRARIES = $(XXF86VMLIB) XawClientLibs
+           SRCS = xbrightness.c
+           OBJS = xbrightness.o
+
+ComplexProgramTarget(xbrightness)
