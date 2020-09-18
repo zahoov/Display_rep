@@ -70,7 +70,7 @@ def createLogLine(message):
         fin.close()
 
     else:
-        fin = open(display_code_dir + "arbitration_file.txt", "w")
+        fin = open(display_code_dir + "J1587_log.txt", "w")
         fin.write(message)
         fin.close()
 
