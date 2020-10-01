@@ -6,8 +6,9 @@ def main():
     code_dir = 'Display_rep/'
     ser = serial.Serial('/dev/ttyS0')
     fin = open(code_dir + "fuel_file.txt", "w")
+    x = 1
 
-    while True:
+    while x == 1:
 
         try:
             recieved_data = ser.readline()
@@ -15,6 +16,8 @@ def main():
 
         except KeyboardInterrupt:
             fin.close()
+            x = 0
+            print('this should stop it?')
             return
 
 
