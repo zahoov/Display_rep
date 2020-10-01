@@ -13,7 +13,7 @@ def main():
         try:
             recieved_data = ser.readline()
             fin.write(str(recieved_data))
-            print(recieved_data)
+            print('Data: ' + recieved_data)
 
         except KeyboardInterrupt:
             fin.close()
