@@ -13,10 +13,10 @@ def main():
         try:
             recieved_data = ser.readline()
             fin.write(str(recieved_data))
+            print(recieved_data)
 
         except KeyboardInterrupt:
             fin.close()
-            x = 0
             print('this should stop it?')
             return
 
