@@ -3,7 +3,7 @@ import serial
 
 def main():
     code_dir = 'Display_rep/'
-    ser = serial.Serial('/dev/ttyS0')
+    ser = serial.Serial('/dev/ttyS0', 9600)
     fin = open(code_dir + "serial_data.txt", "w")
 
     while True:
