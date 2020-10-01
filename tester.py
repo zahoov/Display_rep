@@ -15,7 +15,7 @@ def main():
 
         except KeyboardInterrupt:
             fin.close()
-            pass
+            return
 
 
 if __name__ == '__main__':
