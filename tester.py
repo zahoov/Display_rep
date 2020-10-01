@@ -4,7 +4,7 @@ from time import sleep
 
 def main():
     code_dir = 'Display_rep/'
-    ser = serial.Serial('/dev/')
+    ser = serial.Serial('/dev/ttyS0')
     fin = open(code_dir + "fuel_file.txt", "w")
 
     while True:
