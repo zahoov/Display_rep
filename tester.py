@@ -4,7 +4,7 @@ import serial
 def main():
     code_dir = 'Display_rep/'
     ser = serial.Serial('/dev/ttyS0')
-    fin = open(code_dir + "fuel_file.txt", "w")
+    fin = open(code_dir + "serial_data.txt", "w")
 
     while True:
 
