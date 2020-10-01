@@ -5,7 +5,7 @@ from time import sleep
 
 def main():
     code_dir = 'Display_rep/'
-    ser = serial.Serial('/dev/INSERTSERIALBUSHERE')
+    ser = serial.Serial('/dev/')
     fin = open(code_dir + "fuel_file.txt", "w")
 
     while True:
