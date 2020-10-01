@@ -13,6 +13,7 @@ def main():
         try:
             print('its the try')
             recieved_data = ser.readline()
+            print('its past the readline')
             fin.write(str(recieved_data))
             print('Data: ' + recieved_data)
 
