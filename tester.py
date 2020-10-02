@@ -26,7 +26,7 @@ def main():
         data_left = ser.inWaiting()
         recieved_data += ser.read(data_left)
         print(recieved_data)
-        fin.write(str(recieved_data))
+        fin.write(recieved_data)
         #print('Data: ' + recieved_data)
 
 
