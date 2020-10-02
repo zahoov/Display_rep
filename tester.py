@@ -1,4 +1,5 @@
 import serial
+from time import sleep
 
 
 def main():
@@ -7,23 +8,15 @@ def main():
     fin = open(code_dir + "serial_data.txt", "w")
 
     while True:
+        recieved_data = ser.read()
+        sleep(0.03)
+        data_left = ser.inWaiting()
+        recieved_data += ser.read(data_left)
+        print('its past the readline')
+        fin.write(str(recieved_data))
+        #print('Data: ' + recieved_data)
 
-        print('its in the loop now')
-
-        try:
-            print('its the try')
-            recieved_data = ser.readline()
-            print('its past the readline')
-            fin.write(str(recieved_data))
-            #print('Data: ' + recieved_data)
-
-        except KeyboardInterrupt:
-            fin.close()
-            print('this should stop it?')
-            return
 
 
 if __name__ == '__main__':
     main()
-
-

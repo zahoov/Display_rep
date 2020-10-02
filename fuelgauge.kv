@@ -25,105 +25,122 @@
 
 # Graphical code for the main screen where all of the buttons are
 <MainMenu>:
+
 	# Gives this screen the name 'menu' so that it can be referred to by buttons in the other screens
     name: 'menu'
     # Initialises the canvas before everything else making it the background
     canvas.before:
     	# This color code is rgba and is for the background
 	    Color:
-	        rgba: 0.027, 0.043, 0.372, 1
+	        rgba: 1, 1, 1, 1
 		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
+
 	# Creates a box layout on the screen allowing different widgets/things to be organized
     BoxLayout:
     	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
+
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
-        BoxLayout:
-            orientation: 'horizontal'
+        FloatLayout:
+
+
+            #orientation: 'horizontal'
             # Sets the size of the horizontal box layout so that its
-            size: root.width, root.height * 0.2
+
+            size: root.width, root.height * (200/960)
+
+
             size_hint_y: None
-            Label:
-            	# Shows that there is a fault and what the fault code is
-                text: app.error_base
-                color: 1, 0, 0, 1
-                # This equation ensures that the font size changes in regard to both the width and height of the screen
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                size_hint_x: 0.25
+
 
             Label:
-            	# Main title
-                text: 'H2 Monitor'
-                font_size: ((root.width + root.height) / 2) * 0.1
-                #text_size: self.size
-                size_hint_x: 0.5
-                size: self.texture_size
-                bold: True
-
-            Button:
-            	# Shows what the current truck mode is (either H2 Mode or Diesel Mode)
-                id: hMode
-                background_color: 0, 0, 0, 0
                 canvas.before:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: app.engine_mode
-                size_hint_x: 0.25
-                size: self.texture_size
-                font_size: ((root.width + root.height) / 3) * 0.085
-                color: app.mode_color
-                on_press: app.root.current = 'passlock'
+                        rgb: (52/255, 104/255, 162/255)
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+				font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'right'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+				text: u'H\u2082 Monitor'
+
+
+
+
+
+
+
+
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+                canvas:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+
 
 
         GridLayout:
             cols: 2
-            padding: 10, 10, 10, 10
-            spacing: 10, 10
-            size_hint_y: 0.75
+            padding: 15, 30, 15, 30
+            spacing: 20,20
+            size_hint_y: 760/960
+            Button:
+                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                text: u'H\u2082 Fuel Gauge'
+                background_normal: ''
+			    background_color: .172549, .19215, .42, 1
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
+                on_touch_up: app.root.current = 'first'
+            Button:
+                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                text: u'H\u2082 Injection Rate'
+                background_normal: ''
+			    background_color: .172549, .19215, .42, 1
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
+                on_touch_up: app.root.current = 'second'
+            Button:
+                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                text: u'H\u2082 Leakage'
+                background_normal: ''
+			    background_color: .172549, .19215, .42, 1
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
+                on_touch_up: app.root.current = 'temp&press'
             Button:
 
-                text: 'H2 Fuel Gauge'
+                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                text: 'Pressure and Temp'
                 background_normal: ''
-			    background_color: 0, 0, 0.8, 1
+			    background_color: .172549, .19215, .42, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
-                on_press: app.root.current = 'first'
+                on_touch_up: app.root.current = 'fifth'
             Button:
-                text: 'H2 Injection Rate'
-                background_normal: ''
-			    background_color: 0, 0, 0.8, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
-                on_press: app.root.current = 'second'
-            Button:
-                text: 'H2 Leakage'
-                background_normal: ''
-			    background_color: 0, 0, 0.8, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
-                on_press: app.root.current = 'temp&press'
-            Button:
-                text: 'Tank Pressure and Temp'
-                background_normal: ''
-			    background_color: 0, 0, 0.8, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
-                on_press: app.root.current = 'fifth'
-            Button:
+                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
                 text: 'Fault Information'
                 background_normal: ''
-			    background_color: 0, 0, 0.8, 1
+			    background_color: .172549, .19215, .42, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
-                on_press: app.root.current = 'fourth'
+                on_touch_up: app.root.current = 'fourth'
 
 
             Button:
+                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
                 text: 'Toggle Engine Mode'
                 background_normal: ''
-			    background_color: 0, 0, 0.8, 1
+			    background_color: .172549, .19215, .42, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
-                on_press: root.lock_changer(app.lock_status)
+                on_touch_up: root.lock_changer(app.lock_status)
 
 <Message_settings>:
     name: 'can_settings'
@@ -138,39 +155,46 @@
 
         BoxLayout:
             orientation: 'horizontal'
+            # Sets the size of the horizontal box layout so that its
+
+            size: root.width, root.height * (200/960)
+            background_normal: ''
+
+            background_color: (.28, .8, .6)
+
+            canvas.before:
+                Color:
+                    rgb: (.28, .8, .6)
+
+                Rectangle:
+
+                    size: self.width, self.height
+                    pos: self.x, self.y
+
             size_hint_y: None
-            size: root.width, root.height * 0.2
 
-            Label:
-                text: app.error_base
-                background_color: 0, 0, 0, 0
-                #size: self.texture_size
-                size_hint_x: 0.25
-                color: 1, 0, 0, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                #on_press: app.root.current = 'fourth'
 
-            Label:
-                text: 'Settings'
-
-                size_hint_x: 0.5
-                color: 1, 1, 1, 1
-                font_size: ((root.width + root.height) / 2) * 0.1
-                size: self.texture_size
-                bold: True
-
-            Label:
-                id: hMode
-                canvas.before:
+            Image:
+				source: 'menutitle.jpg'
+				#size_hint_x: 0.3125
+				canvas:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: app.engine_mode
-                size_hint_x: 0.25
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.095
-                color: app.mode_color
+                        rgb: (1, 1, 1)
+                    Rectangle:
+                        texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+
+            Image:
+                source: 'modeshow.jpg'
+                size_hint_x: 0.45
+                canvas:
+                    Color:
+                        rgb: (1, 1, 1)
+                    Rectangle:
+                        texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
 
         GridLayout:
             cols: 2
@@ -360,7 +384,7 @@
     name: 'first'
     canvas.before:
 	    Color:
-	        rgba: 0.027, 0.043, 0.372, 1
+	        rgba: 1, 1, 1, 1
 	    Rectangle:
 	        size: self.width, self.height
     BoxLayout:
@@ -368,48 +392,54 @@
 
         BoxLayout:
             orientation: 'horizontal'
+            # Sets the size of the horizontal box layout so that its
+
+            size: root.width, root.height * (200/960)
+            background_normal: ''
+
+            background_color: (.28, .8, .6)
+
+            canvas.before:
+                Color:
+                    rgb: (.28, .8, .6)
+
+                Rectangle:
+
+                    size: self.width, self.height
+                    pos: self.x, self.y
+
             size_hint_y: None
-            size: root.width, root.height * 0.2
 
-            Label:
-                text: app.error_base
-                background_color: 0, 0, 0, 0
-                #size: self.texture_size
-                size_hint_x: 0.25
-                color: 1, 0, 0, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                #on_press: app.root.current = 'fourth'
 
-            Label:
-        	    id: gauge_title
-			    text: 'H2 Fuel'
-
-			    size_hint_x: 0.5
-			    color: 1, 1, 1, 1
-			    font_size: ((root.width + root.height) / 2) * 0.1
-                size: self.texture_size
-                bold: True
-
-			Label:
-			    id: hMode
-			    canvas.before:
+            Image:
+				source: 'menutitle.jpg'
+				#size_hint_x: 0.3125
+				canvas:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-			    text: app.engine_mode
-			    size_hint_x: 0.25
-			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-			    color: app.mode_color
+                        rgb: (1, 1, 1)
+                    Rectangle:
+                        texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+
+            Image:
+                source: 'modeshow.jpg'
+                size_hint_x: 0.45
+                canvas:
+                    Color:
+                        rgb: (1, 1, 1)
+                    Rectangle:
+                        texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
 
         FloatLayout:
+            id: outer_lay
 
             Image:
                 id: gauge_dash
                 source: 'cadran.png'
-                size: root.width * .6, root.height * .4
-                size_hint_max: 500, 250
+                size_hint_max: 600, 300
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
             Image:
@@ -418,13 +448,13 @@
                     PushMatrix
                     Rotate:
                         angle: 90 - (root.dash_val * app.conversion_factor)
-                        origin: root.width * 0.5, (root.height - gauge_dash.height) / 2
+                        origin: root.width * 0.5, (root.height - self.height)/1.85
                 canvas.after:
                     PopMatrix
 
-                id: needle_dash
+
                 source: 'needle.png'
-                size_hint_max: 50, 275
+                size_hint_max: 50, 260
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
 		BoxLayout:
@@ -434,33 +464,23 @@
 			size_hint_max_y: root.height * (2.5 / 12)
 
 			Button:
+
+			    font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
 			    background_normal: ''
-			    background_color: 0, 0, 0.8, 1
+			    background_color: .172549, .19215, .42, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
 				text: 'Back'
 				on_release: app.root.current = 'menu'
 				size: self.texture_size
 
 			Label:
+			    font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+			    color: 0.9215686275, 0.5882352941, 0.2745098039, 1
 				text: root.dash_label + 'kg'
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.125
 				#size: self.texture_size
-			Image:
-				#font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				#text: 'Next'
-				#on_release: app.root.current = 'second'
-				#size: self.texture_size
-				canvas.before:
-				    Color:
-				        rgba: 1, 1, 1, 1
-				    Rectangle:
-				        size: self.size
-				        pos: self.pos
+		    Label:
 
-
-
-				#background_color: 0, 1, 0.007, 1
-				source: 'logo.png'
 
 
 <FuelInjectionLayout>:

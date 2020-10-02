@@ -60,7 +60,7 @@ cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 20
 
-display_code_dir = 'Display_rep/'
+display_code_dir = '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/'
 
 _canIdTank123 = "cff3d17"
 _canIdTank456 = "cff4017"
@@ -887,9 +887,9 @@ class FuelGaugeApp(App):
         print('Cannot find PiCAN board.')
         pass
 
-    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
+    #toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
 
-    task = bus.send_periodic(toggle_msg, 0.2)
+    #task = bus.send_periodic(toggle_msg, 0.2)
 
     # Runs the screen manager that sets everything in motion
     def build(self):
