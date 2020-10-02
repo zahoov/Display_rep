@@ -12,7 +12,7 @@ def main():
         sleep(0.03)
         data_left = ser.inWaiting()
         recieved_data += ser.read(data_left)
-        print('its past the readline')
+        print(recieved_data)
         fin.write(str(recieved_data))
         #print('Data: ' + recieved_data)
 
