@@ -18,7 +18,7 @@ def main():
 
 
 
-    #fin = open(code_dir + "serial_data.txt", "w")
+    fin = open(code_dir + "serial_data.txt", "w")
 
     while True:
         recieved_data = ser.read()
@@ -26,7 +26,7 @@ def main():
         data_left = ser.inWaiting()
         recieved_data += ser.read(data_left)
         print(recieved_data)
-        #fin.write(str(recieved_data))
+        fin.write(str(recieved_data))
         #print('Data: ' + recieved_data)
 
 
