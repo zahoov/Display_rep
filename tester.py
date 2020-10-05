@@ -1,6 +1,6 @@
 import serial
 from time import sleep
-
+111
 
 def main():
     code_dir = 'Display_rep/'
