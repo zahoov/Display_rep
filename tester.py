@@ -1,7 +1,7 @@
 import serial
 from time import sleep
 111
-
+wweeewe
 def main():
     code_dir = 'Display_rep/'
     ser = serial.Serial('/dev/ttyS0', 9600, )
