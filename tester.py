@@ -1,34 +1,43 @@
-import serial
-from time import sleep
 
-def main():
-    code_dir = 'Display_rep/'
-    ser = serial.Serial('/dev/ttyS0', 9600, )
+import time
 
-    '''ser = serial.Serial(
-        port='/dev/ttyS0',
-        baudrate=9600,
-        parity=serial.PARITY_NONE,
-        stopbits=serial.STOPBITS_ONE,
-        bytesize=serial.EIGHTBITS,
-        timeout=1
-    )'''
+code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
+bRate = 9600
+
+def topOfFile(ymdBV, hmsfV, bRate):
+    """
+    Top of log file message
+    """
+    loggerVersion = "1.1.1"
+    topLineL = ["***RPIMASTER Ver " + loggerVersion + "***",
+                "***PROTOCOL CAN***",
+                "***NOTE: PLEASE DO NOT EDIT THIS DOCUMENT***",
+                "***[START LOGGING SESSION]***",
+                "***START DATE AND TIME " + ymdBV + " " + hmsfV + "***",
+                "***HEX***",
+                "***SYSTEM MODE***",
+                "***START CHANNEL BAUD RATE***",
+                "***CHANNEL TTYS0" + str(
+                    bRate) + " bps***",
+                "***END CHANNEL BAUD RATE***",
+                "***START DATABASE FILES***",
+                "***END DATABASE FILES***",
+                "***<Time><Tx/Rx><Channel><CAN ID><Type><DLC><DataBytes>***"]
+    return "\n".join(topLineL) + "\n"
+
+def bottomOfFile(prevYmdBV, prevHmsfV):
+    """
+    Bottom of the file
+    """
+    bottomLineL = ["***END DATE AND TIME " + prevYmdBV + " " + prevHmsfV + "***",
+                   "***[STOP LOGGING SESSION]***"]
+    return "\n".join(bottomLineL) + "\n"
 
 
 
 
-    fin = open(code_dir + "serial_data.txt", "w")
-
-    while True:
-        recieved_data = ser.read()
-        sleep(0.03)
-        data_left = ser.inWaiting()
-        recieved_data += ser.read(data_left)
-        print(recieved_data)
-        fin.write(str(recieved_data) + '\n')
-        #print('Data: ' + recieved_data)
 
 
 
 if __name__ == '__main__':
-    main()
+    file_setup()
