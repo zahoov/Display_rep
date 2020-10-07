@@ -144,6 +144,7 @@ class J1708():
 
 
 if __name__ == "__main__":
+
     thisport = J1708("/dev/ttyS0")
 
 
@@ -252,4 +253,4 @@ if __name__ == "__main__":
 
 
 
-        del (thisport)
+    #del (thisport)
