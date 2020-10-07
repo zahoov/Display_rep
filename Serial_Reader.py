@@ -77,10 +77,10 @@ def main():
 
             try:
 
-                recieved_data = ser.readline()
+                recieved_data = ser.read()
 
-                #data_left = ser.inWaiting()
-                #recieved_data += ser.read(data_left)
+                data_left = ser.inWaiting()
+                recieved_data += ser.read(data_left)
 
                 x = list(recieved_data)
                 # x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
@@ -94,7 +94,7 @@ def main():
 
                 fin.writelines(outstr)
 
-                #sleep(0.03)
+                sleep(0.03)
             except KeyboardInterrupt:
                 end_time = datetime.datetime.now()
 
