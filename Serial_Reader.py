@@ -6,16 +6,16 @@ from time import sleep
 def main():
     bRate = 9600
     code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
-    # ser = serial.Serial('/dev/ttyS0', 9600, )
+    #ser = serial.Serial('/dev/ttyS0', 9600, )
 
-    '''ser = serial.Serial(
+    ser = serial.Serial(
         port='/dev/ttyS0',
         baudrate=bRate,
         parity=serial.PARITY_NONE,
         stopbits=serial.STOPBITS_ONE,
         bytesize=serial.EIGHTBITS,
         timeout=1
-    )'''
+    )
 
     now = datetime.datetime.now()
 
@@ -41,17 +41,15 @@ def main():
     i = 0
 
     while True:
-
-        #try:
-        if i < 50:
+        try:
             i = i + 1
-            '''recieved_data = ser.read()
+            recieved_data = ser.read()
             
             data_left = ser.inWaiting()
-            recieved_data += ser.read(data_left)'''
+            recieved_data += ser.read(data_left)
 
-            #x = list(recieved_data)
-            x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
+            x = list(recieved_data)
+            #x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
 
             hexlist = ['{:X}'.format(num) for num in x]
             print(*hexlist)
@@ -61,9 +59,12 @@ def main():
             outstr = " ".join([now.strftime("%H:%M:%S"), "Rx", 'ttyS0', *hexlist]) + "\n"
 
             fin.writelines(outstr)
+
+            if i == 500:
+                return
+
             sleep(0.03)
-        #except KeyboardInterrupt:
-        else:
+        except KeyboardInterrupt:
             now = datetime.datetime.now()
 
             bottomLineL = ["***END DATE AND TIME " + now.strftime("%d:%m:%Y %H:%M:%S") + "***",
