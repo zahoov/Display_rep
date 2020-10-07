@@ -10,7 +10,7 @@ import datetime
 
 TENBITTIMES = .0010417
 bRate = 9600
-code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
+code_dir = 'Display_rep/'
 
 def toSignedChar(num):
     if type(num) is bytes:
@@ -144,7 +144,7 @@ class J1708():
 
 
 if __name__ == "__main__":
-    thisport = J1708("/dev/ttyO2")
+    thisport = J1708("/dev/ttyS0")
 
 
 
