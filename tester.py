@@ -1,12 +1,7 @@
 
-import datetime
 
-now = datetime.datetime.now()
+x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
 
-first = now.strftime("%H")
-second = int(now.strftime("%H")) + 1
-third = str(second)
+hexlist = ['{:X}'.format(num) for num in x]
+print(*hexlist)
 
-
-
-print(third)
