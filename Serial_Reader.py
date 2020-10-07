@@ -5,7 +5,7 @@ from time import sleep
 
 def main():
     bRate = 9600
-    code_dir = 'Display_rep/'
+    code_dir = 'Display_rep/logs/'
     start_time = datetime.datetime.now()
 
     ser = serial.Serial(
