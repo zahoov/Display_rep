@@ -6,7 +6,7 @@ from time import sleep
 def main():
     bRate = 9600
     code_dir = 'Display_rep/'
-    #ser = serial.Serial('/dev/ttyS0', 9600, )
+    start_time = datetime.datetime.now()
 
     ser = serial.Serial(
         port='/dev/ttyS0',
@@ -17,15 +17,13 @@ def main():
         timeout=1
     )
 
-    now = datetime.datetime.now()
-
-    fin = open(code_dir + 'serial_log_' + now.strftime("%d-%m-%Y_%H-%M-%S") + ".txt", "w")
+    fin = open(code_dir + 'serial_log_' + start_time.strftime("%d-%m-%Y_%H-%M-%S") + ".txt", "w")
 
     topLineL = ["***RPIMASTER Ver " + "1.1.1" + "***",
                 "***PROTOCOL CAN***",
                 "***NOTE: PLEASE DO NOT EDIT THIS DOCUMENT***",
                 "***[START LOGGING SESSION]***",
-                "***START DATE AND TIME " + now.strftime("%d:%m:%Y %H:%M:%S") + "***",
+                "***START DATE AND TIME " + start_time.strftime("%d:%m:%Y %H:%M:%S") + "***",
                 "***HEX***",
                 "***SYSTEM MODE***",
                 "***START CHANNEL BAUD RATE***",
@@ -38,42 +36,74 @@ def main():
 
     top = "\n".join(topLineL) + "\n"
     fin.writelines(top)
-    i = 0
 
     while True:
-        try:
-            i = i + 1
-            recieved_data = ser.read()
-            
-            data_left = ser.inWaiting()
-            recieved_data += ser.read(data_left)
 
-            x = list(recieved_data)
-            #x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
+        now = datetime.datetime.now()
 
-            hexlist = ['{:X}'.format(num) for num in x]
-            #print(*hexlist)
+        if now.strftime("%H") == str(int(start_time.strftime("%H")) + 1):
 
-            now = datetime.datetime.now()
+            end_time = now
+            start_time = now
 
-            outstr = " ".join([now.strftime("%H:%M:%S"), "Rx", 'ttyS0', str(hexlist)]) + "\n"
-
-            fin.writelines(outstr)
-
-            if i == 50:
-                return
-
-            sleep(0.03)
-        except KeyboardInterrupt:
-            now = datetime.datetime.now()
-
-            bottomLineL = ["***END DATE AND TIME " + now.strftime("%d:%m:%Y %H:%M:%S") + "***",
+            bottomLineL = ["***END DATE AND TIME " + end_time.strftime("%d:%m:%Y %H:%M:%S") + "***",
                            "***[STOP LOGGING SESSION]***"]
             bot = "\n".join(bottomLineL) + "\n"
             fin.writelines(bot)
             fin.close()
 
-            return
+            fin = open(code_dir + 'serial_log_' + start_time.strftime("%d-%m-%Y_%H-%M-%S") + ".txt", "w")
+
+            topLineL = ["***RPIMASTER Ver " + "1.1.1" + "***",
+                        "***PROTOCOL CAN***",
+                        "***NOTE: PLEASE DO NOT EDIT THIS DOCUMENT***",
+                        "***[START LOGGING SESSION]***",
+                        "***START DATE AND TIME " + start_time.strftime("%d:%m:%Y %H:%M:%S") + "***",
+                        "***HEX***",
+                        "***SYSTEM MODE***",
+                        "***START CHANNEL BAUD RATE***",
+                        "***CHANNEL TTYS0" + str(
+                            bRate) + " bps***",
+                        "***END CHANNEL BAUD RATE***",
+                        "***START DATABASE FILES***",
+                        "***END DATABASE FILES***",
+                        "***<Time><Tx/Rx><Port><MID+PID/DataBytes>***"]
+
+            top = "\n".join(topLineL) + "\n"
+            fin.writelines(top)
+
+        else:
+
+            try:
+
+                recieved_data = ser.read()
+
+                data_left = ser.inWaiting()
+                recieved_data += ser.read(data_left)
+
+                x = list(recieved_data)
+                # x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
+
+                hexlist = ['{:X}'.format(num) for num in x]
+                # print(*hexlist)
+
+                prev_time = datetime.datetime.now()
+
+                outstr = " ".join([prev_time.strftime("%H:%M:%S"), "Rx", 'ttyS0', str(hexlist)]) + "\n"
+
+                fin.writelines(outstr)
+
+                sleep(0.03)
+            except KeyboardInterrupt:
+                end_time = datetime.datetime.now()
+
+                bottomLineL = ["***END DATE AND TIME " + end_time.strftime("%d:%m:%Y %H:%M:%S") + "***",
+                               "***[STOP LOGGING SESSION]***"]
+                bot = "\n".join(bottomLineL) + "\n"
+                fin.writelines(bot)
+                fin.close()
+
+                return
 
 
 if __name__ == '__main__':
