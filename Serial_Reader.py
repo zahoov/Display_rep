@@ -78,7 +78,7 @@ def main():
             try:
 
                 recieved_data = ser.read()
-                sleep(0.05)
+                #sleep(0.05)
                 data_left = ser.inWaiting()
                 recieved_data += ser.read(data_left)
 
