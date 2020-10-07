@@ -78,7 +78,7 @@ def main():
             try:
 
                 recieved_data = ser.read()
-
+                sleep(0.03)
                 data_left = ser.inWaiting()
                 recieved_data += ser.read(data_left)
 
@@ -94,7 +94,7 @@ def main():
 
                 fin.writelines(outstr)
 
-                sleep(0.05)
+
             except KeyboardInterrupt:
                 end_time = datetime.datetime.now()
 
