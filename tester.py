@@ -174,7 +174,8 @@ if __name__ == "__main__":
     while count < 50:
         a = thisport.read_message()
         if a is not None:
-            #print(a)
+            print(a)
+            print(count)
 
             x = list(a)
             # x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
