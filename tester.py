@@ -174,9 +174,17 @@ if __name__ == "__main__":
     while count < 50:
         a = thisport.read_message()
         if a is not None:
-            print(a)
+            #print(a)
+
+            x = list(a)
+            # x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
+
+            hexlist = ['{:X}'.format(num) for num in x]
+            #print(*hexlist)
+
+
             now = datetime.datetime.now()
-            outstr = " ".join([now.strftime("%H:%M:%S"), "Rx", 'ttyS0', *a]) + "\n"
+            outstr = " ".join([now.strftime("%H:%M:%S"), "Rx", 'ttyS0', *hexlist]) + "\n"
             fin.writelines(outstr)
         # print(list(map(hex,a)))
         count += 1
