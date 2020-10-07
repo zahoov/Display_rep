@@ -52,11 +52,11 @@ def main():
             #x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
 
             hexlist = ['{:X}'.format(num) for num in x]
-            print(*hexlist)
+            #print(*hexlist)
 
             now = datetime.datetime.now()
 
-            outstr = " ".join([now.strftime("%H:%M:%S"), "Rx", 'ttyS0', *hexlist]) + "\n"
+            outstr = " ".join([now.strftime("%H:%M:%S"), "Rx", 'ttyS0', str(hexlist)]) + "\n"
 
             fin.writelines(outstr)
 
