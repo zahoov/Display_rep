@@ -184,7 +184,7 @@ if __name__ == "__main__":
 
 
             now = datetime.datetime.now()
-            outstr = " ".join([now.strftime("%H:%M:%S"), "Rx", 'ttyS0', *hexlist]) + "\n"
+            outstr = " ".join([now.strftime("%H:%M:%S"), "Rx", 'ttyS0', str(hexlist)]) + "\n"
             fin.writelines(outstr)
         # print(list(map(hex,a)))
         count += 1
