@@ -85,11 +85,11 @@ def main():
                 # x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
 
                 hexlist = ['{:X}'.format(num) for num in x]
-                message = str(*hexlist)
+
 
                 prev_time = datetime.datetime.now()
 
-                outstr = " ".join([prev_time.strftime("%H:%M:%S"), "Rx", 'ttyS0', message]) + "\n"
+                outstr = " ".join([prev_time.strftime("%H:%M:%S"), "Rx", 'ttyS0', *hexlist]) + "\n"
 
                 fin.writelines(outstr)
 
