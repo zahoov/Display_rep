@@ -8,14 +8,15 @@ def main():
     code_dir = 'Display_rep/logs/'
     start_time = datetime.datetime.now()
 
-    ser = serial.Serial(
+    '''ser = serial.Serial(
         port='/dev/ttyS0',
         baudrate=bRate,
         parity=serial.PARITY_NONE,
         stopbits=serial.STOPBITS_ONE,
         bytesize=serial.EIGHTBITS,
         timeout=1
-    )
+    )'''
+    ser = serial.Serial('/dev/ttyS0', 9600)
 
     fin = open(code_dir + 'serial_log_' + start_time.strftime("%d-%m-%Y_%H-%M-%S") + ".txt", "w")
 
@@ -76,10 +77,10 @@ def main():
 
             try:
 
-                recieved_data = ser.read()
+                recieved_data = ser.readline()
 
-                data_left = ser.inWaiting()
-                recieved_data += ser.read(data_left)
+                #data_left = ser.inWaiting()
+                #recieved_data += ser.read(data_left)
 
                 x = list(recieved_data)
                 # x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
