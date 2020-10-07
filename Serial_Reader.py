@@ -93,7 +93,7 @@ def main():
 
                 fin.writelines(outstr)
 
-                sleep(0.03)
+                #sleep(0.03)
             except KeyboardInterrupt:
                 end_time = datetime.datetime.now()
 
