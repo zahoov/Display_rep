@@ -89,7 +89,7 @@ def main():
 
                 prev_time = datetime.datetime.now()
 
-                outstr = " ".join([prev_time.strftime("%H:%M:%S"), "Rx", 'ttyS0', str(hexlist)]) + "\n"
+                outstr = " ".join([prev_time.strftime("%H:%M:%S"), "Rx", 'ttyS0', str.format(hexlist)]) + "\n"
 
                 fin.writelines(outstr)
 
