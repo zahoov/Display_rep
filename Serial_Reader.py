@@ -5,7 +5,7 @@ from time import sleep
 
 def main():
     bRate = 9600
-    code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
+    code_dir = 'Display_rep/'
     #ser = serial.Serial('/dev/ttyS0', 9600, )
 
     ser = serial.Serial(
@@ -60,7 +60,7 @@ def main():
 
             fin.writelines(outstr)
 
-            if i == 500:
+            if i == 50:
                 return
 
             sleep(0.03)
