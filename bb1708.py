@@ -153,7 +153,7 @@ if __name__ == "__main__":
         a = thisport.read_message()
         if a is not None:
             print(a)
-            fin.write(a + '\n')
+            fin.write(str(a) + '\n')
 
         # print(list(map(hex,a)))
         count += 1
