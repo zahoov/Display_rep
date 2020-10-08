@@ -146,10 +146,10 @@ if __name__ == "__main__":
 
     fin = open("Display_rep/TEST2_NO_MOD.txt", "w")
 
+    now = int(time.strftime("%H"))
 
+    while True:
 
-    count = 0
-    while count < 50:
         a = thisport.read_message()
         if a is not None:
             print(a)
@@ -157,19 +157,8 @@ if __name__ == "__main__":
             outstr = " ".join([time.strftime("%H:%M:%S"), "Rx", 'ttyS0', *hexlist1]) + "\n"
             fin.write(outstr)
 
-        # print(list(map(hex,a)))
-        count += 1
 
-    #thisport.send_message([0xac, 0xfe, 0x80, 0xf0, 0x17])
-    count = 0
-    while count < 50:
-        a = thisport.read_message()
-        if a is not None:
-            # print(list(map(hex,a)))
-            print(a)
-            hexlist2 = ['{:X}'.format(num) for num in a]
-            outstr = " ".join([time.strftime("%H:%M:%S"), "Rx", 'ttyS0', *hexlist2]) + "\n"
-            fin.write(outstr)
-        count += 1
+
+
 
     del (thisport)
