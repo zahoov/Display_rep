@@ -144,7 +144,7 @@ class J1708():
 if __name__ == "__main__":
     thisport = J1708("/dev/ttyS0")
 
-    fin = open("Display_rep/TEST1_NO_MOD.txt", "w")
+    fin = open("Display_rep/TEST2_NO_MOD.txt", "w")
 
 
 
