@@ -165,7 +165,7 @@ if __name__ == "__main__":
         if a is not None:
             # print(list(map(hex,a)))
             print(a)
-            fin.write(a + '\n')
+            fin.write(str(a) + '\n')
         count += 1
 
     del (thisport)
