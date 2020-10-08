@@ -153,7 +153,8 @@ if __name__ == "__main__":
         a = thisport.read_message()
         if a is not None:
             print(a)
-            fin.write(str(a) + '\n')
+            outstr = " ".join([time.strftime("%H:%M:%S"), "Rx", 'ttyS0', *a]) + "\n"
+            fin.write(outstr)
 
         # print(list(map(hex,a)))
         count += 1
@@ -165,7 +166,8 @@ if __name__ == "__main__":
         if a is not None:
             # print(list(map(hex,a)))
             print(a)
-            fin.write(str(a) + '\n')
+            outstr = " ".join([time.strftime("%H:%M:%S"), "Rx", 'ttyS0', *a]) + "\n"
+            fin.write(outstr)
         count += 1
 
     del (thisport)
