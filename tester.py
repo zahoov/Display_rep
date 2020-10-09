@@ -9,11 +9,13 @@ for hex in hexlist:
     intlist.append(int(hex, 16))
 
 print(intlist)'''
-x = [b'\x80', b'\xb7', b'\x00', b'\x00', b'\xb8', b'\x00', b'\x00', b'3', b'\x00', b'\xde']
+
+
+b = [b'\x80', b'\xab', b'\x00', b'\x80', b'U']
 int_list = []
 hex_list = []
 
-for num in x:
+for num in b:
     int_list.append(int.from_bytes(num, 'big'))
 
 for num in int_list:
@@ -21,7 +23,7 @@ for num in int_list:
 
 
 
-print(*hex_list)
+print(*int_list)
 
 #hexlist = ['{:X}'.format(num) for num in x]
 
