@@ -146,7 +146,7 @@ if __name__ == "__main__":
 
     now = time.strftime("%H")
 
-    fin = open("Display_rep/" + now + ".txt", "w")
+    fin = open("Display_rep/logs/SEND_TEST" + now + ".txt", "w")
 
 
 
