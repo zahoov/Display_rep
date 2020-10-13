@@ -1,34 +1,19 @@
 
 
-'''x = b'\x80T\x00\xbe\x00\x00U\x00[\x00F\x80\xf8'
-intlist = []
-hexlist = ['{:X}'.format(num) for num in x]
-print(*hexlist)
 
-for hex in hexlist:
-    intlist.append(int(hex, 16))
+fin = open('/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/dataanalysis_20201009_RP18.txt', 'r')
+count = 0
+i = 0
+lines = fin.readlines()
 
-print(intlist)'''
-
-
-b = [b'\x80', b'\xab', b'\x00', b'\x80', b'U']
-int_list = []
-hex_list = []
-
-for num in b:
-    int_list.append(int.from_bytes(num, 'big'))
-
-for num in int_list:
-    hex_list.append(str(hex(num))[2:])
-
-
-
-print(*int_list)
-
-#hexlist = ['{:X}'.format(num) for num in x]
-
-
-
+for l in lines:
+    if l[22:26] == 'FECA':
+        count += 1
+        if l[29:33] == 'x 8 ':
+            print('yes')
+            i += 1
+print(i)
+print(count)
 
 
 
