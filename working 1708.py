@@ -171,7 +171,7 @@ if __name__ == "__main__":
 
             #hexlist = ['{:X}'.format(num) for num in a]
 
-            outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', *a, '\n'])
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', str(*a), '\n'])
             #outstr = a
             print(outstr)
             fin.write(outstr)
@@ -194,7 +194,7 @@ if __name__ == "__main__":
         if a is not None:
             print(a)
             hexlist = ['{:X}'.format(num) for num in a]
-            outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', *a, '\n'])
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', str(*a), '\n'])
             outstr = a
             fin.write(outstr)
 
