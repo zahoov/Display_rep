@@ -146,11 +146,19 @@ if __name__ == "__main__":
 
     now = time.strftime("%H-%M-%S")
 
-    fin = open("Display_rep/logs/SEND_TEST" + now + ".txt", "w")
+
 
 
 
     #thisport.send_message([0xac, 0xfe, 0x80, 0xf0, 0x17])
+
+    message_1 = [0xac, 0xc3, 0x03, 0x9a, 0x97, 0x3e]
+    message_2 = [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
+    message_3 = [0xac, 0x00, 0x2e]
+
+    message_num = input('input message number:\n')
+
+    fin = open("Display_rep/logs/message_" + message_num + "_" + now + ".txt", "w")
 
     count = 0
 
@@ -167,11 +175,15 @@ if __name__ == "__main__":
         count += 1
 
     count = 0
-    # [0xac, 0xc3, 0x03, 0x9a, 0x97, 0x3e]
-    # [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
-    # [0xac, 0x00, 0x2e]
-    #
-    thisport.send_message([0xac, 0xc3, 0x03, 0x80, 0x97, 0x3e])
+
+    if message_num == 1:
+        message = message_1
+    elif message_num == 2:
+        message = message_2
+    else:
+        message = message_3
+
+    thisport.send_message(message)
 
     while count < 50:
         a = thisport.read_message()
