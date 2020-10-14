@@ -156,9 +156,9 @@ if __name__ == "__main__":
     message_2 = [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
     message_3 = [0xac, 0x00, 0x2e]
 
-    #message_num = input('input message number:\n')
+    message_num = input('input message number:\n')
 
-    fin = open("Display_rep/logs/message_" + now + ".txt", "w")
+    fin = open("Display_rep/logs/message_" + message_num + now + ".txt", "w")
 
     count = 0
 
@@ -170,11 +170,11 @@ if __name__ == "__main__":
             print(a)
             a = list(a)
             #hexlist = ['{:X}'.format(num) for num in a]
-            outstr = ''
+            out = ''
             for num in a:
-                outstr += str(num)
+                out += str(num)
 
-            #outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', *hexlist, '\n'])
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', out, '\n'])
             #outstr = a
             #print(outstr)
             fin.write(outstr)
@@ -183,25 +183,25 @@ if __name__ == "__main__":
 
     count = 0
 
-    '''if message_num == 1:
+    if message_num == 1:
         message = message_1
     elif message_num == 2:
         message = message_2
     else:
         message = message_3
-'''
-    thisport.send_message([0xac, 0x00, 0x2e])
+
+    thisport.send_message(message)
 
     while count < 50:
         a = thisport.read_message()
         if a is not None:
             print(a)
             #a = list(a)
-            outstr = ''
+            out = ''
             for num in a:
-                outstr += str(num)
+                out += str(num)
             #hexlist = ['{:X}'.format(num) for num in a]
-            #outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', *hexlist, '\n'])
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
             #outstr = str(*a)
             fin.write(outstr)
 
