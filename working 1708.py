@@ -169,12 +169,12 @@ if __name__ == "__main__":
         if a is not None:
             print(a)
             a = list(a)
-            #hexlist = ['{:X}'.format(num) for num in a]
+            hexlist = ['{:X}'.format(num) for num in a]
 
-            #outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', a, '\n'])
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', *hexlist, '\n'])
             #outstr = a
             #print(outstr)
-            fin.write(*a)
+            fin.write(outstr)
 
         count += 1
 
@@ -194,10 +194,10 @@ if __name__ == "__main__":
         if a is not None:
             print(a)
             a = list(a)
-            #hexlist = ['{:X}'.format(num) for num in a]
-            #outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', a, '\n'])
+            hexlist = ['{:X}'.format(num) for num in a]
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', *hexlist, '\n'])
             #outstr = str(*a)
-            fin.write(*a)
+            fin.write(outstr)
 
             print(outstr)
             #fin.write(outstr)
