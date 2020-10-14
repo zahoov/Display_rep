@@ -168,10 +168,10 @@ if __name__ == "__main__":
         a = thisport.read_message()
         if a is not None:
             print(a)
-
+            a = list(a)
             #hexlist = ['{:X}'.format(num) for num in a]
 
-            #outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', a, '\n'])
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', *a, '\n'])
             #outstr = a
             #print(outstr)
             fin.write(*a)
@@ -193,10 +193,11 @@ if __name__ == "__main__":
         a = thisport.read_message()
         if a is not None:
             print(a)
-            hexlist = ['{:X}'.format(num) for num in a]
-            #outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', a, '\n'])
-            outstr = a
-            fin.write(*a)
+            a = list(a)
+            #hexlist = ['{:X}'.format(num) for num in a]
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', *a, '\n'])
+            #outstr = str(*a)
+            fin.write(outstr)
 
             print(outstr)
             #fin.write(outstr)
