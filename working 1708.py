@@ -172,7 +172,7 @@ if __name__ == "__main__":
             #hexlist = ['{:X}'.format(num) for num in a]
             outstr = ''
             for num in a:
-                outstr += num
+                outstr += str(num)
 
             #outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', *hexlist, '\n'])
             #outstr = a
@@ -199,7 +199,7 @@ if __name__ == "__main__":
             #a = list(a)
             outstr = ''
             for num in a:
-                outstr += num
+                outstr += str(num)
             #hexlist = ['{:X}'.format(num) for num in a]
             #outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', *hexlist, '\n'])
             #outstr = str(*a)
