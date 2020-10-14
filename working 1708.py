@@ -144,7 +144,7 @@ class J1708():
 if __name__ == "__main__":
     thisport = J1708("/dev/ttyS0")
 
-    now = time.strftime("%H")
+    now = time.strftime("%H-%M-%S")
 
     fin = open("Display_rep/logs/SEND_TEST" + now + ".txt", "w")
 
@@ -167,7 +167,10 @@ if __name__ == "__main__":
         count += 1
 
     count = 0
-
+    # [0xac, 0xc3, 0x03, 0x9a, 0x97, 0x3e]
+    # [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
+    # [0xac, 0x00, 0x2e]
+    #
     thisport.send_message([0xac, 0xc3, 0x03, 0x80, 0x97, 0x3e])
 
     while count < 50:
