@@ -144,40 +144,71 @@ class J1708():
 if __name__ == "__main__":
     thisport = J1708("/dev/ttyS0")
 
-    now = time.strftime("%H")
+    now = time.strftime("%H-%M-%S")
 
-    fin = open("Display_rep/logs/SEND_TEST" + now + ".txt", "w")
+
 
 
 
     #thisport.send_message([0xac, 0xfe, 0x80, 0xf0, 0x17])
 
+    message_1 = [0xac, 0xc3, 0x03, 0x9a, 0x97, 0x3e]
+    message_2 = [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
+    message_3 = [0xac, 0x00, 0x2e]
+
+    message_num = input('input message number:\n')
+
+    fin = open("Display_rep/logs/message_" + message_num + now + ".txt", "w")
+
     count = 0
 
+    print('before before')
     while count < 15:
-
+        print('in first loop')
         a = thisport.read_message()
         if a is not None:
             print(a)
-            #hexlist1 = ['{:X}'.format(num) for num in a]
-            #outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', *hexlist1]) + "\n"
-            outstr = " ".join(['BEFORE REQUEST' + str(a)])+ "\n"
+            a = list(a)
+            #hexlist = ['{:X}'.format(num) for num in a]
+            out = ''
+            for num in a:
+                out += str(num)
+
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', out, '\n'])
+            #outstr = a
+            #print(outstr)
             fin.write(outstr)
 
         count += 1
 
     count = 0
 
-    thisport.send_message([0xac, 0xc3, 0x03, 0x80, 0x97, 0x3e])
+    if message_num == 1:
+        message = message_1
+    elif message_num == 2:
+        message = message_2
+    else:
+        message = message_3
+
+    thisport.send_message(message)
 
     while count < 50:
         a = thisport.read_message()
         if a is not None:
             print(a)
-            #hexlist1 = ['{:X}'.format(num) for num in a]
-            #outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', *hexlist1]) + "\n"
-            outstr = " ".join(['AFTER REQUEST' + str(a)]) + "\n"
+            #a = list(a)
+            out = ''
+            for num in a:
+                out += str(num)
+            #hexlist = ['{:X}'.format(num) for num in a]
+            outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
+            #outstr = str(*a)
             fin.write(outstr)
+
+            print(outstr)
+            #fin.write(outstr)
+
+
 
         count += 1
 
