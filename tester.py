@@ -15,9 +15,17 @@ for l in lines:'''
         print('yes')
         i += 1'''
 
-a =
+a = b'\xce'b'\xc2'b'\x00'b'p'
 
+a = list(a)
+b = []
+hexlist = ['{:X}'.format(num) for num in a]
 
+for hex in hexlist:
+    b.append(int(hex, 16))
+
+print(*hexlist)
+print(*b)
 
 
 
