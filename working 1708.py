@@ -211,6 +211,7 @@ if __name__ == "__main__":
                 #fin.write(outstr)
         except KeyboardInterrupt:
             fin.close()
+            exit()
             #count += 1
 
     #fin.close()
