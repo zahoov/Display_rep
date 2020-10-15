@@ -161,9 +161,9 @@ if __name__ == "__main__":
     fin = open("Display_rep/logs/message_" + message_num + now + ".txt", "w")
 
     count = 0
-
+    '''
     print('before before')
-    while count < 15:
+    while count < 50:
         print('in first loop')
         a = thisport.read_message()
         if a is not None:
@@ -190,29 +190,30 @@ if __name__ == "__main__":
     else:
         message = message_3
 
-    thisport.send_message(message)
+    #thisport.send_message(message)
+    '''
 
-    while count < 50:
-        a = thisport.read_message()
-        if a is not None:
-            print(a)
-            #a = list(a)
-            out = ''
-            for num in a:
-                out += str(num)
-            #hexlist = ['{:X}'.format(num) for num in a]
-            outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
-            #outstr = str(*a)
-            fin.write(outstr)
+    while True:
+        try:
+            a = thisport.read_message()
+            if a is not None:
+                print(a)
+                #a = list(a)
+                out = ''
+                for num in a:
+                    out += str(num)
+                #hexlist = ['{:X}'.format(num) for num in a]
+                outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
+                #outstr = str(*a)
+                fin.write(outstr)
 
-            print(outstr)
-            #fin.write(outstr)
+                print(outstr)
+                #fin.write(outstr)
+        except KeyboardInterrupt:
+            fin.close()
+            #count += 1
 
-
-
-        count += 1
-
-    fin.close()
+    #fin.close()
 
 
 
