@@ -62,32 +62,50 @@
                     Rectangle:
                         size: self.width, self.height
                         pos: self.x, self.y
-				font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'right'
+				halign: 'left'
+				valign: 'middle'
                 pos_hint: {'top': 1}
 				size_hint_x: (5.5/8.5625)
-				text: u'H\u2082 Monitor'
 
-
-
-
-
-
-
-
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
 
             Label:
                 #source: 'modeshow.jpg'
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-                canvas:
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
                     Color:
                         rgb: (235/255, 150/255, 72/255)
                     Rectangle:
-                        texture: self.texture
+                        #texture: self.texture
                         size: self.width, self.height
                         pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
+
+            Image:
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -97,21 +115,21 @@
             spacing: 20,20
             size_hint_y: 760/960
             Button:
-                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
                 text: u'H\u2082 Fuel Gauge'
                 background_normal: ''
 			    background_color: .172549, .19215, .42, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
                 on_touch_up: app.root.current = 'first'
             Button:
-                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
                 text: u'H\u2082 Injection Rate'
                 background_normal: ''
 			    background_color: .172549, .19215, .42, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
                 on_touch_up: app.root.current = 'second'
             Button:
-                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
                 text: u'H\u2082 Leakage'
                 background_normal: ''
 			    background_color: .172549, .19215, .42, 1
@@ -119,14 +137,14 @@
                 on_touch_up: app.root.current = 'temp&press'
             Button:
 
-                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
                 text: 'Pressure and Temp'
                 background_normal: ''
 			    background_color: .172549, .19215, .42, 1
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.05
                 on_touch_up: app.root.current = 'fifth'
             Button:
-                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
                 text: 'Fault Information'
                 background_normal: ''
 			    background_color: .172549, .19215, .42, 1
@@ -135,7 +153,7 @@
 
 
             Button:
-                font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
                 text: 'Toggle Engine Mode'
                 background_normal: ''
 			    background_color: .172549, .19215, .42, 1
@@ -144,57 +162,72 @@
 
 <Message_settings>:
     name: 'can_settings'
-    canvas:
+    canvas.before:
+    	# This color code is rgba and is for the background
 	    Color:
-	        rgba: 0.027, 0.043, 0.372, 1
+	        rgba: 1, 1, 1, 1
+		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
 
     BoxLayout:
+    	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
 
-        BoxLayout:
-            orientation: 'horizontal'
+        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
+        FloatLayout:
+
+
+            #orientation: 'horizontal'
             # Sets the size of the horizontal box layout so that its
 
             size: root.width, root.height * (200/960)
-            background_normal: ''
 
-            background_color: (.28, .8, .6)
-
-            canvas.before:
-                Color:
-                    rgb: (.28, .8, .6)
-
-                Rectangle:
-
-                    size: self.width, self.height
-                    pos: self.x, self.y
 
             size_hint_y: None
 
 
-            Image:
-				source: 'menutitle.jpg'
-				#size_hint_x: 0.3125
-				canvas:
+            Label:
+                canvas.before:
                     Color:
-                        rgb: (1, 1, 1)
+                        rgb: (52/255, 104/255, 162/255)
                     Rectangle:
-                        texture: self.texture
                         size: self.width, self.height
                         pos: self.x, self.y
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'left'
+				valign: 'middle'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        #texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
 
             Image:
-                source: 'modeshow.jpg'
-                size_hint_x: 0.45
-                canvas:
-                    Color:
-                        rgb: (1, 1, 1)
-                    Rectangle:
-                        texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
 
         GridLayout:
             cols: 2
@@ -266,52 +299,72 @@
 
 <ModeLocking>:
     name: 'passlock'
-    canvas:
+    canvas.before:
+    	# This color code is rgba and is for the background
 	    Color:
-	        rgba: 0.027, 0.043, 0.372, 1
+	        rgba: 1, 1, 1, 1
+		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
 
     BoxLayout:
+    	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
 
+        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
+        FloatLayout:
 
-        BoxLayout:
-            orientation: 'horizontal'
+
+            #orientation: 'horizontal'
+            # Sets the size of the horizontal box layout so that its
+
+            size: root.width, root.height * (200/960)
+
+
             size_hint_y: None
-            size: root.width, root.height * 0.2
+
 
             Label:
-                text: app.error_base
-                background_color: 0, 0, 0, 0
-                #size: self.texture_size
-                size_hint_x: 0.25
-                color: 1, 0, 0, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                #on_press: app.root.current = 'fourth'
-
-            Label:
-        	    id: gauge_title
-			    text: 'H2 Fuel'
-
-			    size_hint_x: 0.5
-			    color: 1, 1, 1, 1
-			    font_size: ((root.width + root.height) / 2) * 0.1
-                size: self.texture_size
-                bold: True
-
-			Label:
-			    id: hMode
-			    canvas.before:
+                canvas.before:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-			    text: app.engine_mode
-			    size_hint_x: 0.25
-			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-			    color: app.mode_color
+                        rgb: (52/255, 104/255, 162/255)
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'left'
+				valign: 'middle'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        #texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
+
+            Image:
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
         BoxLayout:
             orientation: 'horizontal'
 
@@ -383,55 +436,70 @@
 <FuelGaugeLayout>:
     name: 'first'
     canvas.before:
+    	# This color code is rgba and is for the background
 	    Color:
 	        rgba: 1, 1, 1, 1
+		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
     BoxLayout:
+    	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
 
-        BoxLayout:
-            orientation: 'horizontal'
+        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
+        FloatLayout:
+
+
+            #orientation: 'horizontal'
             # Sets the size of the horizontal box layout so that its
 
             size: root.width, root.height * (200/960)
-            background_normal: ''
 
-            background_color: (.28, .8, .6)
-
-            canvas.before:
-                Color:
-                    rgb: (.28, .8, .6)
-
-                Rectangle:
-
-                    size: self.width, self.height
-                    pos: self.x, self.y
 
             size_hint_y: None
 
 
-            Image:
-				source: 'menutitle.jpg'
-				#size_hint_x: 0.3125
-				canvas:
+            Label:
+                canvas.before:
                     Color:
-                        rgb: (1, 1, 1)
+                        rgb: (52/255, 104/255, 162/255)
                     Rectangle:
-                        texture: self.texture
                         size: self.width, self.height
                         pos: self.x, self.y
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'left'
+				valign: 'middle'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        #texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
 
             Image:
-                source: 'modeshow.jpg'
-                size_hint_x: 0.45
-                canvas:
-                    Color:
-                        rgb: (1, 1, 1)
-                    Rectangle:
-                        texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
 
         FloatLayout:
             id: outer_lay
@@ -445,16 +513,22 @@
             Image:
                 id: needle_dash
                 canvas.before:
+
                     PushMatrix
                     Rotate:
                         angle: 90 - (root.dash_val * app.conversion_factor)
                         origin: root.width * 0.5, (root.height - self.height)/1.85
+                    Color:
+                        rgba: 1, 0, 1, 1
+                    # Sets the size of the background to the size of the screen
+                    Rectangle:
+                        size: self.width, self.height
                 canvas.after:
                     PopMatrix
 
 
-                source: 'needle.png'
-                size_hint_max: 50, 260
+                source: 'new_needle.png'
+                size_hint_max: 150, 300
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
 		BoxLayout:
@@ -465,7 +539,7 @@
 
 			Button:
 
-			    font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
 			    background_normal: ''
 			    background_color: .172549, .19215, .42, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
@@ -474,7 +548,7 @@
 				size: self.texture_size
 
 			Label:
-			    font_name: '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/Montserrat-Regular.ttf'
+			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
 			    color: 0.9215686275, 0.5882352941, 0.2745098039, 1
 				text: root.dash_label + 'kg'
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.125
@@ -487,48 +561,70 @@
 	name: 'second'
 
 	canvas.before:
+    	# This color code is rgba and is for the background
 	    Color:
-	        rgba: 0.027, 0.043, 0.372, 1
+	        rgba: 1, 1, 1, 1
+		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
     BoxLayout:
+    	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
 
-        BoxLayout:
-            orientation: 'horizontal'
+        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
+        FloatLayout:
+
+
+            #orientation: 'horizontal'
+            # Sets the size of the horizontal box layout so that its
+
+            size: root.width, root.height * (200/960)
+
+
             size_hint_y: None
-            size: root.width, root.height * 0.2
+
 
             Label:
-                text: app.error_base
-                background_color: 0, 0, 0, 0
-                size_hint_x: 0.25
-                color: 1, 0, 0, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                #on_press: app.root.current = 'fourth'
-
-            Label:
-        	    id: gauge_title
-        	    size_hint_x: 0.5
-			    text: 'H2 Injection'
-			    text_size: self.size
-			    color: 1, 1, 1, 1
-			    font_size: ((root.width + root.height) / 2) * 0.1
-                size: self.texture_size
-                bold: True
-
-			Label:
-			    id: hMode
-			    canvas.before:
+                canvas.before:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-			    text: app.engine_mode
-			    size_hint_x: 0.25
-			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-			    color: app.mode_color
+                        rgb: (52/255, 104/255, 162/255)
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'left'
+				valign: 'middle'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        #texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
+
+            Image:
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
 
 
 		GridLayout:
@@ -590,30 +686,63 @@
 			size: root.width, root.height
 			pos: root.pos
     BoxLayout:
+    	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
-        BoxLayout:
-            orientation: 'horizontal'
+
+        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
+        FloatLayout:
+
+
+            #orientation: 'horizontal'
+            # Sets the size of the horizontal box layout so that its
+
+            size: root.width, root.height * (200/960)
+
+
             size_hint_y: None
-            size: root.width, root.height * 0.2
+
+
             Label:
-                text: app.error_base
-                color: 1, 0, 0, 1
-                size_hint_x: 0.25
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-            Label:
-                size_hint_x: 0.5
-            Label:
-			    id: hMode
-			    canvas.before:
+                canvas.before:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-			    text: app.engine_mode
-			    size_hint_x: 0.25
-			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
-			    color: app.mode_color
+                        rgb: (52/255, 104/255, 162/255)
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'left'
+				valign: 'middle'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        #texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
+
+            Image:
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
 
 		FloatLayout:
 			size: root.width, root.height * (2.5 / 12)
@@ -628,47 +757,70 @@
 <TankTempPress>:
     name: 'fifth'
     canvas.before:
+    	# This color code is rgba and is for the background
 	    Color:
-	        rgba: 0.027, 0.043, 0.372, 1
+	        rgba: 1, 1, 1, 1
+		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
     BoxLayout:
+    	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
-        BoxLayout:
-            orientation: 'horizontal'
+
+        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
+        FloatLayout:
+
+
+            #orientation: 'horizontal'
+            # Sets the size of the horizontal box layout so that its
+
+            size: root.width, root.height * (200/960)
+
+
             size_hint_y: None
-            size: root.width, root.height * 0.2
+
 
             Label:
-                text: app.error_base
-                background_color: 0, 0, 0, 0
-                #size: self.texture_size
-                size_hint_x: 0.25
-                color: 1, 0, 0, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                #on_press: app.root.current = 'fourth'
-
-            Label:
-        	    id: gauge_title
-        	    size_hint_x: 0.5
-			    text: 'Readings'
-			    color: 1, 1, 1, 1
-			    font_size: ((root.width + root.height) / 2) * 0.1
-                size: self.texture_size
-                bold: True
-
-			Label:
-			    id: hMode
-			    canvas.before:
+                canvas.before:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-			    text: app.engine_mode
-			    size_hint_x: 0.25
-			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-			    color: app.mode_color
+                        rgb: (52/255, 104/255, 162/255)
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'left'
+				valign: 'middle'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        #texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
+
+            Image:
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
         BoxLayout:
             size_hint_y: 0.225
             orientation: 'horizontal'
@@ -795,43 +947,70 @@
 <ErrorPage>:
     name: 'fourth'
     canvas.before:
+    	# This color code is rgba and is for the background
 	    Color:
-	        rgba: 0.027, 0.043, 0.372, 1
+	        rgba: 1, 1, 1, 1
+		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
     BoxLayout:
+    	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
-        BoxLayout:
-            orientation: 'horizontal'
+
+        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
+        FloatLayout:
+
+
+            #orientation: 'horizontal'
+            # Sets the size of the horizontal box layout so that its
+
+            size: root.width, root.height * (200/960)
+
+
             size_hint_y: None
-            size: root.width, root.height * 0.2
+
+
             Label:
-                text: app.error_base
-                background_color: 0, 0, 0, 0
-                #size: self.texture_size
-                size_hint_x: 0.25
-                color: 1, 0, 0, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                #on_press: app.root.current = 'fourth'
-            Label:
-                text: 'Fault Info:'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                size: self.texture_size
-                size_hint_x: 0.5
-                size: self.texture_size
-                bold: True
-            Label:
-			    id: hMode
-			    canvas.before:
+                canvas.before:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-			    text: app.engine_mode
-			    size_hint_x: 0.25
-			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-			    color: app.mode_color
+                        rgb: (52/255, 104/255, 162/255)
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'left'
+				valign: 'middle'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        #texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
+
+            Image:
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
 
         GridLayout:
             cols: 2
@@ -994,48 +1173,70 @@
 <DynamicLeak>:
     name: 'temp&press'
     canvas.before:
+    	# This color code is rgba and is for the background
 	    Color:
-	        rgba: 0.027, 0.043, 0.372, 1
+	        rgba: 1, 1, 1, 1
+		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
     BoxLayout:
+    	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
 
-        BoxLayout:
-            orientation: 'horizontal'
+        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
+        FloatLayout:
+
+
+            #orientation: 'horizontal'
+            # Sets the size of the horizontal box layout so that its
+
+            size: root.width, root.height * (200/960)
+
+
             size_hint_y: None
-            size: root.width, root.height * 0.2
+
 
             Label:
-                text: app.error_base
-                background_color: 0, 0, 0, 0
-                #size: self.texture_size
-                size_hint_x: 0.25
-                color: 1, 0, 0, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                #on_press: app.root.current = 'fourth'
-
-            Label:
-        	    size_hint_x: 0.5
-			    text: 'Mode'
-			    text_size: self.size
-			    color: 1, 1, 1, 1
-			    font_size: ((root.width + root.height) / 2) * 0.1
-                size: self.texture_size
-                bold: True
-
-			Label:
-			    id: hMode
-			    canvas.before:
+                canvas.before:
                     Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: 5
-                        rectangle: self.x, self.y, self.width, self.height
-			    text: app.engine_mode
-			    size_hint_x: 0.25
-			    font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-			    color: app.mode_color
+                        rgb: (52/255, 104/255, 162/255)
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				halign: 'left'
+				valign: 'middle'
+                pos_hint: {'top': 1}
+				size_hint_x: (5.5/8.5625)
+
+				text_size: self.size
+				text: u'  H\u2082 Monitor'
+
+            Label:
+                #source: 'modeshow.jpg'
+                pos_hint: {'top': 1, 'right': 1}
+                size_hint_x: (3.0625/8.5625)
+
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
+                canvas.before:
+                    Color:
+                        rgb: (235/255, 150/255, 72/255)
+                    Rectangle:
+                        #texture: self.texture
+                        size: self.width, self.height
+                        pos: self.x, self.y
+                text: u'H\u2082 Mode '
+                text_size: self.size
+                halign: 'right'
+                valign: 'middle'
+                color: 0, 0, 0, 1
+
+            Image:
+				source: 'hydradrop.png'
+				#size_hint_x: 0.3125
+				pos_hint: {'top': 1, 'right': 1.15}
 
 
         GridLayout:
