@@ -201,7 +201,7 @@ if __name__ == "__main__":
             try:
                 thisport.send_message(message)
                 print(message)
-                sleep(0.1)
+                sleep(0.05)
             except KeyboardInterrupt:
                 exit()
 
