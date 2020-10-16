@@ -184,7 +184,7 @@ if __name__ == "__main__":
     count = 0
     '''
     receiver = 0
-    '''
+
     if message_num == '1':
         message = message_1
     elif message_num == '2':
@@ -194,14 +194,14 @@ if __name__ == "__main__":
     else:
         message = message_1
         receiver = 1
-    '''
-    message = [0xAA, 0xBB, 0xCC, 0xDD, 0xEE]
+
+    #message = [0xAA, 0xBB, 0xCC, 0xDD, 0xEE]
     if receiver == 0:
         while True:
             try:
                 thisport.send_message(message)
-                print(message)
-                print(message_num)
+                print(message + message_num)
+                #print(message_num)
                 sleep(0.05)
             except KeyboardInterrupt:
                 exit()
