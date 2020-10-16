@@ -146,11 +146,10 @@ if __name__ == "__main__":
 
     now = time.strftime("%H-%M-%S")
 
-
-
-
-
-    #thisport.send_message([0xac, 0xfe, 0x80, 0xf0, 0x17])
+    # thisport.send_message([0xac, 0xfe, 0x80, 0xf0, 0x17])
+    # , 0x89
+    # , 0x1f
+    # , 0x31
 
     message_1 = [0xac, 0xc3, 0x03, 0x9a, 0x97, 0x3e]
     message_2 = [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
@@ -182,39 +181,45 @@ if __name__ == "__main__":
         count += 1
 
     count = 0
+    '''
+    receiver = 0
 
     if message_num == 1:
         message = message_1
     elif message_num == 2:
         message = message_2
-    else:
+    elif message_num == 3:
         message = message_3
+    else:
+        message = message_1
+        receiver = 1
 
-    #thisport.send_message(message)
-    '''
+    if receiver is not 1:
+        while True:
+            try:
+                thisport.send_message(message)
+            except KeyboardInterrupt:
+                exit()
 
     while True:
         try:
             a = thisport.read_message()
             if a is not None:
                 print(a)
-                #a = list(a)
+                # a = list(a)
                 out = ''
                 for num in a:
                     out += str(num)
-                #hexlist = ['{:X}'.format(num) for num in a]
+                # hexlist = ['{:X}'.format(num) for num in a]
                 outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
-                #outstr = str(*a)
+                # outstr = str(*a)
                 fin.write(outstr)
 
                 print(outstr)
-                #fin.write(outstr)
+                # fin.write(outstr)
         except KeyboardInterrupt:
             fin.close()
             exit()
-            #count += 1
+            # count += 1
 
-    #fin.close()
-
-
-
+    # fin.close()
