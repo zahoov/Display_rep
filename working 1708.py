@@ -184,20 +184,20 @@ if __name__ == "__main__":
     '''
     receiver = 0
 
-    if message_num == 1:
+    if message_num == '1':
         message = message_1
-    elif message_num == 2:
+    elif message_num == '2':
         message = message_2
-    elif message_num == 3:
+    elif message_num == '3':
         message = message_3
     else:
         message = message_1
         receiver = 1
 
-    if receiver is not 1:
+    if receiver == 0:
         while True:
             try:
-                thisport.send_message([0xac, 0x00, 0x2e])
+                thisport.send_message(message)
                 print('we tried')
             except KeyboardInterrupt:
                 exit()
