@@ -1,5 +1,6 @@
 import serial
 import time
+from time import sleep
 from multiprocessing import Process, Pipe, Lock
 from functools import reduce
 import struct
@@ -200,6 +201,7 @@ if __name__ == "__main__":
             try:
                 thisport.send_message(message)
                 print(message)
+                sleep(0.1)
             except KeyboardInterrupt:
                 exit()
 
