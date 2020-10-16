@@ -160,7 +160,7 @@ if __name__ == "__main__":
 
     fin = open("Display_rep/logs/sendconflicttest_" + now + ".txt", "w")
 
-    count = 50
+    count = 0
 
     print('before before')
 
