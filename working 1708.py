@@ -161,7 +161,7 @@ if __name__ == "__main__":
     fin = open("Display_rep/logs/sendconflicttest_" + now + ".txt", "w")
 
     count = 0
-    '''
+
     print('before before')
     while count < 50:
         print('in first loop')
@@ -182,7 +182,7 @@ if __name__ == "__main__":
         count += 1
 
     count = 0
-    '''
+
     receiver = 0
 
     if message_num == '1':
@@ -196,36 +196,36 @@ if __name__ == "__main__":
         receiver = 1
 
     #message = [0xAA, 0xBB, 0xCC, 0xDD, 0xEE]
-    if receiver == 0:
-        while True:
-            try:
-                thisport.send_message(message)
-                print(*message)
+    #if receiver == 0:
+        #while True:
+            #try:
+    thisport.send_message(message)
+    print(*message)
                 #print(message_num)
-                sleep(0.05)
-            except KeyboardInterrupt:
-                exit()
+                #sleep(0.05)
+            #except KeyboardInterrupt:
+             #   exit()
 
-    else:
-        while True:
-            try:
-                a = thisport.read_message()
-                if a is not None:
-                    print(a)
-                    # a = list(a)
-                    out = ''
-                    for num in a:
-                        out += str(num)
-                    # hexlist = ['{:X}'.format(num) for num in a]
-                    outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
-                    # outstr = str(*a)
-                    fin.write(outstr)
+    #else:
+    while True:
+        try:
+            a = thisport.read_message()
+            if a is not None:
+                print(a)
+                # a = list(a)
+                out = ''
+                for num in a:
+                    out += str(num)
+                # hexlist = ['{:X}'.format(num) for num in a]
+                outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
+                # outstr = str(*a)
+                fin.write(outstr)
 
-                    print(outstr)
-                    # fin.write(outstr)
-            except KeyboardInterrupt:
-                fin.close()
-                exit()
-                # count += 1
+                print(outstr)
+                # fin.write(outstr)
+        except KeyboardInterrupt:
+            fin.close()
+            exit()
+            # count += 1
 
     # fin.close()
