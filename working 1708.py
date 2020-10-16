@@ -160,9 +160,10 @@ if __name__ == "__main__":
 
     fin = open("Display_rep/logs/sendconflicttest_" + now + ".txt", "w")
 
-    count = 0
+    count = 50
 
     print('before before')
+
     while count < 50:
         print('in first loop')
         a = thisport.read_message()
