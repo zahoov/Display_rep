@@ -201,25 +201,26 @@ if __name__ == "__main__":
             except KeyboardInterrupt:
                 exit()
 
-    while True:
-        try:
-            a = thisport.read_message()
-            if a is not None:
-                print(a)
-                # a = list(a)
-                out = ''
-                for num in a:
-                    out += str(num)
-                # hexlist = ['{:X}'.format(num) for num in a]
-                outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
-                # outstr = str(*a)
-                fin.write(outstr)
+    else:
+        while True:
+            try:
+                a = thisport.read_message()
+                if a is not None:
+                    print(a)
+                    # a = list(a)
+                    out = ''
+                    for num in a:
+                        out += str(num)
+                    # hexlist = ['{:X}'.format(num) for num in a]
+                    outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
+                    # outstr = str(*a)
+                    fin.write(outstr)
 
-                print(outstr)
-                # fin.write(outstr)
-        except KeyboardInterrupt:
-            fin.close()
-            exit()
-            # count += 1
+                    print(outstr)
+                    # fin.write(outstr)
+            except KeyboardInterrupt:
+                fin.close()
+                exit()
+                # count += 1
 
     # fin.close()
