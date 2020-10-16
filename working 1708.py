@@ -198,6 +198,7 @@ if __name__ == "__main__":
         while True:
             try:
                 thisport.send_message(b'cool')
+                print('we tried')
             except KeyboardInterrupt:
                 exit()
 
