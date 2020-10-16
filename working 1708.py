@@ -157,7 +157,7 @@ if __name__ == "__main__":
 
     message_num = input('input message number:\n')
 
-    fin = open("Display_rep/logs/message_" + message_num + now + ".txt", "w")
+    fin = open("Display_rep/logs/new_message_" + '_' + message_num + now + ".txt", "w")
 
     count = 0
     '''
