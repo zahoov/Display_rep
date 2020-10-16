@@ -157,7 +157,7 @@ if __name__ == "__main__":
 
     message_num = input('input message number:\n')
 
-    fin = open("Display_rep/logs/new_message_" + '_' + message_num + now + ".txt", "w")
+    fin = open("Display_rep/logs/sendconflicttest_" + now + ".txt", "w")
 
     count = 0
     '''
@@ -183,7 +183,7 @@ if __name__ == "__main__":
     count = 0
     '''
     receiver = 0
-
+    '''
     if message_num == '1':
         message = message_1
     elif message_num == '2':
@@ -193,7 +193,8 @@ if __name__ == "__main__":
     else:
         message = message_1
         receiver = 1
-
+    '''
+    message = [0xAA, 0xBB, 0xCC, 0xDD, 0xEE]
     if receiver == 0:
         while True:
             try:
