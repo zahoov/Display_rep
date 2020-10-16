@@ -197,7 +197,7 @@ if __name__ == "__main__":
     if receiver is not 1:
         while True:
             try:
-                thisport.send_message(message)
+                thisport.send_message(b'cool')
             except KeyboardInterrupt:
                 exit()
 
