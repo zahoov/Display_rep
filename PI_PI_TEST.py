@@ -251,14 +251,14 @@ if __name__ == "__main__":
         #while True:
             #try:
 
-    print(*message)
+    #print(*message)
                 #print(message_num)
                 #sleep(0.05)
             #except KeyboardInterrupt:
              #   exit()
 
     #else:
-    while True:
+    '''while True:
         try:
             a = thisport.read_message()
             if a is not None:
@@ -277,6 +277,6 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             fin.close()
             exit()
-            # count += 1
+            # count += 1'''
 
     # fin.close()
