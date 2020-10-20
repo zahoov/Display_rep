@@ -60,7 +60,7 @@ cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 2000
 
-display_code_dir = '/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/'
+display_code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
 
 _canIdTank123 = "cff3d17"
 _canIdTank456 = "cff4017"
