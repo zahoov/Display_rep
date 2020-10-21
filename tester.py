@@ -7,7 +7,7 @@ i = 0
 lines = fin.readlines()
 
 for l in lines:'''
-#a = b'\xce'b'\xc2'b'\x00'b'p
+
 
 '''if l[22:26] == 'FECA':
     count += 1
@@ -15,29 +15,7 @@ for l in lines:'''
         print('yes')
         i += 1'''
 
-messages = []
-message_file = open("test_messages.txt", 'r')
-clean_msg = ''
-
-
-for line in message_file:
-    stripped_line = line.rstrip()
-    messages.append(stripped_line)
-
-msg = messages[2].split(', ')
-
-
-
-
-#a = b'\xac\x00.'
-
-
-'''
-for item in msg:
-    msg[count] = int(item, 16)
-    msg[count] = hex(msg[count])
-    count += 1
-
+a = b'\xce'b'\xc2'b'\x00'b'p'
 
 a = list(a)
 b = []
@@ -48,4 +26,7 @@ for hex in hexlist:
 
 print(*hexlist)
 print(*b)
-'''
+
+
+
+
