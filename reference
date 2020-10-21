@@ -1,0 +1,12 @@
+diag req - offboard 1     -- PREVIOUSLY TESTED AND DIDN'T WORK
+diag req - offboard 2?    -- PREVIOUSLY TESTED AND DIDN'T WORK
+reg request -             -- PREVIOUSLY TESTED AND DIDN'T WORK
+mids 64-68 are offboard diagnostics - mass air flow
+avg fuel rate
+rated engine power
+same as 4/5/6 but mid is offboard diagnostics (66)
+-
+-
+same as 4/5/6 but mid is diagnostics systems (50)
+-
+-

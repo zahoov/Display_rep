@@ -4,6 +4,7 @@ from time import sleep
 from multiprocessing import Process, Pipe, Lock
 from functools import reduce
 import struct
+import os
 
 # TODO: need a thread that monitors the J1708 bus and continually places messages in the receive buffer.
 #      upon initialization, thread needs to spawn and synchronize itself with the J1708 bus.
@@ -145,119 +146,96 @@ class J1708():
 if __name__ == "__main__":
     thisport = J1708("/dev/ttyS0")
 
-    now = time.strftime("%H-%M-%S")
+    now = time.strftime("%H_%M_%S")
 
+    # message_num = input('input message number:\n')
+    # fin = open("Display_rep/logs/sendconflicttest_" + message_num + '_' + now + ".txt", "w")
     # thisport.send_message([0xac, 0xfe, 0x80, 0xf0, 0x17])
     # , 0x89
     # , 0x1f
     # , 0x31
-
+    '''
     message_1 = [0xac, 0xc3, 0x03, 0x9a, 0x97, 0x3e]
     message_2 = [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
     message_3 = [0xac, 0x00, 0x2e]
+    '''
 
-    message_num = input('input message number:\n')
+    path = 'Display_rep/logs/' + now
+    os.system("mkdir " + path)
 
-    fin = open("Display_rep/logs/sendconflicttest_" + message_num + '_' + now + ".txt", "w")
+    messages = []
+    message_file = open("Display_rep/test_messages.txt", 'r')
+    clean_msg = ''
 
-    if message_num == 'rx':
-        mode = 1
-        message = message_1
-    elif message_num == 'tx':
-        message = message_2
-        mode = 2
-    elif message_num == 'dual':
-        message = message_3
-        mode = 3
-    else:
-        message = message_1
-        #receiver = 1
-        mode = 3
+    for line in message_file:
+        stripped_line = line.rstrip()
+        messages.append(stripped_line)
+
+
 
     count = 0
 
-    print('before before')
+    for thing in messages:
+
+        msg = messages[count].split(', ')
+        count += 1
+        fin = open(path + '/send_test_msg_' + str(count) + '.txt', 'w')
+        i = 0
+        # if mode == 1:
+
+        while i < 20:
+            # print('in first loop')
+            a = thisport.read_message()
+            if a is not None:
+                print(a)
+                a = list(a)
+                # hexlist = ['{:X}'.format(num) for num in a]
+                out = ''
+                for num in a:
+                    out += str(num)
+
+                outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', out, '\n'])
+                # outstr = a
+                # print(outstr)
+                fin.write(outstr)
+
+            i += 1
+
+        thisport.send_message(msg)
+        i = 0
+
+        while i < 50:
+
+            a = thisport.read_message()
+            if a is not None:
+                print(a)
+                a = list(a)
+                # hexlist = ['{:X}'.format(num) for num in a]
+                out = ''
+                for num in a:
+                    out += str(num)
+
+                outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', out, '\n'])
+                # outstr = a
+                # print(outstr)
+                fin.write(outstr)
+            i += 1
+
+        fin.close()
 
 
-    if mode == 1:
-        try:
-            while True:
-                print('in first loop')
-                a = thisport.read_message()
-                if a is not None:
-                    print(a)
-                    a = list(a)
-                    #hexlist = ['{:X}'.format(num) for num in a]
-                    out = ''
-                    for num in a:
-                        out += str(num)
+    # message = [0xAA, 0xBB, 0xCC, 0xDD, 0xEE]
+    # if receiver == 0:
+    # while True:
+    # try:
 
-                    outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', out, '\n'])
-                    #outstr = a
-                    #print(outstr)
-                    fin.write(outstr)
+    # print(*message)
+    # print(message_num)
+    # sleep(0.05)
+    # except KeyboardInterrupt:
+    #   exit()
 
-                count += 1
-        except KeyboardInterrupt:
-            fin.close()
-            exit()
-
-    elif mode == 2:
-        while True:
-            try:
-                thisport.send_message(message)
-            except KeyboardInterrupt:
-                exit()
-            sleep(0.1)
-
-    elif mode == 3:
-        count = 0
-
-        while True:
-            try:
-
-                if count % 15 == 0:
-                    thisport.send_message(message)
-                else:
-
-                    print('in first loop')
-                    a = thisport.read_message()
-                    if a is not None:
-                        print(a)
-                        a = list(a)
-                        # hexlist = ['{:X}'.format(num) for num in a]
-                        out = ''
-                        for num in a:
-                            out += str(num)
-
-                        outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', out, '\n'])
-                        # outstr = a
-                        # print(outstr)
-                        fin.write(outstr)
-                count += 1
-            except KeyboardInterrupt:
-                fin.close()
-                exit()
-
-
-
-
-
-
-
-
-    #message = [0xAA, 0xBB, 0xCC, 0xDD, 0xEE]
-    #if receiver == 0:
-        #while True:
-            #try:
-
-    #print(*message)
-                #print(message_num)
-                #sleep(0.05)
-            #except KeyboardInterrupt:
-             #   exit()
-
-    #else:
+    # else:
     '''while True:
         try:
             a = thisport.read_message()
