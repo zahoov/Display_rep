@@ -178,6 +178,12 @@ if __name__ == "__main__":
     for thing in messages:
 
         msg = messages[count].split(', ')
+        counter = 0
+        for byte in msg:
+            msg[counter] = int(byte, 16)
+            counter += 1
+
+
         count += 1
         fin = open(path + '/send_test_msg_' + str(count) + '.txt', 'w')
         i = 0
