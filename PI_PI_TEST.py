@@ -221,7 +221,7 @@ if __name__ == "__main__":
                 for num in a:
                     out += str(num)
 
-                outstr = " ".join([time.strftime("%H:%M:%S"), 'BEFORE REQUEST', out, '\n'])
+                outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
                 # outstr = a
                 # print(outstr)
                 fin.write(outstr)
