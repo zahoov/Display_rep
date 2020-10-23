@@ -178,10 +178,10 @@ if __name__ == "__main__":
     for thing in messages:
 
         msg = messages[count].split(', ')
-        counter = 0
+        i = 0
         for byte in msg:
-            msg[counter] = int(byte, 16)
-            counter += 1
+            msg[i] = int(byte, 16)
+            i += 1
 
 
         count += 1
