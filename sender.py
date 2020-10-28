@@ -231,8 +231,16 @@ if __name__ == '__main__':
                 #bus_claim, mid_read = mid_receive(com, msg[0])
                 bus_claim = False
                 mid_read = getmsg(com)
-                print(mid_read)
-                fin.write(str(mid_read))
+                mid = mid_read[0]
+                print(mid)
+
+                if mid == msg[0]:
+                    bus_claim = True
+                else:
+                    bus_claim = False
+
+
+                fin.write(str(mid))
 
                 # Step 7 If  the  match  failed,  we  lost  the  arbitration.Continue to step 8
                 if not bus_claim:
