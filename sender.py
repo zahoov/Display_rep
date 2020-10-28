@@ -149,7 +149,7 @@ if __name__ == '__main__':
     path = 'Display_rep/logs/' + 'ROUND3'
 
     com = serial.Serial()
-    com.port = "ttyS0"
+    com.port = "/dev/ttyS0"
     com.baudrate = 9600
     com.timeout = (1 / 9600) * 22
     com.STOPBITS = 1
