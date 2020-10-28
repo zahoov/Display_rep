@@ -207,7 +207,7 @@ if __name__ == "__main__":
 
             i += 1
 
-        thisport.send_message(msg)
+        #thisport.send_message(msg)
         i = 0
 
         while i < 50:
