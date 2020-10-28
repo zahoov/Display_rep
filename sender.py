@@ -116,7 +116,7 @@ def mid_transmit(busport, mid):
 def mid_receive(busport, mid):
     # buslock.aquire()
     mid_read = busport.read()
-    print(mid_read)
+    #print(mid_read)
     if mid_read is mid:
         bus_claim = True
     else:
@@ -218,6 +218,7 @@ if __name__ == '__main__':
 
             # Step 4 transmit the device MID on the bus
             elif step == 4:
+                print(msg[0])
 
                 mid_transmit(com, msg[0])
                 step += 1
