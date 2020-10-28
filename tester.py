@@ -14,28 +14,19 @@ for l in lines:'''
     if l[29:33] == 'x 8 ':
         print('yes')
         i += 1'''
+#b'\x80'b'\xf7'b'\x04'b'"'b'\xcc'b'\x02'b'\x00'b'\x95'
+'''a = b'\x80'b'd'b'\x00'b'n'b'\xc9'b'\xaf'b'\xd5'b'\x02'b'Y'b'\x00'b'\xa8'b'\xfd'b'\x00'b'\xad'b'\xfc'b'\x02'b'f'b'\x00'b'P'
 
-a = b'\xce'b'\xc2'b'\x00'b'p'
-count = 0
-messages = []
-message_file = open("test_messages.txt", 'r')
+a = list(a)
+b = []
+hexlist = ['{:X}'.format(num) for num in a]
 
+for hex in hexlist:
+    b.append(int(hex, 16))
 
-for line in message_file:
-    stripped_line = line.rstrip()
-    messages.append(stripped_line)
-
-for thing in messages:
-
-    msg = messages[count].split(', ')
-    count += 1
-    #fin = open('logs/send_test_msg_' + str(count) + '.txt', 'w')
-    i = 0
-    # if mode == 1:
-
-print(msg)
-print(type(msg[3]))
-
+print(*hexlist)
+print(*b)
+'''
 
 
 
