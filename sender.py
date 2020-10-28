@@ -63,11 +63,11 @@ def getmsg(busport):
 
     busport.timeout = ttimeout
     #buslock.release()
-    if len(msg) <= 1 or not check(msg[:-1]) + toSignedChar(msg[-1]) == 0:
+    #if len(msg) <= 1 or not check(msg[:-1]) + toSignedChar(msg[-1]) == 0:
         #		initialize(busport,buslock)
-        return None
-    else:
-        return msg[0]
+     #   return None
+
+    return msg[0]
 
 def initialize(busport):
     idle = False
