@@ -73,8 +73,8 @@ def initialize(busport):
     idle = False
     # buslock.acquire()
     init_start_time = time.time()
-    busport.flushInput()
-    busport.timeout = 0
+    #busport.flushInput()
+    #busport.timeout = 0
     while not idle:
         # print(time.clock())
         a = busport.read(1)
