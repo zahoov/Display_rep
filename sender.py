@@ -123,7 +123,7 @@ def mid_receive(busport, mid):
 
 
     # buslock.release()
-    return bus_claim
+    return bus_claim, mid_read
 
 
 
@@ -224,7 +224,9 @@ if __name__ == '__main__':
             # Step 5 Receive the transmitted MID and determine that the sent MID matches the received MID
             elif step == 5:
 
-                bus_claim = mid_receive(com, msg[0])
+                bus_claim, mid_read = mid_receive(com, msg[0])
+
+                fin.write(str(mid_read))
 
                 # Step 7 If  the  match  failed,  we  lost  the  arbitration.Continue to step 8
                 if not bus_claim:
