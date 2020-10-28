@@ -232,6 +232,7 @@ if __name__ == '__main__':
                 bus_claim = False
                 com.write(msg[0])
                 mid = getmsg(com)
+                print(msg[0])
 
                 print(mid)
 
