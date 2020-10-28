@@ -155,10 +155,10 @@ if __name__ == '__main__':
     com.port = "/dev/ttyS0"
     com.baudrate = 9600
     com.timeout = (1 / 9600) * 22
-    com.STOPBITS = 1
-    com.PARITIES = 0
+    #com.STOPBITS = 1
+    #com.PARITIES = 0
     com.set_buffer_size = 21
-    com.interCharTimeout = 0.01
+    #com.interCharTimeout = 0.01
 
     # buslock = Lock()
 
@@ -228,8 +228,9 @@ if __name__ == '__main__':
             # Step 5 Receive the transmitted MID and determine that the sent MID matches the received MID
             elif step == 5:
 
-                bus_claim, mid_read = mid_receive(com, msg[0])
-
+                #bus_claim, mid_read = mid_receive(com, msg[0])
+                bus_claim = False
+                mid_read = getmsg(com)
                 fin.write(str(mid_read))
 
                 # Step 7 If  the  match  failed,  we  lost  the  arbitration.Continue to step 8
