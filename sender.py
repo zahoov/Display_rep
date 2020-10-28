@@ -158,7 +158,7 @@ if __name__ == '__main__':
     com.interCharTimeout = 0.01
 
     # buslock = Lock()
-    busport = com.port
+
     testing = True
 
     messages = []
@@ -195,7 +195,7 @@ if __name__ == '__main__':
             # The bus is Idle after 10-bit times have elapsed from the previous character with no received Start bits.
             if step == 1:
 
-                initialize(busport)  # step 1
+                initialize(com)  # step 1
                 step += 1
 
             # Step 2 wait the required priority delay after the idle period has begun --> Pd = Tb*2*P,
@@ -209,7 +209,7 @@ if __name__ == '__main__':
             # Step 3 make sure the bus is still idle, if it is not idle go back to step 1
             elif step == 3:
 
-                idle = init_double_check(busport)  # step 3
+                idle = init_double_check(com)  # step 3
                 if not idle:
                     step = 1
                 else:
@@ -218,13 +218,13 @@ if __name__ == '__main__':
             # Step 4 transmit the device MID on the bus
             elif step == 4:
 
-                mid_transmit(busport, msg[0])
+                mid_transmit(com, msg[0])
                 step += 1
 
             # Step 5 Receive the transmitted MID and determine that the sent MID matches the received MID
             elif step == 5:
 
-                bus_claim = mid_receive(busport, msg[0])
+                bus_claim = mid_receive(com, msg[0])
 
                 # Step 7 If  the  match  failed,  we  lost  the  arbitration.Continue to step 8
                 if not bus_claim:
@@ -236,12 +236,12 @@ if __name__ == '__main__':
 
                     else:
                         # step 9
-                        idle = initialize(busport)
+                        idle = initialize(com)
                         step += 1
 
                 # Step 6 If  the  match  was  successful,  we  have  claimed the bus. Send the packet
                 elif bus_claim:
-                    packet_sender(busport, bus_claim, msg)
+                    packet_sender(com, bus_claim, msg)
                     step = 7
 
             elif step == 6:
@@ -257,7 +257,7 @@ if __name__ == '__main__':
 
                 x = 0
                 while x < 30:
-                    a = getmsg(busport)
+                    a = getmsg(com)
 
                     if a is not None:
                         print(a)
