@@ -107,16 +107,18 @@ def init_double_check(busport):
     return idle
 
 
-def mid_transmit(busport, mid):
+#def mid_transmit(busport, mid):
     # buslock.aquire()
-    busport.write(mid)
+
     # buslock.release()
 
 
 def mid_receive(busport, mid):
     # buslock.aquire()
-    mid_read = busport.read()
-    #print(mid_read)
+    busport.write(mid)
+
+    mid_read = busport.read(1)
+    print(mid_read)
     if mid_read is mid:
         bus_claim = True
     else:
@@ -214,14 +216,14 @@ if __name__ == '__main__':
                 if not idle:
                     step = 1
                 else:
-                    step += 1
+                    step += 2
 
             # Step 4 transmit the device MID on the bus
-            elif step == 4:
-                print(msg[0])
+            #elif step == 4:
+                #print(msg[0])
 
-                mid_transmit(com, msg[0])
-                step += 1
+                #mid_transmit(com, msg[0])
+                #step += 1
 
             # Step 5 Receive the transmitted MID and determine that the sent MID matches the received MID
             elif step == 5:
