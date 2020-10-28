@@ -115,7 +115,7 @@ def mid_transmit(busport, mid):
 
 def mid_receive(busport, mid):
     # buslock.aquire()
-    mid_read = busport.read(1)
+    mid_read = busport.read()
     print(mid_read)
     if mid_read is mid:
         bus_claim = True
