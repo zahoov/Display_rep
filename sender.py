@@ -5,8 +5,8 @@ import struct
 from functools import reduce
 from multiprocessing import Process, Pipe, Lock
 
-TENBITTIMES = 104.16 * 10 / (10 ** 6)
-ONEBITTIME = 104.16 / (10 ** 6)
+TENBITTIMES = 104.17 * 10 / (10 ** 6)
+ONEBITTIME = 104.17 / (10 ** 6)
 
 
 def message_constructor(msg):
