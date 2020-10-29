@@ -221,17 +221,17 @@ if __name__ == '__main__':
 
         # Step 5 Receive the transmitted MID and determine that the sent MID matches the received MID
         elif step == 5:
-
+            message = bytes(msg)
             #bus_claim, mid_read = mid_receive(com, msg[0])
             bus_claim = False
-            com.write(bytes(msg))
+            com.write(message)
             print(msg[0])
             mid = getmsg(com)
 
 
             print(mid)
 
-            if mid == msg[0]:
+            if mid == message[0]:
                 print('wahoo')
                 bus_claim = True
             else:
