@@ -67,7 +67,7 @@ def getmsg(busport):
         #		initialize(busport,buslock)
      #   return None
 
-    return msg
+    return msg[0]
 
 def initialize(busport):
     idle = False
