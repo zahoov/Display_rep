@@ -182,7 +182,7 @@ if __name__ == '__main__':
     message_2 = [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
     message_3 = [0xac, 0x00, 0x2e]
 
-    fin = open('Display_rep/logs/MATCO_Tests/' + time.strftime("%d_%H_%M") + '.txt', 'w')
+    fin = open('Display_rep/logs/ROUND4/' + time.strftime("%d_%H_%M") + '.txt', 'w')
 
     step = 1
 

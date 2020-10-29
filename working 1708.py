@@ -56,7 +56,7 @@ def sender(busport, msg):
             start = int(time.strftime("%M%S"))
 
 
-fin = open('constant_read_w_send.txt', 'w')
+fin = open('Display_rep/logs/working1708_tests/constant_read_w_send.txt', 'w')
 
 ser = serial.Serial('/dev/ttyS0', 9600)
 
