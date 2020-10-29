@@ -160,7 +160,7 @@ if __name__ == "__main__":
     message_3 = [0xac, 0x00, 0x2e]
     '''
 
-    path = 'Display_rep/logs/' + 'ROUND3'
+    path = 'Display_rep/logs/' + 'ROUND4'
     os.system("mkdir " + path)
 
     messages = []
