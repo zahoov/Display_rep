@@ -254,6 +254,7 @@ if __name__ == '__main__':
 
             # Step 6 If  the  match  was  successful,  we  have  claimed the bus. Send the packet
             elif bus_claim:
+                print('its sending the msg rn')
                 packet_sender(com, bus_claim, msg)
                 step = 7
 
