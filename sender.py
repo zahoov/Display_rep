@@ -232,9 +232,12 @@ if __name__ == '__main__':
             print(mid)
 
             if mid == msg[0]:
+                print('wahoo')
                 bus_claim = True
             else:
                 bus_claim = False
+
+            print(bus_claim)
 
 
             fin.write(str(mid))
