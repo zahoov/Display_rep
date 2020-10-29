@@ -224,7 +224,7 @@ if __name__ == '__main__':
 
             #bus_claim, mid_read = mid_receive(com, msg[0])
             bus_claim = False
-            com.write(bytes(msg[0]))
+            com.write(bytes(msg))
             #print(msg[0])
             mid = getmsg(com)
 
