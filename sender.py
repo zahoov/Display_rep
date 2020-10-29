@@ -133,6 +133,7 @@ def mid_receive(busport, mid):
 
 def packet_sender(busport, bus_claim, message):
     if bus_claim:
+        print('inside packet sender and its good')
         # buslock.aquire()
         busport.write(message)
         # buslock.release()
@@ -262,7 +263,7 @@ if __name__ == '__main__':
             # Step 6 If  the  match  was  successful,  we  have  claimed the bus. Send the packet
             elif bus_claim:
                 print('its sending the msg rn')
-                packet_sender(com, bus_claim, msg)
+                packet_sender(com, bus_claim, message)
                 step = 7
 
         elif step == 6:
