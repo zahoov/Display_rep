@@ -225,11 +225,11 @@ if __name__ == '__main__':
             #bus_claim, mid_read = mid_receive(com, msg[0])
             bus_claim = False
             com.write(message)
-            print(message[0].to_bytes(1, 'big'))
+            #print(message[0].to_bytes(1, 'big'))
 
             mid = getmsg(com)
 
-            print(mid)
+            #print(mid)
 
             if mid == message[0].to_bytes(1, 'big'):
                 print('wahoo')
@@ -271,6 +271,7 @@ if __name__ == '__main__':
         elif step == 7:
             is_first_collision = True
             testing = False
+            step = 1
 
             x = 0
             while x < 30:
