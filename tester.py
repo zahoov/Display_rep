@@ -30,9 +30,10 @@ print(*hexlist)
 print(*b)
 '''
 
-import time
+msg = [0x40, 0x00, 0x84]
 
-print((time.strftime("%d")))
+message = bytes(msg)
 
+print((message[0]))
 
 
