@@ -67,7 +67,7 @@ def getmsg(busport):
         #		initialize(busport,buslock)
      #   return None
 
-    return msg[0]
+    return msg
 
 def initialize(busport):
     idle = False
@@ -224,7 +224,7 @@ if __name__ == '__main__':
             message = bytes(msg)
             #bus_claim, mid_read = mid_receive(com, msg[0])
             bus_claim = False
-            com.write(message)
+            com.write(message[0].to_bytes(1, 'big'))
             #print(message[0].to_bytes(1, 'big'))
 
             mid = getmsg(com)
