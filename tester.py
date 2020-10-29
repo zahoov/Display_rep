@@ -32,7 +32,7 @@ print(*b)
 
 import time
 
-print((time.strftime("%M%S")))
+print((time.strftime("%d")))
 
 
 
