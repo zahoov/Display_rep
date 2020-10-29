@@ -34,6 +34,8 @@ msg = [0x40, 0x00, 0x84]
 
 message = bytes(msg)
 
-print((message[0]))
+mid = message[0].to_bytes(1, 'big')
+
+print(mid)
 
 

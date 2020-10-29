@@ -225,13 +225,13 @@ if __name__ == '__main__':
             #bus_claim, mid_read = mid_receive(com, msg[0])
             bus_claim = False
             com.write(message)
-            print(message[0])
-            mid = getmsg(com)
+            print(message[0].to_bytes(1, 'big'))
 
+            mid = getmsg(com)
 
             print(mid)
 
-            if mid == message[0]:
+            if mid == message[0].to_bytes(1, 'big'):
                 print('wahoo')
                 bus_claim = True
             else:
