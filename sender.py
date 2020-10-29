@@ -178,120 +178,115 @@ if __name__ == '__main__':
 
     index = 0
 
-    for thing in messages:
+    msg = [0x40, 0x00, 0x84]
+    message_2 = [0xb4, 0xc3, 0x03, 0x80, 0x97, 0x3e]
+    message_3 = [0xac, 0x00, 0x2e]
 
-        msg = messages[index].split(', ')
-        i = 0
-        for byte in msg:
-            msg[i] = int(byte, 16)
-            i += 1
+    fin = open('/logs/MATCO_Tests/' + time.strftime("_%D_%H_%M"))
 
-        index += 1
-        fin = open(path + '/send_test_msg_' + str(index) + '.txt', 'w')
+    step = 1
+
+    while testing is True:
+
+        # Step 1 Check if idle
+        # The bus is Idle after 10-bit times have elapsed from the previous character with no received Start bits.
+        if step == 1:
+
+            initialize(com)  # step 1
+            step += 1
+
+        # Step 2 wait the required priority delay after the idle period has begun --> Pd = Tb*2*P,
+        # where: Pd = priority delay, Tb = Bit time (104.16 us), P = priority
+        elif step == 2:
+
+            prio_delay = priority_delay(priority=8)  # step 2
+            time.sleep(prio_delay)  # step 2
+            step += 1
+
+        # Step 3 make sure the bus is still idle, if it is not idle go back to step 1
+        elif step == 3:
+
+            idle = init_double_check(com)  # step 3
+            if not idle:
+                step = 1
+            else:
+                step += 2
+
+        # Step 4 transmit the device MID on the bus
+        #elif step == 4:
+            #print(msg[0])
+
+            #mid_transmit(com, msg[0])
+            #step += 1
+
+        # Step 5 Receive the transmitted MID and determine that the sent MID matches the received MID
+        elif step == 5:
+
+            #bus_claim, mid_read = mid_receive(com, msg[0])
+            bus_claim = False
+            com.write(msg[0])
+            print(msg[0])
+            mid = getmsg(com)
 
 
-        step = 1
+            print(mid)
 
-        while testing is True:
-
-            # Step 1 Check if idle
-            # The bus is Idle after 10-bit times have elapsed from the previous character with no received Start bits.
-            if step == 1:
-
-                initialize(com)  # step 1
-                step += 1
-
-            # Step 2 wait the required priority delay after the idle period has begun --> Pd = Tb*2*P,
-            # where: Pd = priority delay, Tb = Bit time (104.16 us), P = priority
-            elif step == 2:
-
-                prio_delay = priority_delay(priority=8)  # step 2
-                time.sleep(prio_delay)  # step 2
-                step += 1
-
-            # Step 3 make sure the bus is still idle, if it is not idle go back to step 1
-            elif step == 3:
-
-                idle = init_double_check(com)  # step 3
-                if not idle:
-                    step = 1
-                else:
-                    step += 2
-
-            # Step 4 transmit the device MID on the bus
-            #elif step == 4:
-                #print(msg[0])
-
-                #mid_transmit(com, msg[0])
-                #step += 1
-
-            # Step 5 Receive the transmitted MID and determine that the sent MID matches the received MID
-            elif step == 5:
-
-                #bus_claim, mid_read = mid_receive(com, msg[0])
+            if mid == msg[0]:
+                bus_claim = True
+            else:
                 bus_claim = False
-                com.write(msg[0])
-                mid = getmsg(com)
-                print(msg[0])
 
-                print(mid)
 
-                if mid == msg[0]:
-                    bus_claim = True
+            fin.write(str(mid))
+
+            # Step 7 If  the  match  failed,  we  lost  the  arbitration.Continue to step 8
+            if not bus_claim:
+
+                # Step 8 If this was the first collision for this packet, go to step 1
+                if is_first_collision:
+                    step = 1
+                    is_first_collision = False
+
                 else:
-                    bus_claim = False
+                    # step 9
+                    idle = initialize(com)
+                    step += 1
 
+            # Step 6 If  the  match  was  successful,  we  have  claimed the bus. Send the packet
+            elif bus_claim:
+                packet_sender(com, bus_claim, msg)
+                step = 7
 
-                fin.write(str(mid))
+        elif step == 6:
+            rand_num_bit_times = pseudo_random()
+            delay_duration = rand_num_bit_times * ONEBITTIME
+            time.sleep(delay_duration)
 
-                # Step 7 If  the  match  failed,  we  lost  the  arbitration.Continue to step 8
-                if not bus_claim:
+            step = 3
 
-                    # Step 8 If this was the first collision for this packet, go to step 1
-                    if is_first_collision:
-                        step = 1
-                        is_first_collision = False
+        elif step == 7:
+            is_first_collision = True
+            testing = False
 
-                    else:
-                        # step 9
-                        idle = initialize(com)
-                        step += 1
+            x = 0
+            while x < 30:
+                a = getmsg(com)
 
-                # Step 6 If  the  match  was  successful,  we  have  claimed the bus. Send the packet
-                elif bus_claim:
-                    packet_sender(com, bus_claim, msg)
-                    step = 7
+                if a is not None:
+                    print(a)
+                    a = list(a)
+                    # hexlist = ['{:X}'.format(num) for num in a]
+                    out = ''
+                    for num in a:
+                        out += str(num)
 
-            elif step == 6:
-                rand_num_bit_times = pseudo_random()
-                delay_duration = rand_num_bit_times * ONEBITTIME
-                time.sleep(delay_duration)
-
-                step = 3
-
-            elif step == 7:
-                is_first_collision = True
-                testing = False
-
-                x = 0
-                while x < 30:
-                    a = getmsg(com)
-
-                    if a is not None:
-                        print(a)
-                        a = list(a)
-                        # hexlist = ['{:X}'.format(num) for num in a]
-                        out = ''
-                        for num in a:
-                            out += str(num)
-
-                        outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
-                        fin.write(outstr)
-                        x += 1
-                fin.close()
+                    outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
+                    fin.write(outstr)
+                    x += 1
+            fin.close()
 
 
 
-            print(step)
+        print(step)
 
 

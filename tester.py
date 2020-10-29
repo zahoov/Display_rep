@@ -14,8 +14,10 @@ for l in lines:'''
     if l[29:33] == 'x 8 ':
         print('yes')
         i += 1'''
+'''
 #b'\x80'b'\xf7'b'\x04'b'"'b'\xcc'b'\x02'b'\x00'b'\x95'
-'''a = b'\x80'b'd'b'\x00'b'n'b'\xc9'b'\xaf'b'\xd5'b'\x02'b'Y'b'\x00'b'\xa8'b'\xfd'b'\x00'b'\xad'b'\xfc'b'\x02'b'f'b'\x00'b'P'
+a = b'\x80'b'd'b'\x00'b'n'b'@'b'\xaf'b'\xfa'b'\x00'b'Y'b'\x00'b'\xa8'b'\x02'b'\x01'b'\xad'b'\x13'b'\x01'b'f'b'\x00'b'\x9a'
+
 
 a = list(a)
 b = []
@@ -27,6 +29,10 @@ for hex in hexlist:
 print(*hexlist)
 print(*b)
 '''
+
+import time
+
+print((time.strftime("%M%S")))
 
 
 
