@@ -225,9 +225,13 @@ if __name__ == '__main__':
             #bus_claim, mid_read = mid_receive(com, msg[0])
             bus_claim = False
             com.write(message[0].to_bytes(1, 'big'))
-            #print(message[0].to_bytes(1, 'big'))
 
-            mid = getmsg(com)
+
+            id = getmsg(com)
+            mid = id[0]
+
+            print(mid)
+            print(message[0].to_bytes(1, 'big'))
 
             #print(mid)
 
