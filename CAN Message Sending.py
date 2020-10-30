@@ -31,7 +31,7 @@ def can_rx_task(bus, fin):
     while True:
         # recieve message and extract info
         outstr = createLogLine(bus.recv())
-
+        print(outstr)
         fin.write(outstr)
 
 

@@ -14,9 +14,9 @@ for l in lines:'''
     if l[29:33] == 'x 8 ':
         print('yes')
         i += 1'''
-'''
-#b'\x80'b'\xf7'b'\x04'b'"'b'\xcc'b'\x02'b'\x00'b'\x95'
-a = b'\x80'b'd'b'\x00'b'n'b'@'b'\xaf'b'\xfa'b'\x00'b'Y'b'\x00'b'\xa8'b'\x02'b'\x01'b'\xad'b'\x13'b'\x01'b'f'b'\x00'b'\x9a'
+
+#b'\x80'b'\xfa'b'\x04'b'o'b'\x19'b'\x06'b'\x00'b'\xf4'
+a = b'\x80'b'V'b'\x00'b'b'b'\x00'b'\xf5'b'\x04'b'q'b'\x95'b'3'b'\x00'b'\x96'
 
 
 a = list(a)
@@ -28,14 +28,7 @@ for hex in hexlist:
 
 print(*hexlist)
 print(*b)
-'''
 
-msg = [0x40, 0x00, 0x84]
 
-message = bytes(msg)
-
-mid = message[0].to_bytes(1, 'big')
-
-print(mid)
 
 
