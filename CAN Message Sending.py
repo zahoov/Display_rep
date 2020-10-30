@@ -53,6 +53,10 @@ def createLogLine(message, baudrate):
         outstr = " ".join([time.strftime("%d_%H_%M_%S"), baudrate, pgnV, "x", str(message.dlc), hexV]) + " "
 
         return outstr
+    else:
+        outstr = str(baudrate) + "DID NOT WORK"
+
+        return outstr
 
 
 def main():
