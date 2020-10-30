@@ -77,7 +77,7 @@ def main():
         if mode == '1':
             bRate = baudrates[i]
         else:
-            bRate += 10000
+            bRate += 1000
 
         os.system("sudo /sbin/ip link set can0 down")
         if numCAN == 2:
