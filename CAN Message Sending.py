@@ -32,7 +32,7 @@ def can_rx_task(bus, fin, baudrate):
     while i < 5:
 
         # recieve message and extract info
-        outstr = createLogLine(bus.recv(timeout=1), baudrate)
+        outstr = createLogLine(bus.recv(timeout=0.05), baudrate)
         print(outstr)
         fin.write(outstr)
         i += 1
