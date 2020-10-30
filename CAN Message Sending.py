@@ -40,17 +40,19 @@ def can_rx_task(bus, fin, baudrate):
 
 
 def createLogLine(message, baudrate):
-    # PGN
-    pgnV = '0x{:02x}'.format(message.arbitration_id)
 
-    # Hex
-    hexV = ''
-    for i in range(message.dlc):
-        hexV += '{0:x} '.format(message.data[i])
+    if message is not None:
+        # PGN
+        pgnV = '0x{:02x}'.format(message.arbitration_id)
 
-    outstr = " ".join([time.strftime("%d_%H_%M_%S"), baudrate, pgnV, "x", str(message.dlc), hexV]) + " "
+        # Hex
+        hexV = ''
+        for i in range(message.dlc):
+            hexV += '{0:x} '.format(message.data[i])
 
-    return outstr
+        outstr = " ".join([time.strftime("%d_%H_%M_%S"), baudrate, pgnV, "x", str(message.dlc), hexV]) + " "
+
+        return outstr
 
 
 def main():
