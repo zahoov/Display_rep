@@ -54,7 +54,7 @@ def createLogLine(message, baudrate):
 
         return outstr
     else:
-        outstr = str(baudrate) + "DID NOT WORK"
+        outstr = str(baudrate) + "DID NOT WORK\n"
 
         return outstr
 
