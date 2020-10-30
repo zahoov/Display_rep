@@ -65,7 +65,7 @@ def createLogLine(message):
 def main():
     outDir = open("Display_rep/CAN2_TEST.txt", 'w')
     numCAN = 1
-    bRate = 667000
+    bRate = 125000
 
     os.system("sudo /sbin/ip link set can0 down")
     if numCAN == 2:
