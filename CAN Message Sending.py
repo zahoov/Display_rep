@@ -27,13 +27,16 @@ def connectToLogger(canV):
 
 
 def can_rx_task(bus, fin, baudrate):
+    now = time.strftime("%M%S")
     i = 0
     while i < 5:
+
         # recieve message and extract info
-        outstr = createLogLine(bus.recv(), baudrate)
+        outstr = createLogLine(bus.recv(timeout=1), baudrate)
         print(outstr)
         fin.write(outstr)
         i += 1
+
 
 
 def createLogLine(message, baudrate):
