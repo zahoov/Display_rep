@@ -69,7 +69,7 @@ def main():
     mode = input('mode 1 for baudrates, mode 2 for 1000 increments')
 
     bRate = 0
-    baudrates = [9600, 14400, 19200, 38400, 57600, 115200, 128000, 256000, 667000]
+    baudrates = [9600, 14400, 19200, 38400, 57600, 115200, 128000, 250000,667000]
 
     while testing:
 

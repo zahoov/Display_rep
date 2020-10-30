@@ -175,7 +175,7 @@ if __name__ == "__main__":
 
     while True:
         try:
-            # print('in first loop')
+            #print('in first loop')
             a = thisport.read_message()
             if a is not None:
                 print(a)
