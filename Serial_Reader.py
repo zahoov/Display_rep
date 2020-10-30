@@ -99,7 +99,7 @@ def main():
                 #end_time = datetime.datetime.now()
 
                 #bottomLineL = ["***END DATE AND TIME " + end_time.strftime("%d:%m:%Y %H:%M:%S") + "***",
-                               "***[STOP LOGGING SESSION]***"]
+                #               "***[STOP LOGGING SESSION]***"]
                 #bot = "\n".join(bottomLineL) + "\n"
                 fin.writelines(bot)
                 fin.close()
