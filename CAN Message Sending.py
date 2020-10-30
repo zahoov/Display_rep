@@ -50,7 +50,7 @@ def createLogLine(message, baudrate):
         for i in range(message.dlc):
             hexV += '{0:x} '.format(message.data[i])
 
-        outstr = " ".join([time.strftime("%d_%H_%M_%S"), str(baudrate), pgnV, "x", str(message.dlc), hexV]) + " "
+        outstr = " ".join([time.strftime("%d_%H_%M_%S"), str(baudrate), pgnV, "x", str(message.dlc), hexV]) + "\n"
 
         return outstr
     else:
