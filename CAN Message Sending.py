@@ -62,42 +62,42 @@ def createLogLine(message, baudrate):
 def main():
     outDir = open("Display_rep/CAN2_TEST.txt", 'w')
     numCAN = 1
-    # bRate = 250000
+    bRate = 250000
     testing = True
     i = 0
 
     mode = input('mode 1 for baudrates, mode 2 for 1000 increments')
 
-    bRate = 0
+    #bRate = 0
     #baudrates = [9600, 14400, 19200, 38400, 57600, 115200, 128000, 250000, 667000]
 
-    while testing:
-        '''
-        if mode == '1':
-            bRate = baudrates[i]
-        else:
-            bRate = bRate + 10000
-        '''
+    bRate = 250000
 
-        bRate = 250000
+    os.system("sudo /sbin/ip link set can0 down")
+    if numCAN == 2:
+        os.system("sudo /sbin/ip link set can1 down")
 
+    # Make CAN interface to 250 or 500kbps
+    setCANbaudRate(numCAN, bRate)
+
+    # Connect to Bus
+    bus0 = connectToLogger('can0')
+
+    # Continually recieved messages
+    can_rx_task(bus0, outDir, bRate)
+
+    try:
+        while True:
+            pass
+
+    except KeyboardInterrupt:
+        # Catch keyboard interrupt
         os.system("sudo /sbin/ip link set can0 down")
         if numCAN == 2:
             os.system("sudo /sbin/ip link set can1 down")
+        print('\n\rKeyboard interrtupt')
 
-        # Make CAN interface to 250 or 500kbps
-        setCANbaudRate(numCAN, bRate)
 
-        # Connect to Bus
-        bus0 = connectToLogger('can0')
-
-        # Continually recieved messages
-        can_rx_task(bus0, outDir, bRate)
-
-        i += 1
-
-        if i == 8:
-            testing = False
 
 
 if __name__ == "__main__":
