@@ -68,34 +68,36 @@ def main():
 
     mode = input('mode 1 for baudrates, mode 2 for 1000 increments')
 
-    #bRate = 0
-    #baudrates = [9600, 14400, 19200, 38400, 57600, 115200, 128000, 250000, 667000]
+    bRate = 0
+    baudrates = [9600, 14400, 19200, 38400, 57600, 115200, 128000, 250000, 667000]
 
-    bRate = 250000
+    #bRate = 250000
 
-    os.system("sudo /sbin/ip link set can0 down")
-    if numCAN == 2:
-        os.system("sudo /sbin/ip link set can1 down")
+    while testing:
+        if mode == '1':
+            bRate = baudrates[i]
+        else:
+            bRate += 10000
 
-    # Make CAN interface to 250 or 500kbps
-    setCANbaudRate(numCAN, bRate)
-
-    # Connect to Bus
-    bus0 = connectToLogger('can0')
-
-    # Continually recieved messages
-    can_rx_task(bus0, outDir, bRate)
-
-    try:
-        while True:
-            pass
-
-    except KeyboardInterrupt:
-        # Catch keyboard interrupt
         os.system("sudo /sbin/ip link set can0 down")
         if numCAN == 2:
             os.system("sudo /sbin/ip link set can1 down")
-        print('\n\rKeyboard interrtupt')
+
+        # Make CAN interface to 250 or 500kbps
+        setCANbaudRate(numCAN, bRate)
+
+        # Connect to Bus
+        bus0 = connectToLogger('can0')
+
+        # Continually recieved messages
+        can_rx_task(bus0, outDir, bRate)
+
+
+        if i == '8':
+            testing = False
+
+        i += 1
+
 
 
 
