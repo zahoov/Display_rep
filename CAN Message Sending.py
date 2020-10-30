@@ -73,7 +73,7 @@ def main():
 
     while testing:
 
-        if mode == 1:
+        if mode == '1':
             bRate = baudrates[i]
         else:
             bRate = bRate + 10000
