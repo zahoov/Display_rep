@@ -16,7 +16,7 @@ for l in lines:'''
         i += 1'''
 
 #b'\x80'b'\xfa'b'\x04'b'o'b'\x19'b'\x06'b'\x00'b'\xf4'
-a = b'\x80'b'V'b'\x00'b'b'b'\x00'b'\xf5'b'\x04'b'q'b'\x95'b'3'b'\x00'b'\x96'
+a = b'\x00'b'['b'\x00'
 
 
 a = list(a)
