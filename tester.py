@@ -15,26 +15,28 @@ for l in lines:'''
         print('yes')
         i += 1'''
 
-a = b'\xce'b'\xc2'b'\x00'b'p'
-count = 0
+a = b'B'b'\x00'b'\xc2'b'\xfc'
 messages = []
 message_file = open("test_messages.txt", 'r')
 
+hexlist = ['{:X}'.format(num) for num in a]
+for item in hexlist:
+    messages.append(int(item, 16))
+print(hexlist)
+print(messages)
+#for line in message_file:
+#    stripped_line = line.rstrip()
+#    messages.append(stripped_line)
 
-for line in message_file:
-    stripped_line = line.rstrip()
-    messages.append(stripped_line)
+#for thing in messages:
 
-for thing in messages:
-
-    msg = messages[count].split(', ')
-    count += 1
+#    msg = messages[count].split(', ')
+#    count += 1
     #fin = open('logs/send_test_msg_' + str(count) + '.txt', 'w')
-    i = 0
+  #  i = 0
     # if mode == 1:
 
-print(msg)
-print(type(msg[3]))
+
 
 
 
