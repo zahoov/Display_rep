@@ -96,11 +96,11 @@ def main():
 
 
             except KeyboardInterrupt:
-                end_time = datetime.datetime.now()
+                #end_time = datetime.datetime.now()
 
-                bottomLineL = ["***END DATE AND TIME " + end_time.strftime("%d:%m:%Y %H:%M:%S") + "***",
-                               "***[STOP LOGGING SESSION]***"]
-                bot = "\n".join(bottomLineL) + "\n"
+                #bottomLineL = ["***END DATE AND TIME " + end_time.strftime("%d:%m:%Y %H:%M:%S") + "***",
+                #               "***[STOP LOGGING SESSION]***"]
+                #bot = "\n".join(bottomLineL) + "\n"
                 fin.writelines(bot)
                 fin.close()
 

@@ -160,8 +160,8 @@ if __name__ == "__main__":
     message_3 = [0xac, 0x00, 0x2e]
     '''
 
-    path = 'Display_rep/logs/' + 'ROUND2'
-    os.system("mkdir " + path)
+    path = 'Display_rep/logs/' + 'MATCO_Tests/'
+    #os.system("mkdir " + path)
 
     messages = []
     message_file = open("Display_rep/test_messages.txt", 'r')
@@ -171,26 +171,11 @@ if __name__ == "__main__":
         stripped_line = line.rstrip()
         messages.append(stripped_line)
 
+    fin = open(path + '/only_reading.txt', 'w')
 
-
-    count = 0
-
-    for thing in messages:
-
-        msg = messages[count].split(', ')
-        i = 0
-        for byte in msg:
-            msg[i] = int(byte, 16)
-            i += 1
-
-
-        count += 1
-        fin = open(path + '/send_test_msg_' + str(count) + '.txt', 'w')
-        i = 0
-        # if mode == 1:
-
-        while i < 20:
-            # print('in first loop')
+    while True:
+        try:
+            #print('in first loop')
             a = thisport.read_message()
             if a is not None:
                 print(a)
@@ -205,62 +190,6 @@ if __name__ == "__main__":
                 # print(outstr)
                 fin.write(outstr)
 
-            i += 1
-
-        thisport.send_message(msg)
-        i = 0
-
-        while i < 50:
-
-            a = thisport.read_message()
-            if a is not None:
-                print(a)
-                a = list(a)
-                # hexlist = ['{:X}'.format(num) for num in a]
-                out = ''
-                for num in a:
-                    out += str(num)
-
-                outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
-                # outstr = a
-                # print(outstr)
-                fin.write(outstr)
-            i += 1
-
-        fin.close()
-
-
-    # message = [0xAA, 0xBB, 0xCC, 0xDD, 0xEE]
-    # if receiver == 0:
-    # while True:
-    # try:
-
-    # print(*message)
-    # print(message_num)
-    # sleep(0.05)
-    # except KeyboardInterrupt:
-    #   exit()
-
-    # else:
-    '''while True:
-        try:
-            a = thisport.read_message()
-            if a is not None:
-                print(a)
-                # a = list(a)
-                out = ''
-                for num in a:
-                    out += str(num)
-                # hexlist = ['{:X}'.format(num) for num in a]
-                outstr = " ".join([time.strftime("%H:%M:%S"), 'AFTER REQUEST', out, '\n'])
-                # outstr = str(*a)
-                fin.write(outstr)
-
-                print(outstr)
-                # fin.write(outstr)
         except KeyboardInterrupt:
             fin.close()
             exit()
-            # count += 1'''
-
-    # fin.close()
