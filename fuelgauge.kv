@@ -5,163 +5,35 @@
 
 # This is for the screen manager, it is not actually a screen so there is no graphical code. The code included for this class is to tell the screenmanager which screens it should be managing/controlling
 # essentially initializes the screen manager
+
+#:import Factory kivy.factory.Factory
+
+#:set color_button (52/255, 104/255, 162/255, 1)  # brown
+#:set color_button_pressed (52/255, 104/255, 162/255, 1)  # darker brown
+#:set color_font (0, 0, 0, 1)
+
+<MySpinnerOption@SpinnerOption>:
+    background_normal: ''
+    background_color: color_button if self.state == 'down' else color_button_pressed
+    background_down: 'atlas://data/images/defaulttheme/button'
+    color: color_font
+
+    font_name: app.font_file
+    font_size: 25
+
 <MyScreenManager>:
-    # Main menu -- 'menu'
-    MainMenu:
-    # Page 1 -- 'first'
     FuelGaugeLayout:
-    # Page 2 -- 'second'
     FuelInjectionLayout:
-    # Page 3 -- 'third'
     ScreenSaver:
-    # Page 4 -- 'fourth'
     ErrorPage:
-    # Page 5 -- 'fifth'
     TankTempPress:
-    # Page 5 -- 'temp&press'
-    DynamicLeak:
+    Mode:
     ModeLocking:
     Message_settings:
 
-# Graphical code for the main screen where all of the buttons are
-<MainMenu>:
-
-	# Gives this screen the name 'menu' so that it can be referred to by buttons in the other screens
-    name: 'menu'
-    # Initialises the canvas before everything else making it the background
-    canvas.before:
-    	# This color code is rgba and is for the background
-	    Color:
-	        rgba: 1, 1, 1, 1
-		# Sets the size of the background to the size of the screen
-	    Rectangle:
-	        size: self.width, self.height
-
-	# Creates a box layout on the screen allowing different widgets/things to be organized
-    BoxLayout:
-    	# Sets the orientation for the box layout --> vertical
-        orientation: 'vertical'
-
-        # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
-        FloatLayout:
-
-
-            #orientation: 'horizontal'
-            # Sets the size of the horizontal box layout so that its
-
-            size: root.width, root.height * (200/960)
-
-
-            size_hint_y: None
-
-
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
-                pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
-
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
-
-            Label:
-                #source: 'modeshow.jpg'
-                pos_hint: {'top': 1, 'right': 1}
-                size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
-                text_size: self.size
-                halign: 'right'
-                valign: 'middle'
-                color: 0, 0, 0, 1
-
-            Image:
-				source: 'hydradrop.png'
-				#size_hint_x: 0.3125
-				pos_hint: {'top': 1, 'right': 1.15}
-
-
-
-
-
-
-
-
-
-
-
-
-
-        GridLayout:
-            cols: 2
-            padding: 15, 30, 15, 30
-            spacing: 20,20
-            size_hint_y: 760/960
-            Button:
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-                text: u'H\u2082 FUEL GAUGE'
-                background_normal: ''
-			    background_color: .172549, .19215, .42, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.045
-                on_touch_up: app.root.current = 'first'
-            Button:
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-                text: u'H\u2082 INJECTION RATE'
-                background_normal: ''
-			    background_color: .172549, .19215, .42, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.045
-                on_touch_up: app.root.current = 'second'
-            Button:
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-                text: u'H\u2082 LEAKAGE'
-                background_normal: ''
-			    background_color: .172549, .19215, .42, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.045
-                on_touch_up: app.root.current = 'temp&press'
-            Button:
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-                text: 'PRESSURE AND TEMP'
-                background_normal: ''
-			    background_color: .172549, .19215, .42, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.045
-                on_touch_up: app.root.current = 'fifth'
-            Button:
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-                text: 'FAULT INFORMATION'
-                background_normal: ''
-			    background_color: .172549, .19215, .42, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.045
-                on_touch_up: app.root.current = 'fourth'
-
-
-            Button:
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-                text: 'TOGGLE ENGINE MODE'
-                background_normal: ''
-			    background_color: .172549, .19215, .42, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.045
-                on_touch_up: root.lock_changer(app.lock_status)
-
 <Message_settings>:
-    name: 'can_settings'
+    name: 'CAN Settings'
+
     canvas.before:
     	# This color code is rgba and is for the background
 	    Color:
@@ -177,52 +49,65 @@
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
         FloatLayout:
 
-
-            #orientation: 'horizontal'
             # Sets the size of the horizontal box layout so that its
-
             size: root.width, root.height * (200/960)
-
-
             size_hint_y: None
 
-
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
+            FloatLayout:
+                #size: root.width, root.height * (200/960)
                 pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
 
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
+                Spinner:
 
-            Label:
-                #source: 'modeshow.jpg'
+                    size_hint_x: (5.5/8.5625)
+                    pos_hint: {'top': 1}
+                    values: app.dropdown_list
+                    #background_color: color_button if self.state == 'normal' else color_button_pressed
+                    background_down: 'atlas://data/images/defaulttheme/spinner'
+                    color: color_font
+                    text: app.current_page
+                    option_cls: Factory.get("MySpinnerOption")
+
+                    on_text:
+                        app.tester(self.text)
+                        app.root.current = self.text
+                        app.title_changer(self.text)
+
+                Label:
+
+                    text: app.current_page
+                    pos_hint: {'top': 1}
+                    color: 0, 0, 0, 1
+                    size_hint_x: (5.5/8.5625)
+
+                    font_name: app.font_file
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.14
+                    color: 1, 1, 1, 1
+                    canvas.before:
+                        Color:
+                            rgb: (52/255, 104/255, 162/255)
+                        Rectangle:
+                            size: self.width, self.height
+                            pos: self.x, self.y
+                    halign: 'left'
+
+            Button:
+
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                background_normal: ''
+                background_color: app.mode_color
+                background_down: ''
+                halign: app.alignment
+                font_name: app.font_file
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
+                text: app.engine_mode
                 text_size: self.size
-                halign: 'right'
                 valign: 'middle'
                 color: 0, 0, 0, 1
+                on_touch_up:
+                    app.root.current = 'Service Lock'
+                    app.title_changer('Service Lock')
 
             Image:
 				source: 'hydradrop.png'
@@ -235,15 +120,13 @@
             spacing: 10, 10
             size_hint_y: 0.75
 
-
-
-
             TextInput:
                 id: destination_id
                 hint_text: 'Enter the new DestID'
                 multiline: False
                 on_text_validate: app.destination_changer(destination_id.text)
                 font_size: ((self.parent.width + self.parent.height) / 3) * 0.075
+
 
             TextInput:
                 id: source_id
@@ -256,13 +139,17 @@
             Label:
                 text: app.dest_id
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf'
+                color: 0.9215686275, 0.5882352941, 0.2745098039, 1
+                size_hint_y: 0.5
 
 
             Label:
                 text: app.source_id
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-
-
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf'
+                color: 0.9215686275, 0.5882352941, 0.2745098039, 1
+                size_hint_y: 0.5
 
         BoxLayout:
             id: reference
@@ -271,34 +158,34 @@
             size_hint_max_y: root.height * (2.5 / 12)
 
             Button:
-                background_normal: ''
-                background_color: 0, 0, 0.8, 1
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-                text: 'Back'
-                on_release: app.root.current = 'menu'
-                size: self.texture_size
+
+			    font_name: app.font_file
+			    background_normal: ''
+			    background_color: 52/255, 104/255, 162/255, 1
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				text: 'Main'
+				on_release: 
+				    app.root.current = 'Fuel Gauge'
+				    app.title_changer('Fuel Gauge')
+				size: self.texture_size
 
             Label:
                 text: app.arb_address
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.095
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf'
+                color: 0.9215686275, 0.5882352941, 0.2745098039, 1
 
             Button:
                 background_normal: ''
-                background_color: 0, 0, 0.8, 1
+                background_color: 52/255, 104/255, 162/255, 1
                 text: 'Toggle Engine Mode'
-                font_size: ((self.parent.width + self.parent.height) / 3) * 0.09
+                font_size: ((self.parent.width + self.parent.height) / 3) * 0.08
+                font_name: app.font_file
                 on_press: app.ModeSender()
 
-
-
-
-
-
-
-
-
 <ModeLocking>:
-    name: 'passlock'
+    name: 'Service Lock'
+
     canvas.before:
     	# This color code is rgba and is for the background
 	    Color:
@@ -314,64 +201,79 @@
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
         FloatLayout:
 
-
-            #orientation: 'horizontal'
             # Sets the size of the horizontal box layout so that its
-
             size: root.width, root.height * (200/960)
-
-
             size_hint_y: None
 
+            FloatLayout:
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
                 pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
 
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
+                Spinner:
 
-            Label:
-                #source: 'modeshow.jpg'
+                    size_hint_x: (5.5/8.5625)
+                    pos_hint: {'top': 1}
+                    values: app.dropdown_list
+                    background_color: color_button if self.state == 'normal' else color_button_pressed
+                    background_down: 'atlas://data/images/defaulttheme/spinner'
+                    color: color_font
+                    text: app.current_page
+                    option_cls: Factory.get("MySpinnerOption")
+
+                    on_text:
+                        app.root.current = self.text
+                        app.tester(self.text)
+                        app.title_changer(self.text)
+
+                Label:
+
+                    text: app.current_page
+                    pos_hint: {'top': 1}
+                    color: 0, 0, 0, 1
+                    size_hint_x: (5.5/8.5625)
+                    font_name: app.font_file
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.14
+                    color: 1, 1, 1, 1
+
+                    canvas.before:
+                        Color:
+                            rgb: (52/255, 104/255, 162/255)
+                        Rectangle:
+                            size: self.width, self.height
+                            pos: self.x, self.y
+                    halign: 'left'
+
+            Button:
+
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                background_normal: ''
+                background_color: app.mode_color
+                background_down: ''
+                halign: app.alignment
+                font_name: app.font_file
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
+                text: app.engine_mode
                 text_size: self.size
-                halign: 'right'
                 valign: 'middle'
                 color: 0, 0, 0, 1
+                on_touch_up:
+                    app.root.current = 'Service Lock'
+                    app.title_changer('Service Lock')
+                    
+
 
             Image:
 				source: 'hydradrop.png'
 				#size_hint_x: 0.3125
 				pos_hint: {'top': 1, 'right': 1.15}
+
         BoxLayout:
             orientation: 'horizontal'
 
             TextInput:
                 id: password
                 password: True
-                #size_hint_max_y: ((self.parent.width + self.parent.height) / 3) * 0.1
                 hint_text: 'Enter the Passcode'
                 multiline : False
                 font_size: ((self.parent.width + self.parent.height) / 3) * 0.1
@@ -388,20 +290,24 @@
             font_size:
             text: root.status
             font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+
 	    BoxLayout:
+
 		    id: reference
 			orientation: 'horizontal'
-
 			size_hint_max_y: root.height * (2.5 / 12)
 
 			Button:
 
-			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+			    font_name: app.font_file
 			    background_normal: ''
-			    background_color: .172549, .19215, .42, 1
+			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				text: 'Back'
-				on_release: app.root.current = 'menu'
+				text: 'Main'
+				on_release: 
+				    app.root.current = 'Fuel Gauge'
+				    app.title_changer('Fuel Gauge')
+				    app.tester(self.text)
 				size: self.texture_size
 
 			Label:
@@ -409,18 +315,9 @@
 		    Label:
 
 
-
-
-
-
-
-
-
-
-
-
 <FuelGaugeLayout>:
-    name: 'first'
+    name: 'Fuel Gauge'
+
     canvas.before:
     	# This color code is rgba and is for the background
 	    Color:
@@ -428,59 +325,78 @@
 		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
+
     BoxLayout:
+
     	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
 
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
         FloatLayout:
 
-
-            #orientation: 'horizontal'
             # Sets the size of the horizontal box layout so that its
-
             size: root.width, root.height * (200/960)
-
-
             size_hint_y: None
 
-
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
+            FloatLayout:
+                #size: root.width, root.height * (200/960)
                 pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
 
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
+                Spinner:
+                    size_hint_x: (5.5/8.5625)
+                    pos_hint: {'top': 1}
+                    values: app.dropdown_list
+                    #background_color: color_button if self.state == 'normal' else color_button_pressed
+                    background_down: 'atlas://data/images/defaulttheme/spinner'
+                    color: color_font
+                    option_cls: Factory.get("MySpinnerOption")
+                    #text: 'Fuel Gauge'
+                    text: app.current_page
+                    font_name: app.font_file
 
-            Label:
-                #source: 'modeshow.jpg'
+                    on_text:
+                        app.title_changer(self.text)
+                        app.root.current = self.text
+                        app.tester(self.text)
+
+
+                Label:
+
+                    text: app.current_page
+                    pos_hint: {'top': 1}
+                    color: 0, 0, 0, 1
+                    size_hint_x: (5.5/8.5625)
+                    font_name: app.font_file
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.14
+                    color: 1, 1, 1, 1
+
+                    canvas.before:
+                        Color:
+                            rgb: (52/255, 104/255, 162/255)
+                        Rectangle:
+                            size: self.width, self.height
+                            pos: self.x, self.y
+                    halign: 'left'
+
+            Button:
+
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                background_normal: ''
+                background_color: app.mode_color
+                background_down: ''
+                halign: app.alignment
+                font_name: app.font_file
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
+                text: app.engine_mode
                 text_size: self.size
-                halign: 'right'
                 valign: 'middle'
                 color: 0, 0, 0, 1
+                on_touch_up:
+                    app.root.current = 'Service Lock'
+                    app.title_changer('Service Lock')
+                    
+
 
             Image:
 				source: 'hydradrop.png'
@@ -504,48 +420,69 @@
                     Rotate:
                         angle: 90 - (root.dash_val * app.conversion_factor)
                         origin: root.width * 0.5, (root.height - self.height)/1.85
-                    Color:
-                        rgba: 1, 0, 1, 1
-                    # Sets the size of the background to the size of the screen
-                    Rectangle:
-                        size: self.width, self.height
+
                 canvas.after:
                     PopMatrix
 
-
                 source: 'new_needle.png'
                 size_hint_max: 150, 300
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.418}
 
 		BoxLayout:
+
 		    id: reference
 			orientation: 'horizontal'
 
 			size_hint_max_y: root.height * (2.5 / 12)
 
-			Button:
-
-			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-			    background_normal: ''
-			    background_color: .172549, .19215, .42, 1
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				text: 'Back'
-				on_release: app.root.current = 'menu'
-				size: self.texture_size
 			Label:
-			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+
+			    canvas.before:
+                    Color:
+                        rgb: .172549, .19215, .42
+
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+
+			    font_name: app.font_file
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
+				text: u'H\u2082:'
+				size: self.texture_size
+				color: 0.9215686275, 0.5882352941, 0.2745098039, 1
+
+			Label:
+
+			    canvas.before:
+                    Color:
+                        rgb: .172549, .19215, .42
+
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
+
+			    font_name: app.font_file
 			    color: 0.9215686275, 0.5882352941, 0.2745098039, 1
 				text: root.dash_label + 'kg'
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.125
-				#size: self.texture_size
 
 			Label:
 
+			    canvas.before:
+                    Color:
+                        rgb: .172549, .19215, .42
 
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: self.x, self.y
 
+			    text: root.percent_label + '%'
+			    font_name: app.font_file
+			    color: 0.9215686275, 0.5882352941, 0.2745098039, 1
+				font_size: ((self.parent.width + self.parent.height) / 2) * 0.125
 
 <FuelInjectionLayout>:
-	name: 'second'
+	name: 'Injection Rate'
 
 	canvas.before:
     	# This color code is rgba and is for the background
@@ -554,6 +491,7 @@
 		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
+
     BoxLayout:
     	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
@@ -561,56 +499,70 @@
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
         FloatLayout:
 
-
-            #orientation: 'horizontal'
-            # Sets the size of the horizontal box layout so that its
-
             size: root.width, root.height * (200/960)
-
-
             size_hint_y: None
 
-
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
+            FloatLayout:
+                #size: root.width, root.height * (200/960)
                 pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
 
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
+                Spinner:
 
-            Label:
-                #source: 'modeshow.jpg'
+                    size_hint_x: (5.5/8.5625)
+                    pos_hint: {'top': 1}
+                    values: app.dropdown_list
+                    background_color: color_button if self.state == 'normal' else color_button_pressed
+                    background_down: 'atlas://data/images/defaulttheme/spinner'
+                    color: color_font
+                    text: app.current_page
+                    option_cls: Factory.get("MySpinnerOption")
+
+                    on_text:
+                        app.root.current = self.text
+                        app.tester(self.text)
+                        app.title_changer(self.text)
+
+                Label:
+
+                    text: app.current_page
+                    pos_hint: {'top': 1}
+                    color: 0, 0, 0, 1
+                    size_hint_x: (5.5/8.5625)
+                    font_name: app.font_file
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.14
+                    color: 1, 1, 1, 1
+
+                    canvas.before:
+                        Color:
+                            rgb: (52/255, 104/255, 162/255)
+                        Rectangle:
+                            size: self.width, self.height
+                            pos: self.x, self.y
+                    halign: 'left'
+
+            Button:
+
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf/'
+                background_normal: ''
+                background_color: app.mode_color
+                background_down: ''
+                halign: app.alignment
+                font_name: app.font_file
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
+                text: app.engine_mode
                 text_size: self.size
-                halign: 'right'
                 valign: 'middle'
                 color: 0, 0, 0, 1
+                on_touch_up:
+                    app.root.current = 'Service Lock'
+                    app.title_changer('Service Lock')
+                    
+
 
             Image:
+
 				source: 'hydradrop.png'
-				#size_hint_x: 0.3125
 				pos_hint: {'top': 1, 'right': 1.15}
 
 
@@ -619,34 +571,47 @@
 
 		    Label:
 		        text: 'Injection Rate:'
-		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf/'
+		        color: 52/255, 104/255, 162/255, 1
+		        halign: 'right'
+		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
+
 		    Label:
 		        text: root.hInjection + 'kg/h'
+		        color: 235/255, 150/255, 72/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf/'
+
 		    Label:
 		        text: 'H2 Leakage:'
-		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf/'
+		        color: 52/255, 104/255, 162/255, 1
+		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
+
 		    Label:
 		        text: root.leak_display + 'g/min'
+		        color: 235/255, 150/255, 72/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-
-
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf/'
 
 		BoxLayout:
 		    id: reference
 			orientation: 'horizontal'
-
 			size_hint_max_y: root.height * (2.5 / 12)
 
 			Button:
 
-			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+			    font_name: app.font_file
 			    background_normal: ''
-			    background_color: .172549, .19215, .42, 1
+			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				text: 'Back'
-				on_release: app.root.current = 'menu'
+				text: 'Main'
+				on_release:
+				    app.root.current = 'Fuel Gauge'
+				    app.title_changer('Fuel Gauge')
+				    app.tester(self.text)
 				size: self.texture_size
+
             Label:
 			Label:
 
@@ -654,13 +619,15 @@
 
 
 <ScreenSaver>:
-    name: 'third'
+    name: 'Screensaver'
+
     canvas.before:
 		Color:
 			rgba: 1, 1, 1, 1
 		Rectangle:
 			size: root.width, root.height
 			pos: root.pos
+
     BoxLayout:
     	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
@@ -668,54 +635,69 @@
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
         FloatLayout:
 
-
-            #orientation: 'horizontal'
-            # Sets the size of the horizontal box layout so that its
-
             size: root.width, root.height * (200/960)
-
-
             size_hint_y: None
 
-
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
+            FloatLayout:
+                #size: root.width, root.height * (200/960)
                 pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
 
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
+                Spinner:
 
-            Label:
-                #source: 'modeshow.jpg'
+                    size_hint_x: (5.5/8.5625)
+                    pos_hint: {'top': 1}
+                    values: app.dropdown_list
+                    background_color: color_button if self.state == 'normal' else color_button_pressed
+                    background_down: 'atlas://data/images/defaulttheme/spinner'
+                    color: color_font
+                    option_cls: Factory.get("MySpinnerOption")
+
+                    on_text:
+
+                        app.root.current = self.text
+                        app.tester(self.text)
+                        app.title_changer(self.text)
+
+                Label:
+
+                    text: app.current_page
+                    pos_hint: {'top': 1}
+                    color: 0, 0, 0, 1
+                    size_hint_x: (5.5/8.5625)
+                    font_name: app.font_file
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.14
+                    color: 1, 1, 1, 1
+
+                    canvas.before:
+                        Color:
+                            rgb: (52/255, 104/255, 162/255)
+                        Rectangle:
+                            size: self.width, self.height
+                            pos: self.x, self.y
+                    halign: 'left'
+
+            Button:
+
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                background_normal: ''
+                background_color: app.mode_color
+                background_down: ''
+                halign: app.alignment
+                font_name: app.font_file
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
+                text: app.engine_mode
                 text_size: self.size
-                halign: 'right'
                 valign: 'middle'
                 color: 0, 0, 0, 1
+                on_touch_up:
+                    app.root.current = 'Service Lock'
+                    app.title_changer('Service Lock')
+                    
+
 
             Image:
+
 				source: 'hydradrop.png'
 				#size_hint_x: 0.3125
 				pos_hint: {'top': 1, 'right': 1.15}
@@ -731,7 +713,8 @@
 
 
 <TankTempPress>:
-    name: 'fifth'
+    name: 'Temp & Press'
+
     canvas.before:
     	# This color code is rgba and is for the background
 	    Color:
@@ -739,6 +722,7 @@
 		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
+
     BoxLayout:
     	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
@@ -746,78 +730,95 @@
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
         FloatLayout:
 
-
-            #orientation: 'horizontal'
-            # Sets the size of the horizontal box layout so that its
-
             size: root.width, root.height * (200/960)
-
-
             size_hint_y: None
 
-
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
+            FloatLayout:
                 pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
 
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
+                Spinner:
 
-            Label:
-                #source: 'modeshow.jpg'
+                    size_hint_x: (5.5/8.5625)
+                    pos_hint: {'top': 1}
+                    values: app.dropdown_list
+                    background_color: color_button if self.state == 'normal' else color_button_pressed
+                    background_down: 'atlas://data/images/defaulttheme/spinner'
+                    color: color_font
+                    text: app.current_page
+                    option_cls: Factory.get("MySpinnerOption")
+
+                    on_text:
+                        app.root.current = self.text
+                        app.title_changer(self.text)
+                        app.tester(self.text)
+
+                Label:
+
+                    text: app.current_page
+                    pos_hint: {'top': 1}
+                    color: 0, 0, 0, 1
+                    size_hint_x: (5.5/8.5625)
+                    font_name: app.font_file
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.14
+                    color: 1, 1, 1, 1
+
+                    canvas.before:
+                        Color:
+                            rgb: (52/255, 104/255, 162/255)
+                        Rectangle:
+                            size: self.width, self.height
+                            pos: self.x, self.y
+                    halign: 'left'
+
+            Button:
+
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                background_normal: ''
+                background_down: ''
+                background_color: app.mode_color
+                halign: app.alignment
+                font_name: app.font_file
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
+                text: app.engine_mode
                 text_size: self.size
-                halign: 'right'
                 valign: 'middle'
                 color: 0, 0, 0, 1
+                on_touch_up:
+                    app.root.current = 'Service Lock'
+                    app.title_changer('Service Lock')
+                    
+
 
             Image:
 				source: 'hydradrop.png'
-				#size_hint_x: 0.3125
 				pos_hint: {'top': 1, 'right': 1.15}
+
         BoxLayout:
             size_hint_y: 0.225
             orientation: 'horizontal'
+
             Label:
-			    color: 1, 1, 1, 1
+			    color: 52/255, 104/255, 162/255, 1
 			    font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+			    font_name: app.font_file
                 size: self.texture_size
                 bold: True
-
                 text: 'Tank Temperatures:'
+
             Label:
-			    color: 1, 1, 1, 1
+			    color: 52/255, 104/255, 162/255, 1
 			    font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+			    font_name: app.font_file
                 size: self.texture_size
                 bold: True
-
                 text: 'Line Pressure:'
+
         BoxLayout:
             pos: root.x, root.height * (2.75 / 12)
             orientation: 'horizontal'
             size_hint_y: 0.5
+
             GridLayout:
                 cols: 2
                 Label:
@@ -827,8 +828,12 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp0
+
+                    text: 'T0: ' + str(app.temps[0]) + u' \u00BAC'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                    font_name: app.font_file
+                    color: 52/255, 104/255, 162/255, 1
+
                 Label:
                     canvas.before:
                         Color:
@@ -836,8 +841,11 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp1
+                    text: 'T1: ' + str(app.temps[1]) + u' \u00BAC'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                    font_name: app.font_file
+                    color: 52/255, 104/255, 162/255, 1
+
                 Label:
                     canvas.before:
                         Color:
@@ -845,8 +853,11 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp2
+                    text: 'T2: ' + str(app.temps[2]) + u' \u00BAC'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                    font_name: app.font_file
+                    color: 52/255, 104/255, 162/255, 1
+
                 Label:
                     canvas.before:
                         Color:
@@ -854,8 +865,11 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp3
+                    text: 'T3: ' + str(app.temps[3]) + u' \u00BAC'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                    font_name: app.font_file
+                    color: 52/255, 104/255, 162/255, 1
+
                 Label:
                     canvas.before:
                         Color:
@@ -863,8 +877,11 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp4
+                    text: 'T4:' + str(app.temps[4]) + u' \u00BAC'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                    font_name: app.font_file
+                    color: 52/255, 104/255, 162/255, 1
+
                 Label:
                     canvas.before:
                         Color:
@@ -872,8 +889,11 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.temp5
+                    text: 'T5: ' + str(app.temps[5]) + u' \u00BAC'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                    font_name: app.font_file
+                    color: 52/255, 104/255, 162/255, 1
+
             GridLayout:
                 cols: 1
                 Label:
@@ -883,8 +903,11 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.press1
+                    text: 'P1: ' + str(app.pressures[0]) + ' bar'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
+                    font_name: app.font_file
+                    color: 52/255, 104/255, 162/255, 1
+
                 Label:
                     canvas.before:
                         Color:
@@ -892,26 +915,30 @@
                         Line:
                             width: 5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: app.press2
+                    text: 'P2: ' + str(app.pressures[1]) + ' bar'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
+                    font_name: app.font_file
+                    color: 52/255, 104/255, 162/255, 1
+
         BoxLayout:
 		    id: reference
 			orientation: 'horizontal'
-
 			size_hint_max_y: root.height * (2.5 / 12)
 
 			Button:
 
-			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+			    font_name: app.font_file
 			    background_normal: ''
-			    background_color: .172549, .19215, .42, 1
+			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				text: 'Back'
-				on_release: app.root.current = 'menu'
+				text: 'Main'
+				on_release: 
+				    app.root.current = 'Fuel Gauge'
+				    app.title_changer('Fuel Gauge')
+				    app.tester(self.text)
 				size: self.texture_size
 
 			Label:
-
 			Label:
 
 
@@ -920,7 +947,8 @@
 
 
 <ErrorPage>:
-    name: 'fourth'
+    name: 'Fault Info'
+
     canvas.before:
     	# This color code is rgba and is for the background
 	    Color:
@@ -928,6 +956,7 @@
 		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
+
     BoxLayout:
     	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
@@ -935,56 +964,69 @@
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
         FloatLayout:
 
-
-            #orientation: 'horizontal'
-            # Sets the size of the horizontal box layout so that its
-
             size: root.width, root.height * (200/960)
-
-
             size_hint_y: None
 
-
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
+            FloatLayout:
+                #size: root.width, root.height * (200/960)
                 pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
 
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
+                Spinner:
 
-            Label:
-                #source: 'modeshow.jpg'
+                    size_hint_x: (5.5/8.5625)
+                    pos_hint: {'top': 1}
+                    values: app.dropdown_list
+                    background_color: color_button if self.state == 'normal' else color_button_pressed
+                    background_down: 'atlas://data/images/defaulttheme/spinner'
+                    color: color_font
+                    text: app.current_page
+                    option_cls: Factory.get("MySpinnerOption")
+
+                    on_text:
+                        app.root.current = self.text
+                        app.title_changer(self.text)
+                        app.tester(self.text)
+
+                Label:
+
+                    text: app.current_page
+                    pos_hint: {'top': 1}
+                    color: 0, 0, 0, 1
+                    size_hint_x: (5.5/8.5625)
+                    font_name: app.font_file
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.14
+                    color: 1, 1, 1, 1
+
+                    canvas.before:
+                        Color:
+                            rgb: (52/255, 104/255, 162/255)
+                        Rectangle:
+                            size: self.width, self.height
+                            pos: self.x, self.y
+                    halign: 'left'
+
+            Button:
+
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                background_normal: ''
+                background_down: ''
+                background_color: app.mode_color
+                halign: app.alignment
+                font_name: app.font_file
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
+                text: app.engine_mode
                 text_size: self.size
-                halign: 'right'
                 valign: 'middle'
                 color: 0, 0, 0, 1
+                on_touch_up:
+                    app.root.current = 'Service Lock'
+                    app.title_changer('Service Lock')
+                    
+
 
             Image:
 				source: 'hydradrop.png'
-				#size_hint_x: 0.3125
 				pos_hint: {'top': 1, 'right': 1.15}
 
         GridLayout:
@@ -1130,20 +1172,23 @@
 
 			Button:
 
-			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+			    font_name: app.font_file
 			    background_normal: ''
-			    background_color: .172549, .19215, .42, 1
+			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				text: 'Back'
-				on_release: app.root.current = 'menu'
+				text: 'Main'
+				on_release: 
+				    app.root.current = 'Fuel Gauge'
+				    app.title_changer('Fuel Gauge')
+				    app.tester(self.text)
 				size: self.texture_size
 
 			Label:
-
 			Label:
 
-<DynamicLeak>:
-    name: 'temp&press'
+<Mode>:
+    name: 'Engine Mode'
+
     canvas.before:
     	# This color code is rgba and is for the background
 	    Color:
@@ -1151,6 +1196,7 @@
 		# Sets the size of the background to the size of the screen
 	    Rectangle:
 	        size: self.width, self.height
+
     BoxLayout:
     	# Sets the orientation for the box layout --> vertical
         orientation: 'vertical'
@@ -1158,75 +1204,100 @@
         # Putting a horizontal box layout within the vertical layout, this means that the top portion of the screen is then split horizontally
         FloatLayout:
 
-
-            #orientation: 'horizontal'
-            # Sets the size of the horizontal box layout so that its
-
             size: root.width, root.height * (200/960)
-
-
             size_hint_y: None
 
+            FloatLayout:
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgb: (52/255, 104/255, 162/255)
-                    Rectangle:
-                        size: self.width, self.height
-                        pos: self.x, self.y
-				font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
-				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				halign: 'left'
-				valign: 'middle'
                 pos_hint: {'top': 1}
-				size_hint_x: (5.5/8.5625)
 
-				text_size: self.size
-				text: u'  H\u2082 Monitor'
+                Spinner:
+                    
+                    size_hint_x: (5.5/8.5625)
+                    pos_hint: {'top': 1}
+                    values: app.dropdown_list
+                    background_color: color_button if self.state == 'normal' else color_button_pressed
+                    #background_down: 'atlas://data/images/defaulttheme/spinner'
+                    background_normal: ''
+                    text: app.current_page
+                    color: 0, 0, 0, 1
+                    option_cls: Factory.get("MySpinnerOption")
 
-            Label:
-                #source: 'modeshow.jpg'
+                    on_text:
+                        app.title_changer(self.text)
+                        app.root.current = self.text
+
+                        app.tester(self.text)
+
+                Label:
+
+                    text: app.current_page
+                    pos_hint: {'top': 1}
+                    color: 0, 0, 0, 1
+                    size_hint_x: (5.5/8.5625)
+                    font_name: app.font_file
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.14
+                    color: 1, 1, 1, 1
+
+                    canvas.before:
+                        Color:
+                            rgb: (52/255, 104/255, 162/255)
+                        Rectangle:
+                            size: self.width, self.height
+                            pos: self.x, self.y
+                    halign: 'left'
+
+            Button:
+
                 pos_hint: {'top': 1, 'right': 1}
                 size_hint_x: (3.0625/8.5625)
-
-                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+                background_normal: ''
+                background_down: ''
+                background_color: app.mode_color
+                halign: app.alignment
+                font_name: app.font_file
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.11
-                canvas.before:
-                    Color:
-                        rgb: (235/255, 150/255, 72/255)
-                    Rectangle:
-                        #texture: self.texture
-                        size: self.width, self.height
-                        pos: self.x, self.y
-                text: u'H\u2082 Mode '
+                text: app.engine_mode
                 text_size: self.size
-                halign: 'right'
                 valign: 'middle'
                 color: 0, 0, 0, 1
+                on_touch_up:
+                    app.root.current = 'Service Lock'
+                    app.title_changer('Service Lock')
+                    
+
 
             Image:
 				source: 'hydradrop.png'
-				#size_hint_x: 0.3125
 				pos_hint: {'top': 1, 'right': 1.15}
 
-
         GridLayout:
-            cols: 2
+		    cols: 2
 
-            Label:
-                text: 'Current:'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-            Label:
-                text: app.current_mode
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-            Label:
-                text: 'Requested:'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-            Label:
-                text: app.engine_mode
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+		    Label:
+		        text: 'Current:'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf/'
+		        color: 52/255, 104/255, 162/255, 1
+		        halign: 'right'
+		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
 
+		    Label:
+		        text: app.current_mode
+		        color: 235/255, 150/255, 72/255, 1
+		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf/'
+
+		    Label:
+		        text: 'Requested:'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf/'
+		        color: 52/255, 104/255, 162/255, 1
+		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
+
+		    Label:
+		        text: app.engine_mode
+		        color: 235/255, 150/255, 72/255, 1
+		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Bold.ttf/'
 
 
 		BoxLayout:
@@ -1237,16 +1308,18 @@
 
 			Button:
 
-			    font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf'
+			    font_name: app.font_file
 			    background_normal: ''
-			    background_color: .172549, .19215, .42, 1
+			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
-				text: 'Back'
-				on_release: app.root.current = 'menu'
+				text: 'Main'
+				on_release: 
+				    app.root.current = 'Fuel Gauge'
+				    app.title_changer('Fuel Gauge')
+				    app.tester(self.text)
 				size: self.texture_size
 
 			Label:
-
 			Label:
 
 

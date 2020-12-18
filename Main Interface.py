@@ -50,6 +50,7 @@ from kivy.config import Config
 from kivy.core.window import Window
 from kivy.properties import NumericProperty, ListProperty, StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.dropdown import DropDown
 
 # The conversion factor is used to convert the raw numerical data into degrees to move the needle
 # default is 1.8 which works for a 0-100 slider, this is because when the needle is pointing straight up (at the 50) it is at 0˚ and since
@@ -60,7 +61,7 @@ cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 2000
 
-display_code_dir = 'Display_rep/'
+display_code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
 
 _canIdTank123 = "cff3d17"
 _canIdTank456 = "cff4017"
@@ -269,11 +270,11 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 tempL[1] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempL[2] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                app.press1 = str("%.2f" % presT1) + ' bar'
+                app.pressures[0] = str("%.2f" % presT1) + ' bar'
 
-                app.temp0 = str("%.2f" % tempL[0]) + '˚C'
-                app.temp1 = str("%.2f" % tempL[1]) + '˚C'
-                app.temp2 = str("%.2f" % tempL[2]) + '˚C'
+                app.temps[0] = str("%.2f" % tempL[0]) + '˚C'
+                app.temps[1] = str("%.2f" % tempL[1]) + '˚C'
+                app.temps[2] = str("%.2f" % tempL[2]) + '˚C'
 
             #######################################################################################
             # Temperature and Pressure T4-T6
@@ -282,9 +283,9 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 tempL[4] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempL[5] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                app.temp3 = str("%.2f" % tempL[3]) + '˚C'
-                app.temp4 = str("%.2f" % tempL[4]) + '˚C'
-                app.temp5 = str("%.2f" % tempL[5]) + '˚C'
+                app.temps[3] = str("%.2f" % tempL[3]) + '˚C'
+                app.temps[4] = str("%.2f" % tempL[4]) + '˚C'
+                app.temps[5] = str("%.2f" % tempL[5]) + '˚C'
 
 
 
@@ -293,7 +294,7 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
             elif (idV == _canIdNira3):
                 railPressure = (enforceMaxV(((int(hexV[12:14], 16))), 4015) * 0.1)
 
-                app.press2 = str('%.2f' % railPressure) + ' bar'
+                app.pressures[1] = str('%.2f' % railPressure) + ' bar'
 
             #######################################################################################
             # Wheel-Based Vehicle Speed
@@ -455,10 +456,10 @@ def truckEngineMode(dt):
     app = App.get_running_app()
 
     if (app.mode_num == '0') or (app.mode_num == '1'):
-        app.engine_mode = 'H2\nMODE'
-        app.mode_color = [0, 1, 0, 1]
+        app.engine_mode = u'H\u2082 Mode '
+        app.mode_color = [235/255, 150/255, 72/255, 1]
     else:
-        app.engine_mode = 'DIESEL\nMODE'
+        app.engine_mode = 'Diesel Mode'
         app.mode_color = [0.431, 0.431, 0.431, 1]
 
 
@@ -488,32 +489,32 @@ def callback(dt):
 
 
 # This is the menu screen that the app defaults to and provides buttons to access all of the information screens
-class MainMenu(Screen):
-
-    def lock_changer(self, status):
-
-        app = App.get_running_app()
-
-        if status == '0':
-            app.root.current = 'can_settings'
-        else:
-            return
-
-    # When the user enters the page a transition to the screen-saver is scheduled for delay seconds from now
-    def on_enter(self):
-        Clock.schedule_once(callback, delay)
-
-    # Listens for the touch up on the screen
-    def on_touch_up(self, touch):
-        # Clock.unschedule(FUNCTION) just cancels whatever scheduling was put onto the designated function. It is used here as the screen saver delay tool. When the user touches the screen the function that changes
-        # the screen to the screen saver will be unscheduled and then rescheduled by the Clock call below this, this basically just resets the delay timer on the screen saver
-        Clock.unschedule(callback)
-        Clock.schedule_once(callback, delay)
-
-    # Unschedules the screensaver when leaving the current screen
-    def on_leave(self):
-        Clock.unschedule(callback)
-
+#class MainMenu(Screen):
+#
+#    def lock_changer(self, status):
+#
+#        app = App.get_running_app()
+#
+#        if status == '0':
+#            app.root.current = 'CAN Settings'
+#        else:
+#            return
+#
+#    # When the user enters the page a transition to the screen-saver is scheduled for delay seconds from now
+#    def on_enter(self):
+#        Clock.schedule_once(callback, delay)
+#
+#    # Listens for the touch up on the screen
+#    def on_touch_up(self, touch):
+#        # Clock.unschedule(FUNCTION) just cancels whatever scheduling was put onto the designated function. It is used here as the screen saver delay tool. When the user touches the screen the function that changes
+#        # the screen to the screen saver will be unscheduled and then rescheduled by the Clock call below this, this basically just resets the delay timer on the screen saver
+#        Clock.unschedule(callback)
+#        Clock.schedule_once(callback, delay)
+#
+#    # Unschedules the screensaver when leaving the current screen
+#    def on_leave(self):
+#        Clock.unschedule(callback)
+#
 
 # This is the screen saver page -- for its design/visual setup look in the Kivy back end code (in the 'root_widget')
 class ScreenSaver(Screen):
@@ -552,12 +553,17 @@ class FuelGaugeLayout(Screen):
     # This (dash_val) value is the value that the dashboard/fuel gauge uses and starts at
     dash_val = NumericProperty(0.00)
     dash_label = StringProperty()
+    percent_label = StringProperty()
+
+
 
     def mass_reader(self, dt):
         app = App.get_running_app()
         # Divides the current hydrogen mass by the maximum possible then multiplies by 100 to get a percentage
         # then assigns this value to the 'dash_val' variable
         self.dash_val = ((app.hMass / 20.7) * 100)
+
+        self.percent_label = '%.2f' % self.dash_val
 
         self.dash_label = '%.2f' % app.hMass
 
@@ -667,8 +673,9 @@ class TankTempPress(Screen):
     def on_leave(self):
         Clock.unschedule(callback)
 
-    pass
 
+class CustomDropDown(DropDown):
+    pass
 
 # This is the screen manager that holds all of the other pages together
 class MyScreenManager(ScreenManager):
@@ -676,8 +683,27 @@ class MyScreenManager(ScreenManager):
 
 
 # Screen that shows the leakage rate
-class DynamicLeak(Screen):
-    pass
+class Mode(Screen):
+
+
+
+    def on_enter(self):
+        app = App.get_running_app()
+
+
+        #app.title_changer('Engine Mode')
+
+        Clock.schedule_once(callback, delay)
+
+    # Kivy function runs code when the user touches and releases on the screen. This is the delay reset for the screen saver
+    def on_touch_up(self, touch):
+        Clock.unschedule(callback)
+        Clock.schedule_once(callback, delay)
+
+    # Same as in the other classes
+    def on_leave(self):
+        Clock.unschedule(callback)
+
 
 
 # This is the lock screen where technicians can lock or unlock the engine mode toggle button -- accessed by hitting the engine mode descriptor
@@ -710,7 +736,7 @@ class ModeLocking(Screen):
             self.status = 'Locked'
 
     # Sets the default color of the submit button
-    wrong_password_ind = ListProperty([0, 0, 0.8, 1])
+    wrong_password_ind = ListProperty([44/255, 49/255, 107/255, 1])
 
     # Called when the user submits their password
     def code_tester(self, text):
@@ -745,7 +771,18 @@ class ModeLocking(Screen):
 
 
 class Message_settings(Screen):
-    pass
+    def on_enter(self):
+        Clock.schedule_once(callback, delay)
+
+    # Kivy function runs code when the user touches and releases on the screen. This is the delay reset for the screen saver
+    def on_touch_up(self, touch):
+        Clock.unschedule(callback)
+        Clock.schedule_once(callback, delay)
+
+    # Same as in the other classes
+    def on_leave(self):
+        Clock.unschedule(callback)
+
 
 
 # The main app class that everything runs off of
@@ -826,14 +863,12 @@ class FuelGaugeApp(App):
         msg_data = [1]
 
     # These are all of the data values received and decoded by Calvin's code
-    temp0 = StringProperty()
-    temp1 = StringProperty()
-    temp2 = StringProperty()
-    temp3 = StringProperty()
-    temp4 = StringProperty()
-    temp5 = StringProperty()
-    press1 = StringProperty()
-    press2 = StringProperty()
+    temps = ListProperty(['NA', 'NA', 'NA', 'NA', 'NA', 'NA'])
+    pressures = ListProperty(['NA', 'NA'])
+    font_file = StringProperty('/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf')
+    current_page = StringProperty('Fuel Gauge')
+    dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
+
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
     mil_light = StringProperty()
@@ -855,10 +890,12 @@ class FuelGaugeApp(App):
     error_base = StringProperty()
 
     if (mode_num == '0') or (mode_num == '1'):
-        engine_mode = StringProperty('H2\nMODE')
-        mode_color = ListProperty([0, 1, 0, 1])
+        engine_mode = StringProperty(u'H\u2082 Mode ')
+        alignment = StringProperty('right')
+        mode_color = ListProperty([235/255, 150/255, 72/255, 1])
     else:
-        engine_mode = StringProperty('DIESEL\nMODE')
+        engine_mode = StringProperty('Diesel Mode')
+        alignment = StringProperty('center')
         mode_color = ListProperty([0.431, 0.431, 0.431, 1])
 
     # Similar to error_base this is a string property and will contain the text to be displayed in the top right of most screens. This text tells the user if the truck is in H2 mode or Diesel mode
@@ -996,6 +1033,19 @@ class FuelGaugeApp(App):
                 self.task.stop()
                 self.toggle_msg = can.Message(arbitration_id=int(self.arb_id, 16), data=self.msg_data)
                 self.task = self.bus.send_periodic(self.toggle_msg, 0.2)
+
+    def title_changer(self, cur_page):
+        #time.sleep(0.5)
+        self.current_page = cur_page
+        #print(self.current_page)
+
+    def tester(self, wow):
+        print(wow)
+
+
+
+
+
 
 
 # Makes everything start
