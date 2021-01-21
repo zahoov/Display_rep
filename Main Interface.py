@@ -872,7 +872,7 @@ class FuelGaugeApp(App):
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
     mil_light = StringProperty()
-    coolant_temp = StringProperty()
+    coolant_temp = StringProperty('100')
     dpf_status = StringProperty()
     current_mode = StringProperty()
 
