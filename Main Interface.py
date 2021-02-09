@@ -918,8 +918,24 @@ class FuelGaugeApp(App):
     a = Thread(target=msg_receiving)
     a.start()
 
+    Clock.schedule_once()
+
+    try:
+        bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
+    except OSError:
+        print('Cannot find PiCAN board.')
+        # Clock.schedule_once(self.bus_activator)
+        pass
+
 
     toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
+
+    try:
+        print('made it past setting up bus now trying to send the toggle msg')
+        task = bus.send_periodic(toggle_msg, 0.2)
+    except NameError:
+        # Clock.schedule_once(self.bus_activator)
+        pass
 
     def bus_activator(self, dt):
         try:
@@ -935,7 +951,7 @@ class FuelGaugeApp(App):
             #Clock.schedule_once(self.bus_activator)
             return
 
-    Clock.schedule_once(bus_activator)
+
 
 
     # Runs the screen manager that sets everything in motion
