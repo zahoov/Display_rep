@@ -913,7 +913,7 @@ class FuelGaugeApp(App):
     Clock.schedule_interval(errorMsg, 2)
 
     # This checks the value of the engine mode number every 2 seconds and changes the notification text if needed
-    Clock.schedule_interval(truckEngineMode, 20)
+    Clock.schedule_interval(truckEngineMode, 2)
     # Starts Calvin's CAN message reading code in another thread so that it is constantly reading while the display is active
     a = Thread(target=msg_receiving)
     a.start()
@@ -964,7 +964,7 @@ class FuelGaugeApp(App):
             fin = open(display_code_dir + "fuel_file.txt", "wt")
             fin.write(self.mode_num)
             fin.close()
-        truckEngineMode(self)
+
             #Clock.schedule_once(truckEngineMode)
 
     def source_changer(self, new_id):
