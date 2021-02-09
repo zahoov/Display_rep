@@ -869,8 +869,8 @@ class FuelGaugeApp(App):
     current_page = StringProperty('Fuel Gauge')
     dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
 
-    Hleakage = NumericProperty()
-    HinjectionV = NumericProperty()
+    Hleakage = NumericProperty('Not Received Yet')
+    HinjectionV = NumericProperty('Not Received Yet')
     mil_light = StringProperty('Not Received Yet')
     coolant_temp = StringProperty('Not Received Yet')
     dpf_status = StringProperty('Not Received Yet')
