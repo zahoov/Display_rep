@@ -932,10 +932,22 @@ class FuelGaugeApp(App):
     def build(self):
         return MyScreenManager()
 
+    def toggle_try(self, dt):
+        try:
+            self.task.modify_data(self.toggle_msg)
+        except AttributeError:
+            print('Unable to Change Message, Please Try Again')
+            return
+
+
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
         print(self.lock_status)
         print(self.mode_num)
+        prev_mode = self.mode_num
+        prev_data = self.msg_data
+
+        Clock.unschedule(self.toggle_try)
 
         # If the display is unlocked (lock_status == '0') it checks to see what the current engine mode is
         if self.lock_status == '0':
@@ -958,6 +970,9 @@ class FuelGaugeApp(App):
                 self.task.modify_data(self.toggle_msg)
             except AttributeError:
                 print('Unable to Change Message, Please Try Again')
+                self.mode_num = prev_mode
+                self.msg_data = prev_data
+                Clock.schedule_interval(self.toggle_try, 2)
                 return
             #print('wowo')
             # Writing the current engine mode to a text file so that it is saved when the display is shut off
