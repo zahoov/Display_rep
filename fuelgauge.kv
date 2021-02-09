@@ -814,7 +814,7 @@
 			    font_name: app.font_file
                 size: self.texture_size
                 bold: True
-                text: 'Line Pressure:'
+                text: 'Pressures:'
 
         BoxLayout:
             pos: root.x, root.height * (2.75 / 12)
@@ -906,7 +906,7 @@
                         Line:
                             width: 2.5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: 'P1: ' + str(app.pressures[0]) + ' bar - Tank Pressure'
+                    text: 'P1: ' + str(app.pressures[0]) + ' bar - Tank'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
                     font_name: app.font_file
                     color: 52/255, 104/255, 162/255, 1
@@ -918,7 +918,7 @@
                         Line:
                             width: 2.5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: 'P2: ' + str(app.pressures[1]) + ' bar - Rail Pressure'
+                    text: 'P2: ' + str(app.pressures[1]) + ' bar - Rail'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
                     font_name: app.font_file
                     color: 52/255, 104/255, 162/255, 1
