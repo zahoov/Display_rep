@@ -942,13 +942,13 @@ class FuelGaugeApp(App):
             bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
         except OSError:
             print('Cannot find PiCAN board.awoaowowowowo')
-            Clock.schedule_once(self.bus_activator)
+            Clock.schedule_once(self.bus_activator, 0.2)
             return
         try:
             print('made it past setting up bus now trying to send the toggle msg')
             self.task = bus.send_periodic(self.toggle_msg, 0.2)
         except NameError:
-            Clock.schedule_once(self.bus_activator)
+            Clock.schedule_once(self.bus_activator, 0.2)
             return
 
 
