@@ -907,10 +907,10 @@ class FuelGaugeApp(App):
     # The conversion factor is for changing the discrete data values into a specific angle of rotation for the gauges
     conversion_factor = cf
 
-    toggle_msg = can.Message()
-
     # This calls errorMsg every 2 seconds to constantly change the error notification text from "FAULT" to the error code, or if there is no error it sets the text to blank
     Clock.schedule_interval(errorMsg, 2)
+
+
 
     # This checks the value of the engine mode number every 2 seconds and changes the notification text if needed
     Clock.schedule_interval(truckEngineMode, 2)
@@ -918,19 +918,31 @@ class FuelGaugeApp(App):
     a = Thread(target=msg_receiving)
     a.start()
 
-    try:
-        bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
-    except OSError:
-        print('Cannot find PiCAN board.')
-        pass
 
     toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
 
-    task = bus.send_periodic(toggle_msg, 0.2)
+    def bus_activator(self, dt):
+        try:
+            bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
+        except OSError:
+            print('Cannot find PiCAN board.')
+            Clock.schedule_once(self.bus_activator, 0.2)
+            return
+        try:
+            print('made it past setting up bus now trying to send the toggle msg')
+            self.task = bus.send_periodic(self.toggle_msg, 0.2)
+        except NameError:
+            Clock.schedule_once(self.bus_activator, 0.2)
+            return
+
+    Clock.schedule_once(bus_activator)
+
 
     # Runs the screen manager that sets everything in motion
     def build(self):
         return MyScreenManager()
+
+
 
     def toggle_try(self, dt):
         try:
@@ -938,7 +950,6 @@ class FuelGaugeApp(App):
         except AttributeError:
             print('Unable to Change Message, Please Try Again')
             return
-
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
