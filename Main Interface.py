@@ -924,9 +924,9 @@ class FuelGaugeApp(App):
         print('Cannot find PiCAN board.')
         pass
 
-    #toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
+    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
 
-    #task = bus.send_periodic(toggle_msg, 0.2)
+    task = bus.send_periodic(toggle_msg, 0.2)
 
     # Runs the screen manager that sets everything in motion
     def build(self):
