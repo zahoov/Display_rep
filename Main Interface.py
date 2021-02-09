@@ -918,7 +918,7 @@ class FuelGaugeApp(App):
     a = Thread(target=msg_receiving)
     a.start()
 
-    Clock.schedule_once()
+
 
     try:
         bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
@@ -950,6 +950,8 @@ class FuelGaugeApp(App):
         except NameError:
             #Clock.schedule_once(self.bus_activator)
             return
+
+    Clock.schedule_once(bus_activator)
 
 
 
