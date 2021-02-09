@@ -821,82 +821,90 @@
             orientation: 'horizontal'
             size_hint_y: 0.5
 
-            GridLayout:
-                cols: 2
-                #Label:
-                    #canvas.before:
-                    #    Color:
-                    #        rgba: .172549, .19215, .42, 1
-                    #    Line:
-                    #        width: 2.5
-                    #        rectangle: self.x, self.y, self.width, self.height
-                    #
-                    #text: 'T0: ' + str(app.temps[0]) + u' \u00BAC'
-                    #font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                    #font_name: app.font_file
-                    #color: 52/255, 104/255, 162/255, 1
+            BoxLayout:
+                orientation: 'vertical'
 
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: .172549, .19215, .42, 1
-                        Line:
-                            width: 2.5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: 'T1: ' + str(app.temps[0]) + u' \u00BAC'
-                    font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                    font_name: app.font_file
-                    color: 52/255, 104/255, 162/255, 1
+                GridLayout:
+                    cols: 2
+                    #Label:
+                        #canvas.before:
+                        #    Color:
+                        #        rgba: .172549, .19215, .42, 1
+                        #    Line:
+                        #        width: 2.5
+                        #        rectangle: self.x, self.y, self.width, self.height
+                        #
+                        #text: 'T0: ' + str(app.temps[0]) + u' \u00BAC'
+                        #font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                        #font_name: app.font_file
+                        #color: 52/255, 104/255, 162/255, 1
 
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: .172549, .19215, .42, 1
-                        Line:
-                            width: 2.5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: 'T2: ' + str(app.temps[1]) + u' \u00BAC'
-                    font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                    font_name: app.font_file
-                    color: 52/255, 104/255, 162/255, 1
+                    Label:
+                        canvas.before:
+                            Color:
+                                rgba: .172549, .19215, .42, 1
+                            Line:
+                                width: 2.5
+                                rectangle: self.x, self.y, self.width, self.height
+                        text: 'T1: ' + str(app.temps[0]) + u' \u00BAC'
+                        font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                        font_name: app.font_file
+                        color: 52/255, 104/255, 162/255, 1
 
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: .172549, .19215, .42, 1
-                        Line:
-                            width: 2.5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: 'T3: ' + str(app.temps[2]) + u' \u00BAC'
-                    font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                    font_name: app.font_file
-                    color: 52/255, 104/255, 162/255, 1
+                    Label:
+                        canvas.before:
+                            Color:
+                                rgba: .172549, .19215, .42, 1
+                            Line:
+                                width: 2.5
+                                rectangle: self.x, self.y, self.width, self.height
+                        text: 'T2: ' + str(app.temps[1]) + u' \u00BAC'
+                        font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                        font_name: app.font_file
+                        color: 52/255, 104/255, 162/255, 1
 
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: .172549, .19215, .42, 1
-                        Line:
-                            width: 2.5
-                            rectangle: self.x, self.y, self.width, self.height
-                    text: 'T4:' + str(app.temps[3]) + u' \u00BAC'
-                    font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                    font_name: app.font_file
-                    color: 52/255, 104/255, 162/255, 1
+                    Label:
+                        canvas.before:
+                            Color:
+                                rgba: .172549, .19215, .42, 1
+                            Line:
+                                width: 2.5
+                                rectangle: self.x, self.y, self.width, self.height
+                        text: 'T3: ' + str(app.temps[2]) + u' \u00BAC'
+                        font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                        font_name: app.font_file
+                        color: 52/255, 104/255, 162/255, 1
 
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: .172549, .19215, .42, 1
-                        Line:
-                            width: 2.5
-                            rectangle: self.x, self.y, 2*self.width, self.height
-                    size: 2*self.width, self.height
-                    text: 'T5: ' + str(app.temps[4]) + u' \u00BAC'
-                    font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                    font_name: app.font_file
-                    halign: 'center'
-                    color: 52/255, 104/255, 162/255, 1
+                    Label:
+                        canvas.before:
+                            Color:
+                                rgba: .172549, .19215, .42, 1
+                            Line:
+                                width: 2.5
+                                rectangle: self.x, self.y, self.width, self.height
+                        text: 'T4:' + str(app.temps[3]) + u' \u00BAC'
+                        font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                        font_name: app.font_file
+                        color: 52/255, 104/255, 162/255, 1
+
+
+                GridLayout:
+
+                    cols: 1
+
+                    Label:
+                        canvas.before:
+                            Color:
+                                rgba: .172549, .19215, .42, 1
+                            Line:
+                                width: 2.5
+                                rectangle: self.x, self.y, 2*self.width, self.height
+
+                        text: 'T5: ' + str(app.temps[4]) + u' \u00BAC'
+                        font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
+                        font_name: app.font_file
+                        halign: 'center'
+                        color: 52/255, 104/255, 162/255, 1
 
             GridLayout:
                 cols: 1
