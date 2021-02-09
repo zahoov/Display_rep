@@ -889,8 +889,8 @@
 
 
                 GridLayout:
-
                     cols: 1
+                    size_hint_y: (2/3)
 
                     Label:
                         canvas.before:
@@ -901,7 +901,7 @@
                                 rectangle: self.x, self.y, self.width, self.height
 
                         text: 'T5: ' + str(app.temps[4]) + u' \u00BAC'
-                        size_hint_y: (2/3)
+
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                         font_name: app.font_file
                         halign: 'center'
@@ -909,7 +909,7 @@
 
             GridLayout:
                 cols: 1
-                size_hint_y: (2/3)
+
                 Label:
                     canvas.before:
                         Color:
