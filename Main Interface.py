@@ -964,8 +964,8 @@ class FuelGaugeApp(App):
             fin = open(display_code_dir + "fuel_file.txt", "wt")
             fin.write(self.mode_num)
             fin.close()
-
-        Clock.schedule_once(truckEngineMode)
+        truckEngineMode(self)
+            #Clock.schedule_once(truckEngineMode)
 
     def source_changer(self, new_id):
 
