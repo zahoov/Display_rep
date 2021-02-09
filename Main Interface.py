@@ -931,8 +931,8 @@ class FuelGaugeApp(App):
     toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
 
     try:
-        print('zooweemama')
         task = bus.send_periodic(toggle_msg, 0.2)
+        print('zooweemama')
     except NameError:
         # Clock.schedule_once(self.bus_activator)
         pass
