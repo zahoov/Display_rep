@@ -937,7 +937,7 @@ class FuelGaugeApp(App):
         # Clock.schedule_once(self.bus_activator)
         pass
 
-    def bus_activator(self, dt):
+    def bus_activator(self):
         try:
             bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
         except OSError:
