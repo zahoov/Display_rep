@@ -951,7 +951,7 @@ class FuelGaugeApp(App):
             Clock.schedule_once(self.bus_activator(self))
             return
 
-    Clock.schedule_once(bus_activator())
+    Clock.schedule_once(bus_activator)
 
 
 
