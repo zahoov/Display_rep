@@ -869,12 +869,12 @@ class FuelGaugeApp(App):
     current_page = StringProperty('Fuel Gauge')
     dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
 
-    Hleakage = NumericProperty('Not Received Yet')
-    HinjectionV = NumericProperty('Not Received Yet')
-    mil_light = StringProperty('Not Received Yet')
-    coolant_temp = StringProperty('Not Received Yet')
-    dpf_status = StringProperty('Not Received Yet')
-    current_mode = StringProperty('Not Received Yet')
+    Hleakage = NumericProperty()
+    HinjectionV = NumericProperty()
+    mil_light = StringProperty()
+    coolant_temp = StringProperty()
+    dpf_status = StringProperty()
+    current_mode = StringProperty()
 
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
