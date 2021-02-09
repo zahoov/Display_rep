@@ -1,8 +1,8 @@
 {
     "title": "Title of your layout",
     "description": "Description of your layout",
-    "cols": 15,
-    "rows": 5,
+    "cols": 3,
+    "rows": 4,
     "normal_1": [
         ["1", "1", "1", 1],    ["2", "2", "2", 1],    ["3", "3", "3", 1]
     ],
