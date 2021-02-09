@@ -61,7 +61,7 @@ cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 2000
 
-display_code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
+display_code_dir = 'Hydra_Display_RPi/'
 
 _canIdTank123 = "cff3d17"
 _canIdTank456 = "cff4017"
@@ -865,7 +865,7 @@ class FuelGaugeApp(App):
     # These are all of the data values received and decoded by Calvin's code
     temps = ListProperty(['NA', 'NA', 'NA', 'NA', 'NA', 'NA'])
     pressures = ListProperty(['NA', 'NA'])
-    font_file = StringProperty('/Users/Xavier Biancardi/PycharmProjects/Display_rep/Montserrat-Regular.ttf')
+    font_file = StringProperty('Hydra_Display_RPi/Montserrat-Regular.ttf')
     current_page = StringProperty('Fuel Gauge')
     dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
 
@@ -878,8 +878,8 @@ class FuelGaugeApp(App):
 
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
-    #hMass = NumericProperty(0)
-    hMass = 12.7
+    hMass = NumericProperty(0)
+    #hMass = 12.7
 
     # error_code is a string variable that is used to temporarily store the current error code taken from the text document it is stored in. It is a string because after coming from the .txt the data is a string and
     # must be converted into a float or int to be used as a number
@@ -934,6 +934,8 @@ class FuelGaugeApp(App):
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
+        print(self.lock_status)
+        print(self.mode_num)
 
         # If the display is unlocked (lock_status == '0') it checks to see what the current engine mode is
         if self.lock_status == '0':
@@ -1040,7 +1042,8 @@ class FuelGaugeApp(App):
         #print(self.current_page)
 
     def tester(self, wow):
-        print(wow)
+        #print(wow)
+        pass
 
 
 
