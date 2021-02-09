@@ -958,11 +958,11 @@ class FuelGaugeApp(App):
                 self.task.modify_data(self.toggle_msg)
             except AttributeError:
                 return
-            else:
-                # Writing the current engine mode to a text file so that it is saved when the display is shut off
-                fin = open(display_code_dir + "fuel_file.txt", "wt")
-                fin.write(self.mode_num)
-                fin.close()
+            print('wowo')
+            # Writing the current engine mode to a text file so that it is saved when the display is shut off
+            fin = open(display_code_dir + "fuel_file.txt", "wt")
+            fin.write(self.mode_num)
+            fin.close()
 
         Clock.schedule_once(truckEngineMode)
 
