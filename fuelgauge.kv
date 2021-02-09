@@ -1032,7 +1032,7 @@
 				pos_hint: {'top': 1, 'right': 1.15}
 
         GridLayout:
-            size_hint_y: 0.5
+            size_hint_y:
             cols: 2
 
             Label:
@@ -1045,7 +1045,7 @@
                 text: 'Error Code:'
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
                 bold: True
-                size: self.texture_size
+                size: self.texture_size * 0.8
                 color: 52/255, 104/255, 162/255, 1
                 padding_x: 50
 
@@ -1058,7 +1058,7 @@
                         rectangle: self.x, self.y, self.width, self.height
                 text: app.error_code
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                size: self.texture_size
+                size: self.texture_size * 0.8
                 valign: 'middle'
                 halign: 'center'
                 color: 52/255, 104/255, 162/255, 1
@@ -1074,7 +1074,7 @@
                 text: 'Error Message:'
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
                 bold: True
-                size: self.texture_size
+                size: self.texture_size * 0.8
                 color: 52/255, 104/255, 162/255, 1
                 padding_x: 50
 
@@ -1086,7 +1086,7 @@
                         width: 5
                         rectangle: self.x, self.y, self.width, self.height
                 text: root.error_expl
-                text_size: self.size
+                size: self.texture_size * 0.8
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
                 valign: 'middle'
                 color: 52/255, 104/255, 162/255, 1
@@ -1102,7 +1102,7 @@
                 text: 'MIL Light:'
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
                 bold: True
-                size: self.texture_size
+                size: self.texture_size * 0.8
                 color: 52/255, 104/255, 162/255, 1
                 padding_x: 50
 
@@ -1116,7 +1116,7 @@
                 text: app.mil_light
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
                 bold: True
-                size: self.texture_size
+                size: self.texture_size * 0.8
                 color: 52/255, 104/255, 162/255, 1
                 padding_x: 50
 
