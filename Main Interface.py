@@ -979,7 +979,7 @@ class FuelGaugeApp(App):
         if self.lock_status == '0':
 
             # Depending on the current mode the CAN msg data is set to either 1 or 0 (for H2 mode and Diesel mode respectively)
-            if self. == '2':
+            if self.mode_num == '2':
 
                 self.msg_data = [1]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
