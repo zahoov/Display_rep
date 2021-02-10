@@ -1323,6 +1323,14 @@
 		        color: 235/255, 150/255, 72/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
 		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		    Button:
+                background_normal: ''
+                background_color: 52/255, 104/255, 162/255, 1
+                text: 'Toggle Engine Mode'
+                font_size: ((self.parent.width + self.parent.height) / 3) * 0.08
+                font_name: app.font_file
+                on_press: app.ModeSender()
+
 
 
 		BoxLayout:

@@ -340,7 +340,7 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
             elif idV == 'cff3c17':
 
-                mode_being_requested = (enforceMaxV(((int(hexV[0:2], 16) & 0b00000011)), 3) * 1.0)  # Unit = bit
+                app.mode_being_requested = (enforceMaxV(((int(hexV[0:2], 16) & 0b00000011)), 3) * 1.0)  # Unit = bit
                 mode_num = (enforceMaxV((((int(hexV[0:2], 16) & 0b00001100) >> 2)), 3) * 1.0)  # Unit = bit
 
                 if (mode_num == 0) or (mode_num == 1):
@@ -349,6 +349,13 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 else:
                     app.current_mode = 'Diesel'
                     app.mode_num = str(mode_num)
+
+                if (app.mode_being_requested == 0) or (app.mode_being_requested == 1):
+                    app.engine_mode = u'H\u2082 Mode '
+                    app.mode_color = [235 / 255, 150 / 255, 72 / 255, 1]
+                else:
+                    app.engine_mode = 'Diesel Mode'
+                    app.mode_color = [0.431, 0.431, 0.431, 1]
 
 
 
@@ -448,7 +455,7 @@ def enforceMaxV(origV, maxV):
 def truckEngineMode(dt):
     app = App.get_running_app()
 
-    if (app.mode_num == '0') or (app.mode_num == '1'):
+    if (app.mode_being_requested == '0') or (app.mode_being_requested == '1'):
         app.engine_mode = u'H\u2082 Mode '
         app.mode_color = [235/255, 150/255, 72/255, 1]
     else:
@@ -862,6 +869,8 @@ class FuelGaugeApp(App):
     font_file = StringProperty('Hydra_Display_RPi/Montserrat-Regular.ttf')
     current_page = StringProperty('Fuel Gauge')
     dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
+    mode_being_requested = int
+
 
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
