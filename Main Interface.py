@@ -338,24 +338,17 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 else:
                     app.dpf_status = 'Not Available'
 
+            elif idV == 'cff3c17':
 
-            elif (idV == 'cff3c28') or (idV == 'cff3cfa'):
+                mode_being_requested = (enforceMaxV(((int(hexV[0:2], 16) & 0b00000011)), 3) * 1.0)  # Unit = bit
+                mode_num = (enforceMaxV((((int(hexV[0:2], 16) & 0b00001100) >> 2)), 3) * 1.0)  # Unit = bit
 
-                current_mode = ( enforceMaxV(( ((int(hexV[0:2], 16) & 0b00001100) >> 2)), 3)  * 1.0)
-
-                if (current_mode == 0) or (current_mode == 1):
+                if (mode_num == 0) or (mode_num == 1):
                     app.current_mode = 'Hydrogen'
-
+                    app.mode_num = str(mode_num)
                 else:
                     app.current_mode = 'Diesel'
-
-
-                pass
-
-
-
-
-
+                    app.mode_num = str(mode_num)
 
 
 
@@ -857,6 +850,7 @@ class FuelGaugeApp(App):
 
     source_id = StringProperty(arb_id[7:9])
 
+    # Sets the data in the requestor
     if mode_num == '2':
         msg_data = [0]
     else:
@@ -967,6 +961,7 @@ class FuelGaugeApp(App):
     def toggle_try(self, dt):
         try:
             self.task.modify_data(self.toggle_msg)
+            Clock.unschedule(self.toggle_try)
         except AttributeError:
             print('Unable to Change Message, Please Try Again')
             return
@@ -984,15 +979,15 @@ class FuelGaugeApp(App):
         if self.lock_status == '0':
 
             # Depending on the current mode the CAN msg data is set to either 1 or 0 (for H2 mode and Diesel mode respectively)
-            if self.mode_num == '2':
+            if self. == '2':
 
                 self.msg_data = [1]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
-                self.mode_num = '0'
+                #self.mode_num = '0'
 
             else:
                 self.msg_data = [0]
-                self.mode_num = '2'
+                #self.mode_num = '2'
 
             self.toggle_msg.data = self.msg_data
             self.toggle_msg.dlc = 1
