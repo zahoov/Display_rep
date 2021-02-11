@@ -314,7 +314,11 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
 
             elif (idV == "18feee00"):
-                app.coolant_temp = str((enforceMaxV(((int(hexV[0:2], 16))), 250) * 1.0) - 40.0)  # Unit = °C
+                coolant_temp = str((enforceMaxV(((int(hexV[0:2], 16))), 250) * 1.0) - 40.0)  # Unit = °C
+
+                if coolant_temp is not '':
+
+                    app.coolant_temp = coolant_temp  + u' \u00BAC'
 
 
             elif (idV == "18feca00"):
@@ -623,7 +627,7 @@ class FuelInjectionLayout(Screen):
 
 # This is the page that displays the Fault code and its corresponding message
 class ErrorPage(Screen):
-    error_expl = StringProperty()
+    error_expl = StringProperty('Missing')
 
     # Same as in the other classes
     def on_touch_up(self, touch):
@@ -868,6 +872,7 @@ class FuelGaugeApp(App):
     temps = ListProperty(['NA', 'NA', 'NA', 'NA', 'NA', 'NA'])
     pressures = ListProperty(['NA', 'NA'])
     font_file = StringProperty(display_code_dir + '/Montserrat-Regular.ttf')
+    bold_font_file = StringProperty(display_code_dir + '/Montserrat-Bold.ttf')
     current_page = StringProperty('Fuel Gauge')
     dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
     mode_being_requested = int
@@ -875,10 +880,10 @@ class FuelGaugeApp(App):
 
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
-    mil_light = StringProperty('ACTIVE')
-    coolant_temp = StringProperty('ACTIVE')
-    dpf_status = StringProperty('ACTIVE')
-    current_mode = StringProperty('ACTIVE')
+    mil_light = StringProperty('Missing')
+    coolant_temp = StringProperty('Missing')
+    dpf_status = StringProperty('Missing')
+    current_mode = StringProperty('Missing')
 
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
@@ -887,7 +892,7 @@ class FuelGaugeApp(App):
 
     # error_code is a string variable that is used to temporarily store the current error code taken from the text document it is stored in. It is a string because after coming from the .txt the data is a string and
     # must be converted into a float or int to be used as a number
-    error_code = StringProperty()
+    error_code = StringProperty('Missing')
 
     # error_base is the text that is displayed in the top left hand of most screens -- if there is a fault this variable becomes "FAULT" and then the error code and flips between them
     # It is a StringProperty() which is a Kivy variable type the essentially tells the Kivy back end code to keep checking what its value is/if it changes

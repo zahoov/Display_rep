@@ -816,10 +816,13 @@
                 bold: True
                 text: 'Pressures:'
 
+
         BoxLayout:
-            pos: root.x, root.height * (2.75 / 12)
             orientation: 'horizontal'
             size_hint_y: 0.5
+
+            Label:
+                size_hint_x: 0.08
 
             BoxLayout:
                 orientation: 'vertical'
@@ -847,8 +850,9 @@
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
                         text: 'T1: ' + str(app.temps[0])# + u' \u00BAC'
+                        bold: True
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                        font_name: app.font_file
+                        font_name: app.bold_font_file
                         color: 52/255, 104/255, 162/255, 1
 
                     Label:
@@ -859,8 +863,9 @@
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
                         text: 'T2: ' + str(app.temps[1])# + u' \u00BAC'
+                        bold: True
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                        font_name: app.font_file
+                        font_name: app.bold_font_file
                         color: 52/255, 104/255, 162/255, 1
 
                     Label:
@@ -871,9 +876,11 @@
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
                         text: 'T3: ' + str(app.temps[2])# + u' \u00BAC'
+                        bold: True
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                        font_name: app.font_file
+                        font_name: app.bold_font_file
                         color: 52/255, 104/255, 162/255, 1
+                        bold: True
 
                     Label:
                         canvas.before:
@@ -883,16 +890,19 @@
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
                         text: 'T4:' + str(app.temps[3])# + u' \u00BAC'
+                        bold: True
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
-                        font_name: app.font_file
+                        font_name: app.bold_font_file
                         color: 52/255, 104/255, 162/255, 1
 
 
                 GridLayout:
-                    cols: 1
                     size_hint_y: 0.5
+                    cols: 1
+
 
                     Label:
+
                         canvas.before:
                             Color:
                                 rgba: .172549, .19215, .42, 1
@@ -903,9 +913,14 @@
                         text: 'T5: ' + str(app.temps[4])# + u' \u00BAC'
 
                         font_size: ((self.parent.width + (2*self.parent.height)) / 3) * 0.12
-                        font_name: app.font_file
+                        font_name: app.bold_font_file
+                        bold: True
                         halign: 'center'
                         color: 52/255, 104/255, 162/255, 1
+
+            Label:
+                size_hint_x: 0.08
+
 
             GridLayout:
                 cols: 1
@@ -919,7 +934,8 @@
                             rectangle: self.x, self.y, self.width, self.height
                     text: 'P1: ' + str(app.pressures[0]) + ' - Tank'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
-                    font_name: app.font_file
+                    font_name: app.bold_font_file
+                    bold: True
                     color: 52/255, 104/255, 162/255, 1
 
                 Label:
@@ -931,8 +947,16 @@
                             rectangle: self.x, self.y, self.width, self.height
                     text: 'P2: ' + str(app.pressures[1]) + ' - Rail'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
-                    font_name: app.font_file
+                    font_name: app.bold_font_file
+                    bold: True
                     color: 52/255, 104/255, 162/255, 1
+
+            Label:
+                size_hint_x: 0.08
+
+        Label:
+            size_hint_y:0.1
+
 
         BoxLayout:
 		    id: reference
@@ -980,6 +1004,7 @@
 
             size: root.width, root.height * (200/960)
             size_hint_y: None
+
 
             FloatLayout:
                 #size: root.width, root.height * (200/960)
@@ -1043,152 +1068,170 @@
 				source: 'hydradrop.png'
 				pos_hint: {'top': 1, 'right': 1.15}
 
-        GridLayout:
-            size_hint_y:
-            cols: 2
+	    Label:
+	        size_hint_y: 0.1
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: 'Error Code:'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                bold: True
-                size: self.texture_size
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
+	    BoxLayout:
+	        orientation: 'horizontal'
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: app.error_code
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                size: self.texture_size
-                valign: 'middle'
-                bold: True
+	        Label:
+	            size_hint_x: .05
+
+
+            GridLayout:
+                size_hint_y:
+                #size_hint_x:
                 halign: 'center'
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: 'Error Message:'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                bold: True
-                size: self.texture_size
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: root.error_expl
-                bold: True
-                size: self.texture_size
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                valign: 'middle'
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
+                cols: 2
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: 'MIL Light:'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                bold: True
-                size: self.texture_size
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: 'Error Code:'
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    bold: True
+                    size: self.texture_size
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: app.mil_light
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                bold: True
-                size: self.texture_size
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: app.error_code
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    size: self.texture_size
+                    valign: 'middle'
+                    bold: True
+                    halign: 'center'
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: 'DPF Status:'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                bold: True
-                size: self.texture_size
-                padding_x: 50
-                color: 52/255, 104/255, 162/255, 1
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: 'Error Message:'
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    bold: True
+                    size: self.texture_size
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: app.dpf_status
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                bold: True
-                size: self.texture_size
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: root.error_expl
+                    bold: True
+                    size: self.texture_size
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    valign: 'middle'
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
 
-            Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: 'Coolant Temp:'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                bold: True
-                size: self.texture_size
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: 'MIL Light:'
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    bold: True
+                    size: self.texture_size
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
 
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: app.mil_light
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    bold: True
+                    size: self.texture_size
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
+
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: 'DPF Status:'
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    bold: True
+                    size: self.texture_size
+                    padding_x: 50
+                    color: 52/255, 104/255, 162/255, 1
+
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: app.dpf_status
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    bold: True
+                    size: self.texture_size
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
+
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: 'Coolant Temp:'
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    bold: True
+                    size: self.texture_size
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
+
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: .172549, .19215, .42, 1
+                        Line:
+                            width: 2.5
+                            rectangle: self.x, self.y, self.width, self.height
+                    text: app.coolant_temp
+                    font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
+                    bold: True
+                    size: self.texture_size
+                    color: 52/255, 104/255, 162/255, 1
+                    padding_x: 50
             Label:
-                canvas.before:
-                    Color:
-                        rgba: .172549, .19215, .42, 1
-                    Line:
-                        width: 2.5
-                        rectangle: self.x, self.y, self.width, self.height
-                text: app.coolant_temp + u' \u00BAC'
-                font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
-                bold: True
-                size: self.texture_size
-                color: 52/255, 104/255, 162/255, 1
-                padding_x: 50
+                size_hint_x: .05
+        Label:
+	        size_hint_y: 0.1
 
 
         BoxLayout:
@@ -1325,13 +1368,7 @@
 		        color: 235/255, 150/255, 72/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
 		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
-		    Button:
-                background_normal: ''
-                background_color: 52/255, 104/255, 162/255, 1
-                text: 'Toggle Engine Mode'
-                font_size: ((self.parent.width + self.parent.height) / 3) * 0.08
-                font_name: app.font_file
-                on_press: app.ModeSender()
+
 
 
 
@@ -1355,7 +1392,13 @@
 				size: self.texture_size
 
 			Label:
-			Label:
+			Button:
+                background_normal: ''
+                background_color: 52/255, 104/255, 162/255, 1
+                text: 'Toggle Engine Mode'
+                font_size: ((self.parent.width + self.parent.height) / 3) * 0.08
+                font_name: app.font_file
+                on_press: app.ModeSender()
 
 
 
