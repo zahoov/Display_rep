@@ -139,7 +139,7 @@
             Label:
                 text: app.dest_id
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf'
                 color: 0.9215686275, 0.5882352941, 0.2745098039, 1
                 size_hint_y: 0.5
 
@@ -147,7 +147,7 @@
             Label:
                 text: app.source_id
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-                font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf'
                 color: 0.9215686275, 0.5882352941, 0.2745098039, 1
                 size_hint_y: 0.5
 
@@ -164,7 +164,7 @@
 			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
 				text: 'Main'
-				on_release: 
+				on_release:
 				    app.root.current = 'Fuel Gauge'
 				    app.title_changer('Fuel Gauge')
 				size: self.texture_size
@@ -172,7 +172,7 @@
             Label:
                 text: app.arb_address
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.095
-                font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf'
+                font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf'
                 color: 0.9215686275, 0.5882352941, 0.2745098039, 1
 
             Button:
@@ -260,7 +260,7 @@
                 on_touch_up:
                     app.root.current = 'Service Lock'
                     app.title_changer('Service Lock')
-                    
+
 
 
             Image:
@@ -306,7 +306,7 @@
 			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
 				text: 'Main'
-				on_release: 
+				on_release:
 				    app.root.current = 'Fuel Gauge'
 				    app.title_changer('Fuel Gauge')
 				    app.tester(self.text)
@@ -397,7 +397,7 @@
                 on_touch_up:
                     app.root.current = 'Service Lock'
                     app.title_changer('Service Lock')
-                    
+
 
 
             Image:
@@ -559,7 +559,7 @@
                 on_touch_up:
                     app.root.current = 'Service Lock'
                     app.title_changer('Service Lock')
-                    
+
 
 
             Image:
@@ -573,7 +573,7 @@
 
 		    Label:
 		        text: 'Injection Rate:'
-		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
 		        color: 52/255, 104/255, 162/255, 1
 		        halign: 'right'
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
@@ -582,11 +582,11 @@
 		        text: root.hInjection + 'kg/h'
 		        color: 235/255, 150/255, 72/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
 
 		    Label:
 		        text: 'H2 Leakage:'
-		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
 		        color: 52/255, 104/255, 162/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
 
@@ -594,7 +594,7 @@
 		        text: root.leak_display + 'g/min'
 		        color: 235/255, 150/255, 72/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
 
 		BoxLayout:
 		    id: reference
@@ -695,7 +695,7 @@
                 on_touch_up:
                     app.root.current = 'Service Lock'
                     app.title_changer('Service Lock')
-                    
+
 
 
             Image:
@@ -789,7 +789,7 @@
                 on_touch_up:
                     app.root.current = 'Service Lock'
                     app.title_changer('Service Lock')
-                    
+
 
 
             Image:
@@ -846,7 +846,7 @@
                             Line:
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
-                        text: 'T1: ' + str(app.temps[0]) + u' \u00BAC'
+                        text: 'T1: ' + str(app.temps[0])# + u' \u00BAC'
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                         font_name: app.font_file
                         color: 52/255, 104/255, 162/255, 1
@@ -858,7 +858,7 @@
                             Line:
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
-                        text: 'T2: ' + str(app.temps[1]) + u' \u00BAC'
+                        text: 'T2: ' + str(app.temps[1])# + u' \u00BAC'
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                         font_name: app.font_file
                         color: 52/255, 104/255, 162/255, 1
@@ -870,7 +870,7 @@
                             Line:
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
-                        text: 'T3: ' + str(app.temps[2]) + u' \u00BAC'
+                        text: 'T3: ' + str(app.temps[2])# + u' \u00BAC'
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                         font_name: app.font_file
                         color: 52/255, 104/255, 162/255, 1
@@ -882,7 +882,7 @@
                             Line:
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
-                        text: 'T4:' + str(app.temps[3]) + u' \u00BAC'
+                        text: 'T4:' + str(app.temps[3])# + u' \u00BAC'
                         font_size: ((self.parent.width + self.parent.height) / 3) * 0.12
                         font_name: app.font_file
                         color: 52/255, 104/255, 162/255, 1
@@ -900,7 +900,7 @@
                                 width: 2.5
                                 rectangle: self.x, self.y, self.width, self.height
 
-                        text: 'T5: ' + str(app.temps[4]) + u' \u00BAC'
+                        text: 'T5: ' + str(app.temps[4])# + u' \u00BAC'
 
                         font_size: ((self.parent.width + (2*self.parent.height)) / 3) * 0.12
                         font_name: app.font_file
@@ -917,7 +917,7 @@
                         Line:
                             width: 2.5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: 'P1: ' + str(app.pressures[0]) + ' bar - Tank'
+                    text: 'P1: ' + str(app.pressures[0]) + ' - Tank'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
                     font_name: app.font_file
                     color: 52/255, 104/255, 162/255, 1
@@ -929,7 +929,7 @@
                         Line:
                             width: 2.5
                             rectangle: self.x, self.y, self.width, self.height
-                    text: 'P2: ' + str(app.pressures[1]) + ' bar - Rail'
+                    text: 'P2: ' + str(app.pressures[1]) + ' - Rail'
                     font_size: ((self.parent.width + self.parent.height) / 3) * 0.15
                     font_name: app.font_file
                     color: 52/255, 104/255, 162/255, 1
@@ -946,7 +946,7 @@
 			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
 				text: 'Main'
-				on_release: 
+				on_release:
 				    app.root.current = 'Fuel Gauge'
 				    app.title_changer('Fuel Gauge')
 				    app.tester(self.text)
@@ -1036,7 +1036,7 @@
                 on_touch_up:
                     app.root.current = 'Service Lock'
                     app.title_changer('Service Lock')
-                    
+
 
 
             Image:
@@ -1072,6 +1072,7 @@
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
                 size: self.texture_size
                 valign: 'middle'
+                bold: True
                 halign: 'center'
                 color: 52/255, 104/255, 162/255, 1
                 padding_x: 50
@@ -1098,6 +1099,7 @@
                         width: 2.5
                         rectangle: self.x, self.y, self.width, self.height
                 text: root.error_expl
+                bold: True
                 size: self.texture_size
                 font_size: ((self.parent.width + self.parent.height) / 2) * 0.075
                 valign: 'middle'
@@ -1202,7 +1204,7 @@
 			    background_color: 52/255, 104/255, 162/255, 1
 				font_size: ((self.parent.width + self.parent.height) / 2) * 0.15
 				text: 'Main'
-				on_release: 
+				on_release:
 				    app.root.current = 'Fuel Gauge'
 				    app.title_changer('Fuel Gauge')
 				    app.tester(self.text)
@@ -1237,7 +1239,7 @@
                 pos_hint: {'top': 1}
 
                 Spinner:
-                    
+
                     size_hint_x: (5.5/8.5625)
                     pos_hint: {'top': 1}
                     values: app.dropdown_list
@@ -1289,7 +1291,7 @@
                 on_touch_up:
                     app.root.current = 'Service Lock'
                     app.title_changer('Service Lock')
-                    
+
 
 
             Image:
@@ -1301,7 +1303,7 @@
 
 		    Label:
 		        text: 'Current:'
-		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
 		        color: 52/255, 104/255, 162/255, 1
 		        halign: 'right'
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
@@ -1310,11 +1312,11 @@
 		        text: app.current_mode
 		        color: 235/255, 150/255, 72/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
 
 		    Label:
 		        text: 'Requested:'
-		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
 		        color: 52/255, 104/255, 162/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.085
 
@@ -1322,7 +1324,7 @@
 		        text: app.engine_mode
 		        color: 235/255, 150/255, 72/255, 1
 		        font_size: ((self.parent.width + self.parent.height) / 2) * 0.1
-		        font_name: 'Hydra_Display_RPi/Montserrat-Bold.ttf/'
+		        font_name: '/Users/Xavier Biancardi/PycharmProjects/Display_rep//Montserrat-Bold.ttf/'
 		    Button:
                 background_normal: ''
                 background_color: 52/255, 104/255, 162/255, 1

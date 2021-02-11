@@ -61,7 +61,7 @@ cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 2000
 
-display_code_dir = 'Hydra_Display_RPi/'
+display_code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
 
 _canIdTank123 = "cff3d17"
 _canIdTank456 = "cff4017"
@@ -460,6 +460,7 @@ def truckEngineMode(dt):
         app.mode_color = [235/255, 150/255, 72/255, 1]
     else:
         app.engine_mode = 'Diesel Mode'
+        app.alignment = 'center'
         app.mode_color = [0.431, 0.431, 0.431, 1]
 
 
@@ -641,9 +642,9 @@ class ErrorPage(Screen):
             return ()
 
         if e_c == 255:
-            self.error_expl = 'Everything is running as expected'
+            self.error_expl = 'Running as expected'
         elif int(app.error_code) >= 233:
-            self.error_expl = 'ERROR: Code outside of range'
+            self.error_expl = 'Invalid Code'
         else:
             self.error_expl = app.error_list[e_c]
 
@@ -866,7 +867,7 @@ class FuelGaugeApp(App):
     # These are all of the data values received and decoded by Calvin's code
     temps = ListProperty(['NA', 'NA', 'NA', 'NA', 'NA', 'NA'])
     pressures = ListProperty(['NA', 'NA'])
-    font_file = StringProperty('Hydra_Display_RPi/Montserrat-Regular.ttf')
+    font_file = StringProperty(display_code_dir + '/Montserrat-Regular.ttf')
     current_page = StringProperty('Fuel Gauge')
     dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
     mode_being_requested = int
@@ -874,10 +875,10 @@ class FuelGaugeApp(App):
 
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
-    mil_light = StringProperty()
-    coolant_temp = StringProperty()
-    dpf_status = StringProperty()
-    current_mode = StringProperty()
+    mil_light = StringProperty('ACTIVE')
+    coolant_temp = StringProperty('ACTIVE')
+    dpf_status = StringProperty('ACTIVE')
+    current_mode = StringProperty('ACTIVE')
 
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
