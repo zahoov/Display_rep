@@ -61,7 +61,7 @@ cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 2000
 
-display_code_dir = 'Display_rep'
+display_code_dir = 'Display_rep/'
 
 _canIdTank123 = "cff3d17"
 _canIdTank456 = "cff4017"
@@ -871,8 +871,8 @@ class FuelGaugeApp(App):
     # These are all of the data values received and decoded by Calvin's code
     temps = ListProperty(['NA', 'NA', 'NA', 'NA', 'NA', 'NA'])
     pressures = ListProperty(['NA', 'NA'])
-    font_file = StringProperty(display_code_dir + '/Montserrat-Regular.ttf')
-    bold_font_file = StringProperty(display_code_dir + '/Montserrat-Bold.ttf')
+    font_file = StringProperty(display_code_dir + 'Montserrat-Regular.ttf')
+    bold_font_file = StringProperty(display_code_dir + 'Montserrat-Bold.ttf')
     current_page = StringProperty('Fuel Gauge')
     dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
     mode_being_requested = int
