@@ -462,10 +462,10 @@ def enforceMaxV(origV, maxV):
 def truckEngineMode(dt):
     app = App.get_running_app()
 
-    if (app.mode_being_requested == 0) or (app.mode_being_requested == 1):
+    if (app.mode_num == '0') or (app.mode_num == '1'):
         app.engine_mode = u'H\u2082 Mode '
         app.mode_color = [235/255, 150/255, 72/255, 1]
-    elif app.mode_being_requested == 2:
+    else:
         app.engine_mode = 'Diesel Mode'
         app.alignment = 'center'
         app.mode_color = [0.431, 0.431, 0.431, 1]
