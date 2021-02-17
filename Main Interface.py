@@ -1011,24 +1011,26 @@ class FuelGaugeApp(App):
 
                 self.msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
-                #self.mode_num = '0'
+                self.mode_num = '0'
 
             else:
                 self.msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
-                #self.mode_num = '2'
+                self.mode_num = '2'
 
             self.toggle_msg.data = self.msg_data
             self.toggle_msg.dlc = 8
 
             try:
                 self.task.modify_data(self.toggle_msg)
+
             except AttributeError:
+
                 print('Unable to Change Message, Please Try Again')
                 self.mode_num = prev_mode
                 self.msg_data = prev_data
-                #Clock.schedule_interval(self.toggle_try, 2)
                 return
-            #print('wowo')
+
+
             # Writing the current engine mode to a text file so that it is saved when the display is shut off
             fin = open(display_code_dir + "fuel_file.txt", "wt")
             fin.write(self.mode_num)
