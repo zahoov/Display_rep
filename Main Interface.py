@@ -354,6 +354,7 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                     app.current_mode = 'Diesel'
                     app.mode_num = str(mode_num)
 
+                print(app.mode_being_requested)
                 if (app.mode_being_requested == 0) or (app.mode_being_requested == 1):
                     app.engine_mode = u'H\u2082 Mode '
                     app.mode_color = [235 / 255, 150 / 255, 72 / 255, 1]
