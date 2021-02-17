@@ -356,10 +356,10 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
                 print(app.mode_being_requested)
 
-                if (app.mode_being_requested == 0) or (app.mode_being_requested == 1):
+                if (app.mode_num == '0') or (app.mode_num == '1'):
                     app.engine_mode = u'H\u2082 Mode '
                     app.mode_color = [235 / 255, 150 / 255, 72 / 255, 1]
-                elif app.mode_being_requested == 2:
+                elif app.mode_num == '2':
                     app.engine_mode = 'Diesel Mode'
                     app.mode_color = [0.431, 0.431, 0.431, 1]
 
@@ -465,7 +465,7 @@ def truckEngineMode(dt):
     if (app.mode_num == '0') or (app.mode_num == '1'):
         app.engine_mode = u'H\u2082 Mode '
         app.mode_color = [235/255, 150/255, 72/255, 1]
-    elif app.mode_being_requested == 2:
+    elif app.mode_num == '2':
         app.engine_mode = 'Diesel Mode'
         app.alignment = 'center'
         app.mode_color = [0.431, 0.431, 0.431, 1]
