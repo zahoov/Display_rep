@@ -462,10 +462,10 @@ def enforceMaxV(origV, maxV):
 def truckEngineMode(dt):
     app = App.get_running_app()
 
-    if (app.mode_num == '0') or (app.mode_num == '1'):
+    if (app.mode_being_requested == 0) or (app.mode_being_requested == 1):
         app.engine_mode = u'H\u2082 Mode '
         app.mode_color = [235/255, 150/255, 72/255, 1]
-    else:
+    elif app.mode_being_requested == 2:
         app.engine_mode = 'Diesel Mode'
         app.alignment = 'center'
         app.mode_color = [0.431, 0.431, 0.431, 1]
@@ -951,14 +951,11 @@ class FuelGaugeApp(App):
 
     toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data, is_extended_id=True)
 
-
-
-
-    #try:
-    #    task = bus.send_periodic(toggle_msg, 0.2)
-    #except NameError:
-    #    # Clock.schedule_once(self.bus_activator)
-    #    pass
+    try:
+        task = bus.send_periodic(toggle_msg, 0.2)
+    except NameError:
+        # Clock.schedule_once(self.bus_activator)
+        pass
 
     def bus_activator(self, dt):
         try:
@@ -988,13 +985,13 @@ class FuelGaugeApp(App):
 
 
 
-    #def toggle_try(self, dt):
-    #    try:
-    #        self.task.modify_data(self.toggle_msg)
-    #        Clock.unschedule(self.toggle_try)
-    #    except AttributeError:
-    #        print('Unable to Change Message, Please Try Again')
-    #        return
+    def toggle_try(self, dt):
+        try:
+            self.task.modify_data(self.toggle_msg)
+            Clock.unschedule(self.toggle_try)
+        except AttributeError:
+            print('Unable to Change Message, Please Try Again')
+            return
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
@@ -1003,7 +1000,7 @@ class FuelGaugeApp(App):
         prev_mode = self.mode_num
         prev_data = self.msg_data
 
-        #Clock.unschedule(self.toggle_try)
+        Clock.unschedule(self.toggle_try)
 
         # If the display is unlocked (lock_status == '0') it checks to see what the current engine mode is
         if self.lock_status == '0':
@@ -1011,27 +1008,30 @@ class FuelGaugeApp(App):
             # Depending on the current mode the CAN msg data is set to either 1 or 0 (for H2 mode and Diesel mode respectively)
             if self.mode_num == '2':
 
-                self.msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
+                self.msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
-                self.mode_num = '0'
+                #self.mode_num = '0'
 
             else:
-                self.msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
-                self.mode_num = '2'
+                self.msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
+                #self.mode_num = '2'
 
             self.toggle_msg.data = self.msg_data
             self.toggle_msg.dlc = 8
 
-
-            self.task.modify_data(self.toggle_msg)
-
-
-
-
+            try:
+                self.task.modify_data(self.toggle_msg)
+            except AttributeError:
+                print('Unable to Change Message, Please Try Again')
+                self.mode_num = prev_mode
+                self.msg_data = prev_data
+                Clock.schedule_interval(self.toggle_try, 2)
+                return
+            #print('wowo')
             # Writing the current engine mode to a text file so that it is saved when the display is shut off
-            #fin = open(display_code_dir + "fuel_file.txt", "wt")
-            #fin.write(self.mode_num)
-            #fin.close()
+            fin = open(display_code_dir + "fuel_file.txt", "wt")
+            fin.write(self.mode_num)
+            fin.close()
 
             #Clock.schedule_once(truckEngineMode)
 
