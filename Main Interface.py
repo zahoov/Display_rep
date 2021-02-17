@@ -349,10 +349,10 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
                 if (mode_num == 0) or (mode_num == 1):
                     app.current_mode = 'Hydrogen'
-                    app.mode_num = mode_num
+                    app.mode_num = str(mode_num)
                 else:
                     app.current_mode = 'Diesel'
-                    app.mode_num = mode_num
+                    app.mode_num = str(mode_num)
 
                 print(app.mode_being_requested)
 
@@ -807,7 +807,7 @@ class FuelGaugeApp(App):
     # The error_list is the list of all the error messages
     error_list = []
     # Just initializing the engine mode variable
-    mode_num = int
+    mode_num = str
 
     # Opens the NIRA error code file and saves th error codes to error_code_list
     with open(display_code_dir + 'faultmessages.txt',
@@ -841,13 +841,12 @@ class FuelGaugeApp(App):
 
     if os.path.isfile(display_code_dir + "fuel_file.txt"):
         fin = open(display_code_dir + "fuel_file.txt", "rt")
-        mode_num = float(fin.read())
-        mode_num = '%.2f' % mode_num
+        mode_num = fin.read()
         fin.close()
     else:
         fin = open(display_code_dir + "fuel_file.txt", "w")
         fin.write('2')
-        mode_num = 2
+        mode_num = '2'
         fin.close()
 
     if os.path.isfile(display_code_dir + "arbitration_file.txt"):
@@ -874,7 +873,7 @@ class FuelGaugeApp(App):
     source_id = StringProperty(arb_id[7:9])
 
     # Sets the data in the requestor
-    if mode_num == 2:
+    if (mode_num == '0') or (mode_num == '1'):
         msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
     else:
         msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
@@ -911,7 +910,7 @@ class FuelGaugeApp(App):
     error_base = StringProperty()
     print(mode_num)
 
-    if (mode_num == 0) or (mode_num == 1):
+    if (mode_num == '0') or (mode_num == '1'):
         engine_mode = StringProperty(u'H\u2082 Mode ')
         alignment = StringProperty('right')
         mode_color = ListProperty([235/255, 150/255, 72/255, 1])
@@ -1009,7 +1008,7 @@ class FuelGaugeApp(App):
         if self.lock_status == '0':
 
             # Depending on the current mode the CAN msg data is set to either 1 or 0 (for H2 mode and Diesel mode respectively)
-            if self.mode_num == 2:
+            if self.mode_num == '2':
 
                 self.msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
