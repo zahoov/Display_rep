@@ -872,11 +872,7 @@ class FuelGaugeApp(App):
 
     source_id = StringProperty(arb_id[7:9])
 
-    # Sets the data in the requestor
-    if (mode_num == '0') or (mode_num == '1'):
-        msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
-    else:
-        msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
+
 
 
     # These are all of the data values received and decoded by Calvin's code
@@ -933,14 +929,17 @@ class FuelGaugeApp(App):
     # This calls errorMsg every 2 seconds to constantly change the error notification text from "FAULT" to the error code, or if there is no error it sets the text to blank
     Clock.schedule_interval(errorMsg, 2)
 
-
+    # Sets the data in the requestor
+    if (mode_num == '0') or (mode_num == '1'):
+        msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
+    else:
+        msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
 
     # This checks the value of the engine mode number every 2 seconds and changes the notification text if needed
     Clock.schedule_interval(truckEngineMode, 2)
     # Starts Calvin's CAN message reading code in another thread so that it is constantly reading while the display is active
     a = Thread(target=msg_receiving)
     a.start()
-
 
 
     try:
@@ -951,7 +950,7 @@ class FuelGaugeApp(App):
         pass
 
 
-    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data, is_extended_id=True)
+
 
     try:
         task = bus.send_periodic(toggle_msg, 0.2)
@@ -975,7 +974,7 @@ class FuelGaugeApp(App):
             Clock.schedule_once(self.bus_activator, 0.2)
             return
 
-
+    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data, is_extended_id=True)
 
 
 
@@ -1019,7 +1018,7 @@ class FuelGaugeApp(App):
                 #self.mode_num = '2'
 
             self.toggle_msg.data = self.msg_data
-            self.toggle_msg.dlc = 1
+            self.toggle_msg.dlc = 8
 
             try:
                 self.task.modify_data(self.toggle_msg)
