@@ -949,6 +949,8 @@ class FuelGaugeApp(App):
         # Clock.schedule_once(self.bus_activator)
         pass
 
+    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data, is_extended_id=True)
+
 
 
 
@@ -974,7 +976,7 @@ class FuelGaugeApp(App):
             Clock.schedule_once(self.bus_activator, 0.2)
             return
 
-    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data, is_extended_id=True)
+
 
 
 
