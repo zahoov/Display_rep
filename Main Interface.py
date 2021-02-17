@@ -60,7 +60,7 @@ from kivy.uix.dropdown import DropDown
 cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 2000
-# '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
+#'/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
 display_code_dir = 'Display_rep/'
 
 _canIdTank123 = "cff3d17"
@@ -317,7 +317,8 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 coolant_temp = str((enforceMaxV(((int(hexV[0:2], 16))), 250) * 1.0) - 40.0)  # Unit = °C
 
                 if coolant_temp is not '':
-                    app.coolant_temp = coolant_temp + u' \u00BAC'
+
+                    app.coolant_temp = coolant_temp  + u' \u00BAC'
 
 
             elif (idV == "18feca00"):
@@ -361,6 +362,9 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 elif app.mode_being_requested == 2:
                     app.engine_mode = 'Diesel Mode'
                     app.mode_color = [0.431, 0.431, 0.431, 1]
+
+
+
 
             #######################################################################################
             # curHr = int(dateV.split(":")[1])
@@ -460,7 +464,7 @@ def truckEngineMode(dt):
 
     if (app.mode_num == '0') or (app.mode_num == '1'):
         app.engine_mode = u'H\u2082 Mode '
-        app.mode_color = [235 / 255, 150 / 255, 72 / 255, 1]
+        app.mode_color = [235/255, 150/255, 72/255, 1]
     else:
         app.engine_mode = 'Diesel Mode'
         app.alignment = 'center'
@@ -469,6 +473,9 @@ def truckEngineMode(dt):
 
 def stateUpdate(dt):
     app = App.get_running_app()
+
+
+
 
 
 # This checks what value the error_code variable has and if it has no value or is 255 then since there is no fault the function sets the error_base string variable to ' ' which is just blank
@@ -497,7 +504,7 @@ def callback(dt):
 
 
 # This is the menu screen that the app defaults to and provides buttons to access all of the information screens
-# class MainMenu(Screen):
+#class MainMenu(Screen):
 #
 #    def lock_changer(self, status):
 #
@@ -563,6 +570,8 @@ class FuelGaugeLayout(Screen):
     dash_label = StringProperty()
     percent_label = StringProperty()
 
+
+
     def mass_reader(self, dt):
         app = App.get_running_app()
         # Divides the current hydrogen mass by the maximum possible then multiplies by 100 to get a percentage
@@ -595,6 +604,7 @@ class FuelInjectionLayout(Screen):
     hInjection = StringProperty()
     leak_display = StringProperty()
 
+
     # Same as in the other classes, calls functions as the user enters the page. Upon_entering has the same function as upon_entering_mass and just calls the functions after a 0.5s
     # delay to avoid any issues
     def on_enter(self):
@@ -624,7 +634,6 @@ class FuelInjectionLayout(Screen):
     def on_leave(self):
         Clock.unschedule(callback)
         Clock.unschedule(self.injection_reader)
-
 
 # This is the page that displays the Fault code and its corresponding message
 class ErrorPage(Screen):
@@ -683,7 +692,6 @@ class TankTempPress(Screen):
 class CustomDropDown(DropDown):
     pass
 
-
 # This is the screen manager that holds all of the other pages together
 class MyScreenManager(ScreenManager):
     pass
@@ -692,10 +700,13 @@ class MyScreenManager(ScreenManager):
 # Screen that shows the leakage rate
 class Mode(Screen):
 
+
+
     def on_enter(self):
         app = App.get_running_app()
 
-        # app.title_changer('Engine Mode')
+
+        #app.title_changer('Engine Mode')
 
         Clock.schedule_once(callback, delay)
 
@@ -707,6 +718,7 @@ class Mode(Screen):
     # Same as in the other classes
     def on_leave(self):
         Clock.unschedule(callback)
+
 
 
 # This is the lock screen where technicians can lock or unlock the engine mode toggle button -- accessed by hitting the engine mode descriptor
@@ -739,7 +751,7 @@ class ModeLocking(Screen):
             self.status = 'Locked'
 
     # Sets the default color of the submit button
-    wrong_password_ind = ListProperty([44 / 255, 49 / 255, 107 / 255, 1])
+    wrong_password_ind = ListProperty([44/255, 49/255, 107/255, 1])
 
     # Called when the user submits their password
     def code_tester(self, text):
@@ -785,6 +797,7 @@ class Message_settings(Screen):
     # Same as in the other classes
     def on_leave(self):
         Clock.unschedule(callback)
+
 
 
 # The main app class that everything runs off of
@@ -859,15 +872,18 @@ class FuelGaugeApp(App):
 
     source_id = StringProperty(arb_id[7:9])
 
+
+
+
     # These are all of the data values received and decoded by Calvin's code
     temps = ListProperty(['NA', 'NA', 'NA', 'NA', 'NA', 'NA'])
     pressures = ListProperty(['NA', 'NA'])
     font_file = StringProperty(display_code_dir + 'Montserrat-Regular.ttf')
     bold_font_file = StringProperty(display_code_dir + 'Montserrat-Bold.ttf')
     current_page = StringProperty('Fuel Gauge')
-    dropdown_list = ListProperty(
-        ['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
+    dropdown_list = ListProperty(['Fuel Gauge', 'Injection Rate', 'Engine Mode', 'Temp & Press', 'Fault Info', 'CAN Settings'])
     mode_being_requested = int
+
 
     Hleakage = NumericProperty()
     HinjectionV = NumericProperty()
@@ -879,7 +895,7 @@ class FuelGaugeApp(App):
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
     hMass = NumericProperty(0)
-    # hMass = 12.7
+    #hMass = 12.7
 
     # error_code is a string variable that is used to temporarily store the current error code taken from the text document it is stored in. It is a string because after coming from the .txt the data is a string and
     # must be converted into a float or int to be used as a number
@@ -893,11 +909,13 @@ class FuelGaugeApp(App):
     if (mode_num == '0') or (mode_num == '1'):
         engine_mode = StringProperty(u'H\u2082 Mode ')
         alignment = StringProperty('right')
-        mode_color = ListProperty([235 / 255, 150 / 255, 72 / 255, 1])
+        mode_color = ListProperty([235/255, 150/255, 72/255, 1])
     else:
         engine_mode = StringProperty('Diesel Mode')
         alignment = StringProperty('center')
         mode_color = ListProperty([0.431, 0.431, 0.431, 1])
+
+
 
     # Similar to error_base this is a string property and will contain the text to be displayed in the top right of most screens. This text tells the user if the truck is in H2 mode or Diesel mode
 
@@ -923,6 +941,7 @@ class FuelGaugeApp(App):
     a = Thread(target=msg_receiving)
     a.start()
 
+
     try:
         bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
     except OSError:
@@ -931,6 +950,9 @@ class FuelGaugeApp(App):
         pass
 
     toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data, is_extended_id=True)
+
+
+
 
     try:
         task = bus.send_periodic(toggle_msg, 0.2)
@@ -943,7 +965,7 @@ class FuelGaugeApp(App):
             bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
             print('Found PiCAN board!')
         except OSError:
-            # print('Cannot find PiCAN board')
+            #print('Cannot find PiCAN board')
             Clock.schedule_once(self.bus_activator, 0.2)
             return
         try:
@@ -954,12 +976,19 @@ class FuelGaugeApp(App):
             Clock.schedule_once(self.bus_activator, 0.2)
             return
 
+
+
+
+
+
     # Runs the screen manager that sets everything in motion
     def build(self):
         Clock.schedule_once(self.bus_activator)
         return MyScreenManager()
 
-    # def toggle_try(self, dt):
+
+
+    #def toggle_try(self, dt):
     #    try:
     #        self.task.modify_data(self.toggle_msg)
     #        Clock.unschedule(self.toggle_try)
@@ -974,7 +1003,7 @@ class FuelGaugeApp(App):
         prev_mode = self.mode_num
         prev_data = self.msg_data
 
-        # Clock.unschedule(self.toggle_try)
+        #Clock.unschedule(self.toggle_try)
 
         # If the display is unlocked (lock_status == '0') it checks to see what the current engine mode is
         if self.lock_status == '0':
@@ -984,17 +1013,18 @@ class FuelGaugeApp(App):
 
                 self.msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
-                self.mode_num = '0'
-                self.toggle_msg.data = self.msg_data
-                self.toggle_msg.dlc = 8
-                self.task.modify_data(self.toggle_msg)
+                #self.mode_num = '0'
 
             else:
                 self.msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
-                self.mode_num = '2'
-                self.toggle_msg.data = self.msg_data
-                self.toggle_msg.dlc = 8
-                self.task.modify_data(self.toggle_msg)
+                #self.mode_num = '2'
+
+            self.toggle_msg.data = self.msg_data
+            self.toggle_msg.dlc = 8
+
+
+            self.task.modify_data(self.toggle_msg)
+
 
 
 
@@ -1003,7 +1033,7 @@ class FuelGaugeApp(App):
             fin.write(self.mode_num)
             fin.close()
 
-            # Clock.schedule_once(truckEngineMode)
+            #Clock.schedule_once(truckEngineMode)
 
     def source_changer(self, new_id):
 
@@ -1076,13 +1106,18 @@ class FuelGaugeApp(App):
                 self.task = self.bus.send_periodic(self.toggle_msg, 0.2)
 
     def title_changer(self, cur_page):
-        # time.sleep(0.5)
+        #time.sleep(0.5)
         self.current_page = cur_page
-        # print(self.current_page)
+        #print(self.current_page)
 
     def tester(self, wow):
-        # print(wow)
+        #print(wow)
         pass
+
+
+
+
+
 
 
 # Makes everything start
