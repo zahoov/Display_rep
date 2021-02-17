@@ -61,7 +61,7 @@ cf = 1.8
 # The delay is how long the app goes without user input before it changes to the screen saver
 delay = 2000
 
-display_code_dir = 'Display_rep/'
+display_code_dir = '/Users/Xavier Biancardi/PycharmProjects/Display_rep/'
 
 _canIdTank123 = "cff3d17"
 _canIdTank456 = "cff4017"
@@ -359,9 +359,10 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
                 if (app.mode_being_requested == 0) or (app.mode_being_requested == 1):
                     app.engine_mode = u'H\u2082 Mode '
                     app.mode_color = [235 / 255, 150 / 255, 72 / 255, 1]
-                else:
+                elif app.mode_being_requested == 2:
                     app.engine_mode = 'Diesel Mode'
                     app.mode_color = [0.431, 0.431, 0.431, 1]
+
 
 
 
@@ -464,10 +465,17 @@ def truckEngineMode(dt):
     if (app.mode_being_requested == 0) or (app.mode_being_requested == 1):
         app.engine_mode = u'H\u2082 Mode '
         app.mode_color = [235/255, 150/255, 72/255, 1]
-    else:
+    elif app.mode_being_requested == 2:
         app.engine_mode = 'Diesel Mode'
         app.alignment = 'center'
         app.mode_color = [0.431, 0.431, 0.431, 1]
+
+
+def stateUpdate(dt):
+    app = App.get_running_app()
+
+
+
 
 
 # This checks what value the error_code variable has and if it has no value or is 255 then since there is no fault the function sets the error_base string variable to ' ' which is just blank
@@ -900,15 +908,17 @@ class FuelGaugeApp(App):
     # error_base is the text that is displayed in the top left hand of most screens -- if there is a fault this variable becomes "FAULT" and then the error code and flips between them
     # It is a StringProperty() which is a Kivy variable type the essentially tells the Kivy back end code to keep checking what its value is/if it changes
     error_base = StringProperty()
+    print(mode_num)
 
     if (mode_num == '0') or (mode_num == '1'):
         engine_mode = StringProperty(u'H\u2082 Mode ')
         alignment = StringProperty('right')
         mode_color = ListProperty([235/255, 150/255, 72/255, 1])
-    else:
+    elif mode_num == '2':
         engine_mode = StringProperty('Diesel Mode')
         alignment = StringProperty('center')
         mode_color = ListProperty([0.431, 0.431, 0.431, 1])
+
 
     # Similar to error_base this is a string property and will contain the text to be displayed in the top right of most screens. This text tells the user if the truck is in H2 mode or Diesel mode
 
