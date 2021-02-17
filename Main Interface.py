@@ -1012,6 +1012,7 @@ class FuelGaugeApp(App):
 
             try:
                 self.task.modify_data(self.toggle_msg)
+                print(self.task.message)
             except AttributeError:
                 print('Unable to Change Message, Please Try Again')
                 self.mode_num = prev_mode
