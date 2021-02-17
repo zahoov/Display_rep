@@ -954,11 +954,11 @@ class FuelGaugeApp(App):
 
 
 
-    try:
-        task = bus.send_periodic(toggle_msg, 0.2)
-    except NameError:
-        # Clock.schedule_once(self.bus_activator)
-        pass
+    #try:
+    #    task = bus.send_periodic(toggle_msg, 0.2)
+    #except NameError:
+    #    # Clock.schedule_once(self.bus_activator)
+    #    pass
 
     def bus_activator(self, dt):
         try:
@@ -1029,9 +1029,9 @@ class FuelGaugeApp(App):
 
 
             # Writing the current engine mode to a text file so that it is saved when the display is shut off
-            fin = open(display_code_dir + "fuel_file.txt", "wt")
-            fin.write(self.mode_num)
-            fin.close()
+            #fin = open(display_code_dir + "fuel_file.txt", "wt")
+            #fin.write(self.mode_num)
+            #fin.close()
 
             #Clock.schedule_once(truckEngineMode)
 
