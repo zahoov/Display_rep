@@ -864,9 +864,10 @@ class FuelGaugeApp(App):
 
     # Sets the data in the requestor
     if mode_num == '2':
-        msg_data = [0]
+        msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
     else:
-        msg_data = [1]
+        msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
+
 
     # These are all of the data values received and decoded by Calvin's code
     temps = ListProperty(['NA', 'NA', 'NA', 'NA', 'NA', 'NA'])
@@ -937,7 +938,7 @@ class FuelGaugeApp(App):
         pass
 
 
-    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data)
+    toggle_msg = can.Message(arbitration_id=0xCFF41F2, data=msg_data, is_extended_id=True)
 
     try:
         task = bus.send_periodic(toggle_msg, 0.2)
@@ -996,12 +997,12 @@ class FuelGaugeApp(App):
             # Depending on the current mode the CAN msg data is set to either 1 or 0 (for H2 mode and Diesel mode respectively)
             if self.mode_num == '2':
 
-                self.msg_data = [1]
+                self.msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
                 # Then it changes what the current mode number is (ie. it toggles the engine mode for the next time the button is pressed)
                 #self.mode_num = '0'
 
             else:
-                self.msg_data = [0]
+                self.msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
                 #self.mode_num = '2'
 
             self.toggle_msg.data = self.msg_data
