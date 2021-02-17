@@ -914,10 +914,11 @@ class FuelGaugeApp(App):
         engine_mode = StringProperty(u'H\u2082 Mode ')
         alignment = StringProperty('right')
         mode_color = ListProperty([235/255, 150/255, 72/255, 1])
-    elif mode_num == '2':
+    else:
         engine_mode = StringProperty('Diesel Mode')
         alignment = StringProperty('center')
         mode_color = ListProperty([0.431, 0.431, 0.431, 1])
+
 
 
     # Similar to error_base this is a string property and will contain the text to be displayed in the top right of most screens. This text tells the user if the truck is in H2 mode or Diesel mode
