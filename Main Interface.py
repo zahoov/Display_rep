@@ -1020,15 +1020,10 @@ class FuelGaugeApp(App):
             self.toggle_msg.data = self.msg_data
             self.toggle_msg.dlc = 8
 
-            try:
-                self.task.modify_data(self.toggle_msg)
 
-            except AttributeError:
+            self.task.modify_data(self.toggle_msg)
 
-                print('Unable to Change Message, Please Try Again')
-                self.mode_num = prev_mode
-                self.msg_data = prev_data
-                return
+
 
 
             # Writing the current engine mode to a text file so that it is saved when the display is shut off
