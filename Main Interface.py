@@ -349,10 +349,10 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
                 if (mode_num == 0) or (mode_num == 1):
                     app.current_mode = 'Hydrogen'
-                    #app.mode_num = str(mode_num)
+                    app.mode_num = str(mode_num)
                 elif mode_num == 2:
                     app.current_mode = 'Diesel'
-                    #app.mode_num = str(mode_num)
+                    app.mode_num = str(mode_num)
 
                 #print(app.mode_being_requested)
 
