@@ -928,10 +928,12 @@ class FuelGaugeApp(App):
         engine_mode = StringProperty(u'H\u2082 Mode ')
         alignment = StringProperty('right')
         mode_color = ListProperty([235/255, 150/255, 72/255, 1])
+        msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
     elif mode_num == '2':
         engine_mode = StringProperty('Diesel Mode')
         alignment = StringProperty('center')
         mode_color = ListProperty([0.431, 0.431, 0.431, 1])
+        msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
 
 
 
@@ -946,12 +948,9 @@ class FuelGaugeApp(App):
 
     # This calls errorMsg every 2 seconds to constantly change the error notification text from "FAULT" to the error code, or if there is no error it sets the text to blank
     Clock.schedule_interval(errorMsg, 2)
+ 
 
-    # Sets the data in the requestor
-    if (mode_num == '0') or (mode_num == '1'):
-        msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
-    else:
-        msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
+
 
     # This checks the value of the engine mode number every 2 seconds and changes the notification text if needed
     Clock.schedule_interval(truckEngineMode, 2)
