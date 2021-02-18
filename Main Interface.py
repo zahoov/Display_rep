@@ -349,10 +349,10 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
                 if (mode_num == 0) or (mode_num == 1):
                     app.current_mode = 'Hydrogen'
-                    app.mode_num = str(mode_num)
+                    #app.mode_num = str(mode_num)
                 elif mode_num == 2:
                     app.current_mode = 'Diesel'
-                    app.mode_num = str(mode_num)
+                    #app.mode_num = str(mode_num)
 
                 #print(app.mode_being_requested)
 
@@ -928,7 +928,7 @@ class FuelGaugeApp(App):
         engine_mode = StringProperty(u'H\u2082 Mode ')
         alignment = StringProperty('right')
         mode_color = ListProperty([235/255, 150/255, 72/255, 1])
-    else:
+    elif mode_num == '2':
         engine_mode = StringProperty('Diesel Mode')
         alignment = StringProperty('center')
         mode_color = ListProperty([0.431, 0.431, 0.431, 1])
