@@ -344,17 +344,33 @@ def liveUpdateTruck(outstr, livefeedNiraErrorFname, livefeedHmassFname, prevNira
 
             elif idV == 'cff3c17':
 
-                app.mode_being_requested = (enforceMaxV(((int(hexV[0:2], 16) & 0b00000011)), 3) * 1.0)  # Unit = bit
+                mode_being_requested = (enforceMaxV(((int(hexV[0:2], 16) & 0b00000011)), 3) * 1.0)  # Unit = bit
                 mode_num = (enforceMaxV((((int(hexV[0:2], 16) & 0b00001100) >> 2)), 3) * 1.0)  # Unit = bit
 
                 if (mode_num == 0) or (mode_num == 1):
                     app.current_mode = 'Hydrogen'
-                    app.mode_num = str(mode_num)
-                else:
+                    #app.mode_num = str(mode_num)
+                elif mode_num == 2:
                     app.current_mode = 'Diesel'
-                    app.mode_num = str(mode_num)
+                    #app.mode_num = str(mode_num)
 
-                print(app.mode_being_requested)
+                #print(app.mode_being_requested)
+
+                if (mode_being_requested) == 0 or (mode_being_requested == 1):
+
+                    app.truck_reqd = u'H\u2082 Mode '
+                    app.mode_color = [235 / 255, 150 / 255, 72 / 255, 1]
+
+                elif mode_being_requested == 2:
+
+                    app.truck_reqd = 'Diesel Mode'
+                    app.mode_color = [0.431, 0.431, 0.431, 1]
+
+                else:
+
+                    app.engine_mode = 'Missing'
+                    app.mode_color = [1, 0, 0, 1]
+
 
                 if (app.mode_num == '0') or (app.mode_num == '1'):
                     app.engine_mode = u'H\u2082 Mode '
@@ -891,6 +907,8 @@ class FuelGaugeApp(App):
     coolant_temp = StringProperty('Missing')
     dpf_status = StringProperty('Missing')
     current_mode = StringProperty('Missing')
+
+    truck_reqd = StringProperty()
 
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks
