@@ -481,6 +481,7 @@ def truckEngineMode(dt):
     if (app.mode_num == '0') or (app.mode_num == '1'):
         app.engine_mode = u'H\u2082 Mode '
         app.mode_color = [235/255, 150/255, 72/255, 1]
+        app.alignment = 'right'
     elif app.mode_num == '2':
         app.engine_mode = 'Diesel Mode'
         app.alignment = 'center'
