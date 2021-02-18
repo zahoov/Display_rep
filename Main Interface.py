@@ -857,7 +857,7 @@ class FuelGaugeApp(App):
 
     if os.path.isfile(display_code_dir + "fuel_file.txt"):
         fin = open(display_code_dir + "fuel_file.txt", "rt")
-        mode_num = fin.read()
+        mode_num = fin.read().strip('\n')
         fin.close()
     else:
         fin = open(display_code_dir + "fuel_file.txt", "w")
