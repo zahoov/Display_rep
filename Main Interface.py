@@ -928,12 +928,12 @@ class FuelGaugeApp(App):
         engine_mode = StringProperty(u'H\u2082 Mode ')
         alignment = StringProperty('right')
         mode_color = ListProperty([235/255, 150/255, 72/255, 1])
-        msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
+        msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
     elif mode_num == '2':
         engine_mode = StringProperty('Diesel Mode')
         alignment = StringProperty('center')
         mode_color = ListProperty([0.431, 0.431, 0.431, 1])
-        msg_data = [1, 0, 0, 0, 0, 0, 0, 0]
+        msg_data = [0, 0, 0, 0, 0, 0, 0, 0]
 
 
 
