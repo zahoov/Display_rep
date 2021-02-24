@@ -9,7 +9,7 @@ while brightness > 0:
 
     os.system(dimmer)
 
-    brightness -= 16
+    brightness -= 64
 
     time.sleep(0.5)
 
@@ -19,7 +19,7 @@ while brightness < 1024:
 
     os.system(brighter)
 
-    brightness += 16
+    brightness += 64
 
     time.sleep(0.5)
 
