@@ -1,26 +1,41 @@
 import os
 import time
+import requests
+
+#fin = open('/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/sunsets.txt', 'w')
+
+i = 1
 
 
-brightness = 1024
+while i <= 12:
 
-while brightness > 0:
-    dimmer = "gpio -g pwm 12 " + str(brightness)
+    d = [1, 7, 14, 20, 26]
 
-    os.system(dimmer)
+    for day in d:
 
-    brightness -= 64
+        cur_date = '2021-' + str(i) + '-' + str(day)
 
-    time.sleep(0.5)
+        url = 'https://api.sunrise-sunset.org/json?lat=49.169611&lng=-122.946766&date=' + cur_date
 
-while brightness < 1024:
+        #receive = requests.get(url)
 
-    brighter = "gpio -g pwm 12 " + str(brightness)
+        print(receive.text)
 
-    os.system(brighter)
+        a = receive.text.split(',')
 
-    brightness += 64
+        utc_hour = a[5].split('"')[3].split(':')[0]
+        min = a[5].split('"')[3][2:4]
 
-    time.sleep(0.5)
+        pst_hour = int(utc_hour) + 4
 
+        if pst_hour > 12:
+            print('wow')
+
+        pst = str(pst_hour) + ':' + min
+
+        fin.write(cur_date + '>' + pst + '\n')
+
+    i += 1
+
+fin.close()
 
