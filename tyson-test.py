@@ -1,7 +1,6 @@
 import can
 import os
 import time
-from threading import Thread
 
 # _canIdTank123 = "cff3d17"
 _canIdTank123 = "14ff0221"
@@ -71,17 +70,6 @@ def connectToLogger(canV):
         print('Cannot find PiCAN board.')
         exit()
     return bus
-
-
-def readwriteMessageThread(bus):
-    print('readWrite')
-    """
-    In seperate thread continually recieve messages from CAN logger
-    """
-    # Start receive thread
-    t = Thread(target=can_rx_task, args=bus)
-    t.start()
-
 
 def liveUpdateTruck(outstr):
     # print('liveupdate')
