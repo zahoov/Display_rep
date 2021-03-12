@@ -3,7 +3,8 @@ import os
 import time
 from threading import Thread
 
-_canIdTank123 = "cff3d17"
+#_canIdTank123 = "cff3d17"
+_canIdTank123 = "14ff0221"
 _canIdTank456 = "cff4017"
 _canIdNira3 = "cff3e17"
 _canIdWheelSpeed = "18fef100"
