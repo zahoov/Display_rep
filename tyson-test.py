@@ -90,7 +90,7 @@ def liveUpdateTruck(outstr):
 
     for i in range(6):
         tempL.append(None)
-    for i in range(3):
+    for i in range(2):
         pressures.append(None)
 
     splt = outstr.strip().split(" ")
@@ -125,7 +125,8 @@ def liveUpdateTruck(outstr):
                 tempL[1] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempL[2] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-
+                print(tempL[:3])
+                print(pressures[0])
 
             #######################################################################################
             # Temperature T4-T6
@@ -135,13 +136,15 @@ def liveUpdateTruck(outstr):
                 tempL[4] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempL[5] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                # print(tempL)
+                print(tempL[3:])
 
             #######################################################################################
             # Rail pressure
             elif (idV == _canIdNira3):
                 # print('nira3')
                 pressures[1] = (enforceMaxV(((int(hexV[12:14], 16))), 4015) * 0.1)
+
+                print(pressures[1])
 
             #######################################################################################
 
@@ -180,11 +183,6 @@ def can_rx_task(bus):
 
         (tempL, pressureL) = liveUpdateTruck(outstr)
 
-        ###########
-        # Outputs are below in this function #
-        print(tempL)
-        print(pressureL)
-        ###########
 
 
 def enforceMaxV(origV, maxV):
