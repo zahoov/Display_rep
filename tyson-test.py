@@ -118,7 +118,7 @@ def liveUpdateTruck(outstr):
                 tempList[1] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempList[2] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                print(tempList[0:2])
+                print(tempList)
 
             #######################################################################################
             # Temperature T4-T6
@@ -127,7 +127,7 @@ def liveUpdateTruck(outstr):
                 tempList[4] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempList[5] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                print(tempList[3:])
+                print(tempList)
 
 
             #######################################################################################
