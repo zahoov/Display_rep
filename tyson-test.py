@@ -144,7 +144,7 @@ def liveUpdateTruck(outstr):
 
 
 def createLogLine(message):
-    print('createlogline')
+    #print('createlogline')
 
     hmsfV = 'placeholder:'
 
@@ -157,6 +157,8 @@ def createLogLine(message):
         hexV += '{0:x} '.format(message.data[i])
 
     outstr = " ".join([hmsfV, "Rx", "1", pgnV, "x", str(message.dlc), hexV]) + " "
+
+    print(outstr)
 
     return (outstr)
 
