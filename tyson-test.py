@@ -31,7 +31,8 @@ def msg_receiving():
     bus0 = connectToLogger('can0')
 
     # Continually recieved messages
-    readwriteMessageThread(bus0)
+    #readwriteMessageThread(bus0)
+    can_rx_task(bus0)
     # if numCAN == 2:
     #    readwriteMessageThread(bus1, outDir, numCAN, bRate, CANtype + "1", numTank, volumeL)
 
