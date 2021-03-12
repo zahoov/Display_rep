@@ -166,3 +166,7 @@ def enforceMaxV(origV, maxV):
         return origV
     else:
         return maxV
+
+
+if __name__ == '__main__':
+    msg_receiving()
