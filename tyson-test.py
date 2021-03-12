@@ -94,7 +94,7 @@ def liveUpdateTruck(outstr):
     # date, can ID, hex value
     if (outstr[0] != "*"):
         try:
-            print('nice')
+            #print('nice')
             idV = splt[3].lower()[2:]
             hexVsplt = splt[6:]
             hexV = ""
@@ -108,7 +108,7 @@ def liveUpdateTruck(outstr):
             idV = ""
 
         if len(hexV) == 16:
-            print('lengthgood')
+            #print('lengthgood')
 
             #######################################################################################
             # Temperature and Pressure T1-T3
@@ -179,7 +179,7 @@ def can_rx_task(bus):
 
         (tempL, pressureL) = liveUpdateTruck(outstr)
 
-        print(tempL)
+        #print(tempL)
 
 
 def enforceMaxV(origV, maxV):
