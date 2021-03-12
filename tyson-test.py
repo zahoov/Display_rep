@@ -94,6 +94,7 @@ def liveUpdateTruck(outstr):
     # date, can ID, hex value
     if (outstr[0] != "*"):
         try:
+            print('nice')
             idV = splt[3].lower()[2:]
             hexVsplt = splt[6:]
             hexV = ""
