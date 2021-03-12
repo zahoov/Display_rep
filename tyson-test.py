@@ -10,6 +10,7 @@ _canIdWheelSpeed = "18fef100"
 
 
 def msg_receiving():
+    print('msg_receiving')
     outDir = "Display_rep/out/hydraFL"  # "/home/pi/rough/logger-rbp-python-out/lomack150_"
     numCAN = 1  # 2
     bRate = 250000  # 250000 or 500000
@@ -46,6 +47,7 @@ def msg_receiving():
 
 
 def setCANbaudRate(numCAN, bRate):
+    print('setCANbaudRate')
     """
     Make CAN interface to 250 or 500 kbps
     """
@@ -56,6 +58,7 @@ def setCANbaudRate(numCAN, bRate):
 
 
 def connectToLogger(canV):
+    print('connectToLogger')
     """
     Connect to Bus
     """
@@ -69,6 +72,7 @@ def connectToLogger(canV):
 
 
 def readwriteMessageThread(bus):
+    print('readWrite')
     """
     In seperate thread continually recieve messages from CAN logger
     """
@@ -78,6 +82,7 @@ def readwriteMessageThread(bus):
 
 
 def liveUpdateTruck(outstr):
+    print('liveupdate')
     tempL = []
     pressures = []
 
@@ -128,6 +133,7 @@ def liveUpdateTruck(outstr):
 
 
 def createLogLine(message):
+    print('createlogline')
 
     hmsfV = 'placeholder:'
 
@@ -145,6 +151,7 @@ def createLogLine(message):
 
 
 def can_rx_task(bus):
+    print('can_rx_task')
     tempL = []
     pressureL = []
 
