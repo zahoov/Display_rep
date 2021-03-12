@@ -85,7 +85,7 @@ def readwriteMessageThread(bus):
 
 
 def liveUpdateTruck(outstr):
-    print('liveupdate')
+    #print('liveupdate')
     tempL = []
     pressures = []
 
@@ -114,26 +114,27 @@ def liveUpdateTruck(outstr):
 
                 pressures[0] = (enforceMaxV(((int(hexV[0:2], 16)) + ((int(hexV[2:4], 16) & 0b00001111) << 8)), 4015) * 0.1)
                 presT2 = (enforceMaxV((((int(hexV[2:4], 16) & 0b11110000) >> 4) + ((int(hexV[4:6], 16)) << 4)), 4015) * 0.1)
-                tempList[0] = (enforceMaxV(((int(hexV[10:12], 16))), 250) * 1.0) - 40.0
-                tempList[1] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
-                tempList[2] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
+                tempL[0] = (enforceMaxV(((int(hexV[10:12], 16))), 250) * 1.0) - 40.0
+                tempL[1] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
+                tempL[2] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                print(tempList)
+
 
             #######################################################################################
             # Temperature T4-T6
             elif (idV == _canIdTank456):
-                tempList[3] = (enforceMaxV(((int(hexV[10:12], 16))), 250) * 1.0) - 40.0
-                tempList[4] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
-                tempList[5] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
+                tempL[3] = (enforceMaxV(((int(hexV[10:12], 16))), 250) * 1.0) - 40.0
+                tempL[4] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
+                tempL[5] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-                print(tempList)
 
+                #print(tempL)
 
             #######################################################################################
             # Rail pressure
             elif (idV == _canIdNira3):
                 pressures[1] = (enforceMaxV(((int(hexV[12:14], 16))), 4015) * 0.1)
+
 
 
 
@@ -170,6 +171,8 @@ def can_rx_task(bus):
         (outstr) = createLogLine(bus.recv())
 
         (tempL, pressureL) = liveUpdateTruck(outstr)
+
+        print(tempL)
 
 
 def enforceMaxV(origV, maxV):
