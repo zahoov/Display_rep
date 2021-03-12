@@ -3,14 +3,12 @@ import os
 import time
 from threading import Thread
 
-#_canIdTank123 = "cff3d17"
+# _canIdTank123 = "cff3d17"
 _canIdTank123 = "14ff0221"
 _canIdTank456 = "cff4017"
 _canIdNira3 = "cff3e17"
 _canIdWheelSpeed = "18fef100"
 
-tempList = []
-pressureList = []
 
 def msg_receiving():
     print('msg_receiving')
@@ -34,7 +32,7 @@ def msg_receiving():
     bus0 = connectToLogger('can0')
 
     # Continually recieved messages
-    #readwriteMessageThread(bus0)
+    # readwriteMessageThread(bus0)
     can_rx_task(bus0)
     # if numCAN == 2:
     #    readwriteMessageThread(bus1, outDir, numCAN, bRate, CANtype + "1", numTank, volumeL)
@@ -86,16 +84,21 @@ def readwriteMessageThread(bus):
 
 
 def liveUpdateTruck(outstr):
-    #print('liveupdate')
+    # print('liveupdate')
     tempL = []
     pressures = []
+
+    for i in range(6):
+        tempL.append(None)
+    for i in range(3):
+        pressures.append(None)
 
     splt = outstr.strip().split(" ")
 
     # date, can ID, hex value
     if (outstr[0] != "*"):
         try:
-            #print('nice')
+            # print('nice')
             idV = splt[3].lower()[2:]
             hexVsplt = splt[6:]
             hexV = ""
@@ -109,12 +112,12 @@ def liveUpdateTruck(outstr):
             idV = ""
 
         if len(hexV) == 16:
-            #print('lengthgood')
+            # print('lengthgood')
 
             #######################################################################################
             # Temperature and Pressure T1-T3
             if (idV == _canIdTank123):
-                print('tank123msgfound')
+                # print('tank123msgfound')
 
                 pressures[0] = (enforceMaxV(((int(hexV[0:2], 16)) + ((int(hexV[2:4], 16) & 0b00001111) << 8)), 4015) * 0.1)
                 presT2 = (enforceMaxV((((int(hexV[2:4], 16) & 0b11110000) >> 4) + ((int(hexV[4:6], 16)) << 4)), 4015) * 0.1)
@@ -127,22 +130,18 @@ def liveUpdateTruck(outstr):
             #######################################################################################
             # Temperature T4-T6
             elif (idV == _canIdTank456):
-                print('tank456msgfound')
+                # print('tank456msgfound')
                 tempL[3] = (enforceMaxV(((int(hexV[10:12], 16))), 250) * 1.0) - 40.0
                 tempL[4] = (enforceMaxV(((int(hexV[12:14], 16))), 250) * 1.0) - 40.0
                 tempL[5] = (enforceMaxV(((int(hexV[14:16], 16))), 250) * 1.0) - 40.0
 
-
-                #print(tempL)
+                # print(tempL)
 
             #######################################################################################
             # Rail pressure
             elif (idV == _canIdNira3):
-                print('nira3')
+                # print('nira3')
                 pressures[1] = (enforceMaxV(((int(hexV[12:14], 16))), 4015) * 0.1)
-
-
-
 
             #######################################################################################
 
@@ -150,7 +149,7 @@ def liveUpdateTruck(outstr):
 
 
 def createLogLine(message):
-    #print('createlogline')
+    # print('createlogline')
 
     hmsfV = 'placeholder:'
 
@@ -164,11 +163,12 @@ def createLogLine(message):
 
     outstr = " ".join([hmsfV, "Rx", "1", pgnV, "x", str(message.dlc), hexV]) + " "
 
-    print(outstr)
+    # print(outstr)
 
     return (outstr)
 
 
+# THIS IS WHERE THE OUTPUT IS -- THE PRINTING
 def can_rx_task(bus):
     print('can_rx_task')
     tempL = []
@@ -180,7 +180,11 @@ def can_rx_task(bus):
 
         (tempL, pressureL) = liveUpdateTruck(outstr)
 
-        #print(tempL)
+        ###########
+        # Outputs are below in this function #
+        print(tempL)
+        print(pressureL)
+        ###########
 
 
 def enforceMaxV(origV, maxV):
