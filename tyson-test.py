@@ -108,6 +108,7 @@ def liveUpdateTruck(outstr):
             idV = ""
 
         if len(hexV) == 16:
+            print('lengthgood')
 
             #######################################################################################
             # Temperature and Pressure T1-T3
