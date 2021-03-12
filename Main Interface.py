@@ -39,10 +39,9 @@ Any reference to the Kivy back end or the Kivy code relates to the code held wit
 """
 
 import time
-
 import can
-from threading import Thread
 import os
+from threading import Thread
 
 from kivy.app import App
 from kivy.clock import Clock
@@ -491,9 +490,9 @@ def truckEngineMode(dt):
 def stateUpdate(dt):
     app = App.get_running_app()
 
+###
 
-
-
+###
 
 # This checks what value the error_code variable has and if it has no value or is 255 then since there is no fault the function sets the error_base string variable to ' ' which is just blank
 # If error_code is any other number it then changes the error_base variable to a couple different things. This function is called repeatedly every 2s so it checks to see what error_base is currently
@@ -910,6 +909,40 @@ class FuelGaugeApp(App):
     current_mode = StringProperty('Missing')
 
     truck_reqd = StringProperty()
+
+    ###
+
+    dusk_file = open(display_code_dir + 'sunsets.txt', 'r')
+
+    dusk_list = dusk_file.readlines()
+
+    this_month = time.strftime('%m')
+    real_today = time.strftime('%d')
+
+    if int(real_today) <= 3:
+        sudo_today = '01'
+    elif int(real_today) <= 10:
+        sudo_today = '07'
+    elif int(real_today) <= 17:
+        sudo_today = '14'
+    elif int(real_today) <= 23:
+        sudo_today = '20'
+    else:
+        sudo_today = '26'
+
+    for line in dusk_list:
+
+        dusk_month = line.split('>')[0].split('-')[0]
+        dusk_day = line.split('>')[0].split('-')[1]
+
+        if dusk_month == this_month:
+
+            dusk_time = line.split('>')[1].strip('\n')
+
+            if dusk_day == sudo_today:
+                print(dusk_time)
+
+    dusk_file.close()
 
     dest_id = StringProperty(arb_id[5:7])
     # The 0 inside the brackets is providing an initial value for hMass -- required or else something breaks

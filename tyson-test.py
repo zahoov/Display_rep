@@ -154,8 +154,8 @@ def can_rx_task(bus):
 
         (tempL, pressureL) = liveUpdateTruck(outstr)
 
-        print(tempL)
-        print(pressureL)
+        print(tempL + 'wow')
+        print(pressureL + 'wee')
 
 
 def enforceMaxV(origV, maxV):
