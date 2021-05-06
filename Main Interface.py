@@ -37,6 +37,12 @@ Page Descriptions:
 Any reference to the Kivy back end or the Kivy code relates to the code held within the "fuelgauge.kv" file -- it will/needs to be in the same folder as this code for the app to work
 
 """
+"""
+    Outside References:
+    - For the dusk screen dimming system the https://sunrise-sunset.org/api was used, this provided a very useful list of sunset times
+    
+
+"""
 
 import time
 import can

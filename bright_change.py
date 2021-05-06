@@ -2,7 +2,7 @@ import os
 import time
 import requests
 
-#fin = open('/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/sunsets.txt', 'w')
+fin = open('/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/2021PrinceGeorgeSunsets.txt', 'w')
 
 i = 1
 
@@ -14,26 +14,45 @@ while i <= 12:
     for day in d:
 
         cur_date = '2021-' + str(i) + '-' + str(day)
+        if i >= 10:
 
-        url = 'https://api.sunrise-sunset.org/json?lat=49.169611&lng=-122.946766&date=' + cur_date
+            cur_date_str = '2021-' + str(i) + '-' + str(day)
 
-        #receive = requests.get(url)
+        else:
+            cur_date_str = '2021-' + '0' + str(i) + '-' + str(day)
 
-        print(receive.text)
+        url = 'https://api.sunrise-sunset.org/json?lat=53.9195387498915&lng=-122.7517381789694&date=' + cur_date
+
+        receive = requests.get(url)
+
+        #print(receive.text)
+
+
 
         a = receive.text.split(',')
 
-        utc_hour = a[5].split('"')[3].split(':')[0]
-        min = a[5].split('"')[3][2:4]
+        utc_hour = a[1].split('"')[3].split(':')[0]
+        min = a[1].split('"')[3].split(':')[1]
+
+
+
+
+        #if i == 5:
+            #print(receive.text)
+
+            #print(utc_hour)
 
         pst_hour = int(utc_hour) + 4
+        #print(min)
 
         if pst_hour > 12:
-            print('wow')
+            pst_hour = pst_hour - 12
+            #pst = str(pst_hour) + min
+
 
         pst = str(pst_hour) + ':' + min
 
-        fin.write(cur_date + '>' + pst + '\n')
+        fin.write(cur_date_str + '>' + pst + '\n')
 
     i += 1
 
