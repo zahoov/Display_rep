@@ -4,7 +4,7 @@ import time
 
 def dusk_check():
 
-    fin = open('/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/2021PrinceGeorgeSunsets.txt', 'r')
+    fin = open('/Users/Xavier Biancardi/PycharmProjects/Display_rep/2021PrinceGeorgeSunsets.txt', 'r')
 
     dusk_list = fin.readlines()
 
@@ -52,6 +52,9 @@ def dusk_check():
                     dhour = int(dusk_time.split(':')[0]) + 1
                     dmin = int(dusk_time.split(':')[1])
                     dusk_time = str(dhour) + ':' + str(dmin)
+
+
+                    
                 print(dusk_time)
 
     fin.close()

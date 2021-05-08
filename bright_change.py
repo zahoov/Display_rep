@@ -2,7 +2,7 @@ import os
 import time
 import requests
 
-fin = open('/Users/Xavier/Desktop/Kivystuff/Truck Monitoring/Truck Screen/2021PrinceGeorgeSunsets.txt', 'w')
+fin = open('/Users/Xavier Biancardi/PycharmProjects/Display_rep/2021PrinceGeorgeSunsets.txt', 'w')
 
 i = 1
 
@@ -50,7 +50,7 @@ while i <= 12:
             #pst = str(pst_hour) + min
 
 
-        pst = str(pst_hour) + ':' + min
+        pst = '0' + str(pst_hour) + ':' + min
 
         fin.write(cur_date_str + '>' + pst + '\n')
 
