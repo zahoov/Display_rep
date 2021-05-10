@@ -539,8 +539,7 @@ def isDusk(dt):
     if (not dimmed) and (now == dusk_today):
 
         try:
-            os.system('gpio -g mode 18 pwm')
-            os.system('gpio -g pwm 18 512')
+            os.system('gpio -g pwm 18 75')
         except OSError:
             exit()
 
@@ -604,6 +603,7 @@ def getDuskTime():
                 dusk_file.close()
                 return dusk_time
 
+
 def bus_activator(dt):
     app = App.get_running_app()
 
@@ -621,6 +621,7 @@ def bus_activator(dt):
     except NameError:
         Clock.schedule_once(bus_activator, 2)
         return
+
 
 #################################################################################################################
 
@@ -872,7 +873,6 @@ class ModeLocking(Screen):
             self.wrong_password_ind = [1, 0, 0, 1]
 
 
-
 class Message_settings(Screen):
     def on_enter(self):
         Clock.schedule_once(callback, delay)
@@ -889,6 +889,8 @@ class Message_settings(Screen):
 
 # The main app class that everything runs off of
 class FuelGaugeApp(App):
+    os.system('gpio -g mode 18 pwm')
+    os.system('gpio -g pwm 18 1024')
 
     ####################################################################################################
     # Variable declarations
@@ -1034,20 +1036,15 @@ class FuelGaugeApp(App):
         Clock.schedule_once(bus_activator)
         pass
 
-
+    ####################################################################################################
+    # These are the functions that are used by the kivy side of the app -- they are defined here so that they can be accessed by the
+    # .kv file
+    ####################################################################################################
 
     # Runs the screen manager that sets everything in motion
     def build(self):
         # Clock.schedule_once(self.bus_activator)
         return MyScreenManager()
-
-    # def toggle_try(self, dt):
-    #    try:
-    #        self.task.modify_data(self.toggle_msg)
-    #        Clock.unschedule(self.toggle_try)
-    #    except AttributeError:
-    #        print('Unable to Change Message, Please Try Again')
-    #        return
 
     # Called when the user hits the 'Truck Engine Mode' button
     def ModeSender(self):
@@ -1081,9 +1078,8 @@ class FuelGaugeApp(App):
                 print('Unable to Change Message, Please Try Again')
                 self.mode_num = prev_mode
                 self.msg_data = prev_data
-                # Clock.schedule_interval(self.toggle_try, 2)
                 return
-            # print('wowo')
+
             # Writing the current engine mode to a text file so that it is saved when the display is shut off
             fin = open(display_code_dir + "fuel_file.txt", "wt")
             fin.write(self.mode_num)
@@ -1162,13 +1158,7 @@ class FuelGaugeApp(App):
                 self.task = self.bus.send_periodic(self.toggle_msg, 0.2)
 
     def title_changer(self, cur_page):
-        # time.sleep(0.5)
         self.current_page = cur_page
-        # print(self.current_page)
-
-    def tester(self, wow):
-        # print(wow)
-        pass
 
 
 # Makes everything start
