@@ -1,0 +1,37 @@
+
+##############################################################
+######################## Config file #########################
+##############################################################
+
+# Add the overlays into config file
+
+#     Add lines if single CAN logger
+
+sudo bash -c 'cat /home/pi/recordCAN/dtoverlay-1CAN.txt >> /boot/config.txt'
+
+#     Add lines if dual CAN logger
+
+sudo bash -c 'cat /home/pi/recordCAN/dtoverlay-2CAN.txt >> /boot/config.txt'
+
+
+##############################################################
+###################### Edit cmdline.txt ######################
+##############################################################
+
+sudo bash -c 'cat /home/pi/recordGPS/cmdline_gps.txt > /boot/cmdline.txt'
+
+sudo reboot
+
+##############################################################
+####################### Run on boot ##########################
+##############################################################
+
+mkdir /home/pi/outGPS/
+
+bash /home/pi/recordGPS/runRecordGPS.sh
+
+# In /home/pi/recordGPS/extractGPS_RBP_v2.py , adjust these variables accordingly
+# Changeable variables
+#    _outDir = "/home/pi/outGPS/"
+#    _truckname = "bigWhite"
+
