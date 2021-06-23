@@ -64,7 +64,7 @@ for l in lines:
         #before = (time.monotonic_ns()) / micro_in_sec
         
         msg = can.Message(arbitration_id=int(arb_id, 16), data=can_data)
-        bus.send(msg, None)
+        bus.send(msg, 1)
         
         prev_timestamp = cur_timestamp
 
