@@ -42,7 +42,8 @@ for l in lines:
     if l[0] == '*':
         pass
     else:
-
+        print(i)
+        i += 1
         line = l.split(' ')
         cur_timestamp = line[0]
         #print(line[6:14])
