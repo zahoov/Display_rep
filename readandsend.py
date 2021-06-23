@@ -13,13 +13,13 @@ prev_timestamp = None
 
 filename = None
 
-while filename == None:
-    try:
-        filename = input('Enter the file name to read:\n')
-        fin = open(filename, 'r')
-    except(FileNotFoundError):
-        print("That file doesn't exist")
-        filename = None
+#while filename == None:
+#    try:
+#        filename = input('Enter the file name to read:\n')
+fin = open('freezedirected1.log', 'r')
+#    except(FileNotFoundError):
+#        print("That file doesn't exist")
+#        filename = None
 
 lines = fin.readlines()
 i = 0
@@ -47,6 +47,8 @@ for l in lines:
         #print(line[6:14])
         can_data = []
 
+        arb_id = line[3]
+
         for item in line[6:14]:
             can_data.append((int(item, 16)))
 
@@ -61,7 +63,7 @@ for l in lines:
 
         #before = (time.monotonic_ns()) / micro_in_sec
         
-        msg = can.Message(data=can_data)
+        msg = can.Message(arbitration_id=int(arb_id, 16), data=can_data)
         bus.send(msg)
         
         prev_timestamp = cur_timestamp
