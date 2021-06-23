@@ -32,7 +32,10 @@ fin.close()
 #else:
 #    bRate = 500000
 
-os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(250000))
+try:
+    os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(250000))
+except(OSError):
+    pass
 bus = can.interface.Bus(channel='can0', bustype='socketcan_native', is_extended_id=True)
 
 
