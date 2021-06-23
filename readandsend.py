@@ -11,7 +11,7 @@ micro_in_sec = 1000000
 
 prev_timestamp = None
 
-filename = "RBP18.log"
+filename = None
 
 while filename == None:
     try:
