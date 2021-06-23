@@ -33,7 +33,7 @@ fin.close()
 #    bRate = 500000
 
 os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(250000))
-bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
+bus = can.interface.Bus(channel='can0', bustype='socketcan_native', is_extended_id=True)
 
 
 for l in lines:
@@ -64,7 +64,7 @@ for l in lines:
         #before = (time.monotonic_ns()) / micro_in_sec
         
         msg = can.Message(arbitration_id=int(arb_id, 16), data=can_data)
-        bus.send(msg)
+        bus.send(msg, None)
         
         prev_timestamp = cur_timestamp
 
