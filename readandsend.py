@@ -3,6 +3,7 @@ import os
 import time
 from datetime import datetime
 
+os.system("sudo /sbin/ip link set can0 down")
 experimental_timestamps = []
 time_deltas = []
 
@@ -32,10 +33,7 @@ fin.close()
 #else:
 #    bRate = 500000
 
-try:
-    os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(250000))
-except(OSError):
-    pass
+os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(250000))
 bus = can.interface.Bus(channel='can0', bustype='socketcan_native', is_extended_id=True)
 
 
