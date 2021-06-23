@@ -25,14 +25,14 @@ lines = fin.readlines()
 i = 0
 fin.close()
 
-bRate = input("Choose the baudrate for data transmission\n1:250000\n2:500000\n")
-bRate = '1'
-if bRate == '1':
-    bRate = 250000
-else:
-    bRate = 500000
+#bRate = input("Choose the baudrate for data transmission\n1:250000\n2:500000\n")
+#bRate = '1'
+#if bRate == '1':
+#    bRate = 250000
+#else:
+#    bRate = 500000
 
-os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(bRate))
+os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(250000))
 bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
 
 
