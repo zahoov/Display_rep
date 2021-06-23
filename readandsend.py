@@ -50,7 +50,7 @@ for l in lines:
         for item in line[6:14]:
             can_data.append(hex(int(item, 16)))
 
-
+        can_msg_data = ','.join(can_data)
         if prev_timestamp == None:
             prev_timestamp = cur_timestamp
 
@@ -61,7 +61,7 @@ for l in lines:
 
         #before = (time.monotonic_ns()) / micro_in_sec
         
-        msg = can.Message(data=[can_data])
+        msg = can.Message(data=[can_msg_data])
         bus.send(msg)
         
         prev_timestamp = cur_timestamp
