@@ -363,13 +363,13 @@ def main():
     setCANbaudRate(numCAN, bRate)
     
     # Connect to Bus
-    bus0 = connectToLogger('can1')
+    bus1 = connectToLogger('can1')
     if numCAN == 2:
         bus1 = connectToLogger('can1')
     
     # Continually recieved messages
     if numCAN == 1:
-        readwriteMessageThread(bus0, outDir, numCAN, bRate, CANtype, numTank, volumeL)
+        readwriteMessageThread(bus1, outDir, numCAN, bRate, CANtype, numTank, volumeL)
     #elif numCAN == 2:
     #    readwriteMessageThread(bus0, outDir, numCAN, bRate, CANtype + "0", numTank, volumeL)
     #    readwriteMessageThread(bus1, outDir, numCAN, bRate, CANtype + "1", numTank, volumeL)
