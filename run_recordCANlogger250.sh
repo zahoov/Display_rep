@@ -8,7 +8,7 @@ truckName="bigWhite"
 numTank=5
 volumeStr="202,202,202,202,148"
 
-codeDir="/home/pi/recordCAN/"
+codeDir="/home/pi/Display_rep/"
 outDir="/home/pi/outCAN/${truckName}"
 
 mkdir -p /home/pi/outCAN/
