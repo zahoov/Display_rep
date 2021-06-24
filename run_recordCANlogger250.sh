@@ -13,5 +13,5 @@ outDir="/home/pi/outCAN/${truckName}"
 
 mkdir -p /home/pi/outCAN/
 
-sudo python3 ${codeDir}recordCANlogger.py ${outDir} ${numCAN} ${bRate} ${CANtype} ${numTank} ${volumeStr}
+sudo python3 ${codeDir}recordCANlogger250.py ${outDir} ${numCAN} ${bRate} ${CANtype} ${numTank} ${volumeStr}
 
