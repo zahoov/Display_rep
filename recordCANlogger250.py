@@ -62,7 +62,7 @@ def setCANbaudRate(numCAN, bRate):
     """
     os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(bRate))
     if numCAN == 2:
-        os.system("sudo /sbin/ip link set can1 up type can bitrate " + str(bRate))
+        os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(bRate))
     time.sleep(0.1)
 
 def connectToLogger(canV):
@@ -357,7 +357,7 @@ def main():
 
     os.system("sudo /sbin/ip link set can0 down")
     if numCAN == 2:
-        os.system("sudo /sbin/ip link set can1 down")
+        os.system("sudo /sbin/ip link set can0 down")
 
     # Make CAN interface to 250 or 500kbps
     setCANbaudRate(numCAN, bRate)
@@ -365,7 +365,7 @@ def main():
     # Connect to Bus
     bus0 = connectToLogger('can0')
     if numCAN == 2:
-        bus1 = connectToLogger('can1')
+        bus1 = connectToLogger('can0')
     
     # Continually recieved messages
     if numCAN == 1:
@@ -383,7 +383,7 @@ def main():
         #Catch keyboard interrupt
         os.system("sudo /sbin/ip link set can0 down")
         if numCAN == 2:
-            os.system("sudo /sbin/ip link set can1 down")
+            os.system("sudo /sbin/ip link set can0 down")
         print('\n\rKeyboard interrtupt')
     
 
